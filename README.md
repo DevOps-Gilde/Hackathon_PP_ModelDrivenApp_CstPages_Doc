@@ -29,8 +29,8 @@ No extra tooling will be required due to the LowCode platform.
 
 We strongly recommend that you carry out the tasks below before the hackathon session starts. It helps you to maximize the time for coding:
 
-1. Get used to the environment [here](/02_PrimerPowerApps.md)<br>
-2. Import the database solution [here](/03_ImportDBSolution.md)<br>
+1. Get used to the environment [here](/01_PrimerPowerApps.md)<br>
+2. Import the database solution [here](/02_ImportDBSolution.md)<br>
 
 ## Session implementation tasks
 
@@ -41,7 +41,7 @@ The following implementation tasks will expect you:
    Learning goals of this step are:
 
    * Layouting controls
-   * Woring with the form control
+   * Working with the form control (Edit Mode)
    * Power FX expressions for navigation    
 
 4. Implement embedded flow [here](/04_ImplementEmbeddedFlow.md)
