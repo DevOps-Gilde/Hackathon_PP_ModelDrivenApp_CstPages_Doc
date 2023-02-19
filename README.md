@@ -30,13 +30,13 @@ No extra tooling will be required due to the LowCode platform.
 We strongly recommend that you carry out the tasks below before the hackathon session starts. It helps you to maximize the time for coding:
 
 1. Get used to the environment [here](/01_PrimerPowerApps.md)<br>
-2. Import the database solution [here](/02_ImportDBSolution.md)<br>
+2. Import the database solution [here](/02_ImportDataverseDatamodel.md)<br>
 
 ## Session implementation tasks
 
 The following implementation tasks will expect you:
 
-3. Implement Wizard Step [here](/03_ImplementWizard.md)
+3. Implement Wizard Step [here](/03_ImplementCustomPageScreen.md)
 
    Learning goals of this step are:
 
@@ -44,8 +44,8 @@ The following implementation tasks will expect you:
    * Working with the form control (Edit Mode)
    * Power FX expressions for navigation    
 
-4. Implement embedded flow [here](/04_ImplementEmbeddedFlow.md)
-5. **Optional advanced extra task:** Implement approval [here](/05_ImplementApproval.md)
+4. Implement embedded flow [here](/04_ImplementNewImportFlow.md)
+5. **Optional advanced extra task:** Implement approval [here](/05_ImplementApprovalFlow.md)
 
-:white_check_mark: We also created a working solution located in the branch [Solution](https://github.com/DevOps-Gilde/S3_Code_GitHubActionsTerraform/tree/Solution) of your forked repository that covers all tasks except monitoring. 
+:white_check_mark: We also created a working solution located in the branch [Solution](https://github.com/DevOps-Gilde/Hackathon_PP_ModelDrivenApp_CstPages_Doc/tree/Solution) of your forked repository that covers all tasks. The solution is provided as solution so you have to import it to your environment.
 If at any Point you need assistance nevertheless do not hesitate to ask. We are here to Help you.
