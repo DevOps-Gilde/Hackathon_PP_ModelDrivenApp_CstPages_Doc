@@ -1,6 +1,10 @@
 # 1. Introduction to Wizard
 
-TODO
+You should now have Completed the Following things:
+
+1. Importing database
+
+Next you will implement a page within our application.
 
 # 2. Layouting controls
 
