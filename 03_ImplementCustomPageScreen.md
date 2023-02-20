@@ -37,10 +37,11 @@ We have to do the following adjustments for our newly added container:
 * Rename
 
 Insert the remaining controls and name them accordingly:
-!Control               !Name Parent !Name      !
-!----------------------!------------!----------!
-!Form                  !TODO        !TODO      !
-!Submit Button         !TODO        !TODO      !
+
+|Control   |Name Parent   |Name  |
+|---|---|---|
+|Form   |   |   |
+|Button   |   |   |
 
 # 3. Form control (Edit Mode)
 
