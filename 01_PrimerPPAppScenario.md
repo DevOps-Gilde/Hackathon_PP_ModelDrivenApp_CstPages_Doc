@@ -1,8 +1,9 @@
-# 1. Introduction to Power Platform
+# 1. Introduction to Power Platform & App Scenario
 
 Power Platform is the low code platform from Microsoft. If required also coding is possible e.g. by providing JavaScript. The Microsoft cloud service Azure is the foundation of the platform. This primer won't cover all aspects of the platform. It focuses at the aspects that are important for this hackathon.
 
-# 2. Web portal of Power Platform
+# 2. Introduction to Power Platform
+## Web portal of Power Platform
 
 The most important tool from the hackathon perspective is the web portal. It allows to work with all relevant components for our hackathon such as the Dataverse, Power Apps and solutions. The portal is scoped to a certain environment and a user. A PowerPlatform environment represents an environment such as dev or prod as you know it from software engineering. PowerPlatform environment types are for instance sandbox or production. The pictur below shows a screenshot of the portal.
 
@@ -12,7 +13,7 @@ Cooments regarding the picture:
 * The red boxes in the picture mark the environment and the user.
 * On the left hand side you have the main navigation that allows you to reach Dataverse, Power Apps and solutions.
 
-# 3. Dataverse
+## Dataverse
 
 Dataverse are managed services that can live in an environment. They allow ypu to persist data and is designed for transactional data. For analytic worloads Microsoft recommends switching to Azure. The core service is a SQL server but as you can see in the picture Dataverse is a implemented behind the sceen by a bunch of services.
 
@@ -29,7 +30,7 @@ The central element for storing data are tables. A table is just another entity 
 * **Relationships:** They correspond to foreign key constraints in relational databases. Power platform uses partially a special terminology. An example are lookup columns that boil down to a relationship under the hood.
 * **Choices:** You can think of them as an enum or a table with key value pairs. Relational databases don't provide something like that out of the box. You can limit a column to these values by associating the column with the choice as part of the column definition.
 
-# 4. Model-driven-Apps
+## Model-driven-Apps
 
 Model driven apps are a special application type within power apps. Besides you have:
 * Portal pages
@@ -46,7 +47,9 @@ TODO screenshot
 
 Custom pages can give you a citizen developer like experience. Compared to  the dataverse table option they are closer to architecture principles for professional developers since the UI is not directly bound to the tables. However unexpected shortcomings were identified during that hackathon and the licensing is still per user. Only power pages provide licenses that are for a bunch of users.
 
-# 5. Power Automate
+Editing custom pages is a step process. First you switch the Model-driven-app in edit mode. Then you select the page to be edited. Changing something is also a two step process. They must be saved AND published to take effect.
+
+## Power Automate
 
 Power automate propagates a workflow like business logic rogramming style that boils down to a graph. The trigger is the starting point, actions are represented by boxes and the lines between the boxes determine what comes next. Access to data sources or third party systems is provided by connectors that are used by the actions under the hood. The picture below shows a simple example of a few sequential steps:
 
@@ -62,8 +65,62 @@ There are various types of flows but the major distinction for us is the followi
 2. Flow that is embedded in a Power App
 We will use the second option since option one requires higher licenses.
 
-# 6. Solutions
+## Solutions
 
 The standard way to program in a low code platform is rather clicking instead of coding. That is fine for dev/ test environments. But think of production as environment. There clicking together is no option. You rather want to transfer what you clicked together as it is to production. That requires a programmatic way to export something from your dev/ test environment and import it to production.
 
 The vehicle is a solution which can transport any artefact from power platform. You can click it together in the portal or by exporting it.
+
+# 3. Application Scenario
+
+## Business Problem
+
+Our application is centered CO2 consumption data that is uploaded by the userOnce the upload is final it must be approved. An upload is also known as "Import". An import consits of the following two entities (1 Header - N Consumptions):
+* Import Header
+
+  The header summarizes the rows that constitute an import. It contains the importing and approving details such as user and timestamps. Business rules enforce consistency e.g. an approving user must be stored if the state is approved. One tracks the current state of the import which has the following state model:
+  
+  * Pending - Import has been done but the figures are not ready for approval
+  * Finalized - Figures are ready for approval
+  * Approved - Figures habe been approved and can be processed
+  * Processed - Figures have been added to the accumated CO2 consumption by the system.
+
+* Consumption data
+
+  Each record in the table denotes a CO2 consumption. Driver refers to the substance that caused the CO2 emission.
+
+First then it appears in the final destination table that holds the accumulated CO2 consumption per year.
+
+## Application Functionality
+
+Our application knows two types of users:
+* Users that are eligible for import (all employees that are not part of the COMPLIANCE department)
+* Users that are eligible for approval (all employees that are  part of the COMPLIANCE department)
+
+The application provides importing users a search mask as entry point. It contains the list of imports with the possibility to filter. It allows the user to either
+* Start a new import or
+* editing an existing one as long as the import is not yet approved
+
+Major mechanism to manage the import is a wizard. The context of the wizard is either (1) the import to be edited or (2) null. that consists of three steps:
+* Create/ Update - Creates/ updates the header depending on the wizard context
+* Upload - Uploads the local file containing the consumption data
+* Approve - Step reserved for approver.
+
+The approving user also gets a search mask as entry point that is geared towards finalized imports that have not been approved yet. Approval is done by directly jumping to the third step of the wizard based on the selected import.
+Additionally the approver can display the accumulated CO2 consumptions per year.
+
+Our application does not provide functionality to maintain users and their corresponding departments. The idea is to use the built-in dataverse functionality to modify the data if required.
+
+## Data Model
+
+The picture below shows the data model:
+
+TODO
+
+The tabe meaning is as follows:
+* ...HDR_RAW - Import
+* ...HDR - Consumption data
+* IMP_USERS - Users and associated department
+* IMP_DEARTMENTS - Departments
+* CHOICE_IMP_ST - Eligible import states
+* CHOICE_DRIVER - Drivers for CO2 emission
