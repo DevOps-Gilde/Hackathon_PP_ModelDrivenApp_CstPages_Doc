@@ -29,7 +29,7 @@ No extra tooling will be required due to the LowCode platform.
 
 We strongly recommend that you carry out the tasks below before the hackathon session starts. It helps you to maximize the time for coding:
 
-1. Get used to the environment [here](/01_PrimerPowerPlatform.md)<br>
+1. Get familiar with Platform & Application Scenario [here](/01_PrimerPPAppScenario.md)<br>
 2. Import the database solution [here](/02_ImportDataverseDatamodel.md)<br>
 
 ## Session implementation tasks
