@@ -46,7 +46,7 @@ The following implementation tasks will expect you:
 
 4. Implement Wizard Step Create/ Update (Part2) [here](/04_ImplementWizardStep1Part2.md)
 
-   Part two includes implementing the creation of a new import with a flow. Reason is a limitation of the form control that does not return the values for the newly created record.
+   Part two includes implementing the creation of a new import with a flow. Reason is a limitation of the form control that does not return the values for the newly created record. For the edit case the standard functionality is sufficient.
 
 5. **Optional advanced extra task:** Implement approval [here](/05_ImplementApprovalFlow.md)
 

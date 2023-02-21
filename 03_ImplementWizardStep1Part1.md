@@ -4,9 +4,9 @@ You should now have Completed the Following things:
 
 1. Importing database
 
-Next you will implement a page within our application.
+Next you add the required controls to the first step of the wizard and wire it with the rest of the application.
 
-# 2. Completing the wizard
+# 2. Implementation Task
 
 ## Introduction
 

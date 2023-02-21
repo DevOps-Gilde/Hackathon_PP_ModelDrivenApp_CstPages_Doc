@@ -3,18 +3,24 @@
 You should now have Completed the Following things:
 
 1. Importing database
-2. Im
+2. Implement Wizard Step 1 (Part1)
 
-Next you will implement a page within our application.
+Next you will complete the implementation of the first step of the wizard.
 
-# 2. Form New
+# 2. Implementation Task
+
+## Introduction
+
+TODO Replace dummy dialog with flow
+
+## Define Flow
 
 TODO
 
-# 3. Implement Read Username
+## Wire Flow with Submit Button
 
 TODO
 
-# 4. Implement Add Data Row
+# 3. Testing changes
 
 TODO
