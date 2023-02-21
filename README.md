@@ -36,15 +36,18 @@ We strongly recommend that you carry out the tasks below before the hackathon se
 
 The following implementation tasks will expect you:
 
-3. Implement Wizard Step [here](/03_ImplementCustomPageScreen.md)
+3. Implement Wizard Step Create/ Update (Part1) [here](/03_ImplementWizardStep1Part1.md)
 
-   Learning goals of this step are:
+   Part one only includes adding the control and wiring them with the rest. Learning goals of this step are:
 
    * Layouting controls
-   * Working with the form control (New Mode)
+   * Configuring controls (Form, Button)
    * Power FX expressions for navigation
 
-4. Implement embedded flow [here](/04_ImplementNewImportFlow.md)
+4. Implement Wizard Step Create/ Update (Part2) [here](/04_ImplementWizardStep1Part2.md)
+
+   Part two includes implementing the creation of a new import with a flow. Reason is a limitation of the form control that does not return the values for the newly created record.
+
 5. **Optional advanced extra task:** Implement approval [here](/05_ImplementApprovalFlow.md)
 
 :white_check_mark: We also created a working solution located in the branch [Solution](https://github.com/DevOps-Gilde/Hackathon_PP_ModelDrivenApp_CstPages_Doc/tree/Solution) of your forked repository that covers all tasks. The solution is provided as solution so you have to import it to your environment.
