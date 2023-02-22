@@ -38,8 +38,8 @@ Specifics resulting from the column definition are automatically reflected by th
 
 To understand the columns checkout the column definitions. Click on "Columns" as shown below.
 
-TODO screen
+<br><img src="./images/work_tables_cols_ovr.png" /><br>
 
 Select the column you are interested in. You can limit the columns by filtering according to the prefix "CST". The screenshot below shows the definition of the column that references a choice.
-<br><img src="./images/work_tables_check_col_def.png" /><br>
+<br><img src="./images/work_tables_cols_check_def.png" /><br>
 
