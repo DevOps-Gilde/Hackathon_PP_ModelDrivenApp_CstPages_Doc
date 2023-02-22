@@ -7,7 +7,7 @@ Power Platform is the low code platform from Microsoft. If required also coding 
 
 The most important tool from the hackathon perspective is the web portal. It allows to work with all relevant components for our hackathon such as the Dataverse, Power Apps and solutions. The portal is scoped to a certain environment and a user. A PowerPlatform environment represents an environment such as dev or prod as you know it from software engineering. PowerPlatform environment types are for instance sandbox or production. The pictur below shows a screenshot of the portal.
 
-TODO screenshot
+<br><img src="./images/intro_power_platform.png" /><br>
 
 Cooments regarding the picture:
 * The red boxes in the picture mark the environment and the user.
@@ -17,7 +17,7 @@ Cooments regarding the picture:
 
 Dataverse are managed services that can live in an environment. They allow ypu to persist data and is designed for transactional data. For analytic worloads Microsoft recommends switching to Azure. The core service is a SQL server but as you can see in the picture Dataverse is a implemented behind the sceen by a bunch of services.
 
-TODO screenshot
+<br><img src="./images/intro_dataverse.png" /><br>
 
 The central element for storing data are tables. A table is just another entity in Power Platform as for instance a Power App. Columns, keys, views and relationships are compareable to the counterparts in relational databses. The following points summarize power platform concepts starting from relational database counterparts:
 
@@ -43,7 +43,7 @@ Model driven apps consist of a number of pages. Each page can use one of the thr
 3. Dashboards
 These three options are also reflected by the main choice you have to make when adding a page:
 
-TODO screenshot
+<br><img src="./images/intro_apps_page_types.png" /><br>
 
 Custom pages can give you a citizen developer like experience. Compared to  the dataverse table option they are closer to architecture principles for professional developers since the UI is not directly bound to the tables. However unexpected shortcomings were identified during that hackathon and the licensing is still per user. Only power pages provide licenses that are for a bunch of users.
 
@@ -51,9 +51,9 @@ Editing custom pages is a step process. First you switch the Model-driven-app in
 
 ## Power Automate
 
-Power automate propagates a workflow like business logic rogramming style that boils down to a graph. The trigger is the starting point, actions are represented by boxes and the lines between the boxes determine what comes next. Access to data sources or third party systems is provided by connectors that are used by the actions under the hood. The picture below shows a simple example of a few sequential steps:
+Power automate propagates a workflow like business logic programming style that boils down to a graph. The trigger is the starting point, actions are represented by boxes and the lines between the boxes determine what comes next. Access to data sources or third party systems is provided by connectors that are used by the actions under the hood. The picture below shows a simple example of a few sequential steps:
 
-TODO screenshot
+<br><img src="./images/intro_flows_example.png" /><br>
 
 Comments regarding the picture:
 * Trigger of the flow is a Power App
@@ -75,10 +75,10 @@ The vehicle is a solution which can transport any artefact from power platform. 
 
 ## Business Problem
 
-Our application is centered CO2 consumption data that is uploaded by the userOnce the upload is final it must be approved. An upload is also known as "Import". An import consits of the following two entities (1 Header - N Consumptions):
+Our application is centered CO2 consumption data that is uploaded by the user. Once the upload is final it must be approved. An upload is also known as "Import". An import consits of the following two entities (1 Header - N Consumptions):
 * Import Header
 
-  The header summarizes the rows that constitute an import. It contains the importing and approving details such as user and timestamps. Business rules enforce consistency e.g. an approving user must be stored if the state is approved. One tracks the current state of the import which has the following state model:
+  The header summarizes an import. It contains important general importing and approving details such as user and timestamps. Business rules enforce consistency e.g. an approving user must be stored if the state is approved. One tracks the current state of the import which has the following state model:
   
   * Pending - Import has been done but the figures are not ready for approval
   * Finalized - Figures are ready for approval
@@ -97,17 +97,26 @@ Our application knows two types of users:
 * Users that are eligible for import (all employees that are not part of the COMPLIANCE department)
 * Users that are eligible for approval (all employees that are  part of the COMPLIANCE department)
 
-The application provides importing users a search mask as entry point. It contains the list of imports with the possibility to filter. It allows the user to either
+The application provides importing users a search mask as entry point. It contains the list of imports with the possibility to filter. The screenshot below is a conceptual one that shows the search mask:
+
+<br><img src="./images/intro_apps_imp_mask_ovr.png" /><br>
+
+It allows the user to either
 * Start a new import or
 * editing an existing one as long as the import is not yet approved
 
 Major mechanism to manage the import is a wizard. The context of the wizard is either (1) the import to be edited or (2) null. that consists of three steps:
 * Create/ Update - Creates/ updates the header depending on the wizard context
+<br><img src="./images/intro_apps_imp_mask_wiz_cre.png" /><br>
 * Upload - Uploads the local file containing the consumption data
+<br><img src="./images/intro_apps_imp_mask_wiz_upl.png" /><br>
 * Approve - Step reserved for approver.
+<br><img src="./images/intro_apps_imp_mask_wiz_appr.png" /><br>
 
-The approving user also gets a search mask as entry point that is geared towards finalized imports that have not been approved yet. Approval is done by directly jumping to the third step of the wizard based on the selected import.
-Additionally the approver can display the accumulated CO2 consumptions per year.
+The approving user also gets a search mask as entry point that is geared towards finalized imports that have not been approved yet. Approval is done by directly jumping to the third step of the wizard based on the selected import. Additionally the approver can display the accumulated CO2 consumptions per year.
+
+<br><img src="./images/intro_apps_appr_mask_ovr.png" /><br>
+<br><img src="./images/intro_apps_appr_mask_co2_cons.png" /><br>
 
 Our application does not provide functionality to maintain users and their corresponding departments. The idea is to use the built-in dataverse functionality to modify the data if required.
 
@@ -118,9 +127,10 @@ The picture below shows the data model:
 TODO
 
 The tabe meaning is as follows:
-* ...HDR_RAW - Import
-* ...HDR - Consumption data
+* IMP_CO2_CONS_ACC - Aggregated C=2 consumption
+* IMP_CO2_CONS_RAW_HDR - Import
+* IMP_CO2_CONS_RAW - Consumption data
 * IMP_USERS - Users and associated department
 * IMP_DEARTMENTS - Departments
-* CHOICE_IMP_ST - Eligible import states
-* CHOICE_DRIVER - Drivers for CO2 emission
+* IMP_STATES_CHOICE - Eligible import states
+* IMP_CO2_DRIVER_TYPES_CHOICE - Drivers for CO2 emission
