@@ -124,7 +124,7 @@ Our application does not provide functionality to maintain users and their corre
 
 The picture below shows the data model:
 
-TODO
+<br><img src="./images/intro_dataverse_app_model.png" /><br>
 
 The tabe meaning is as follows:
 * IMP_CO2_CONS_ACC - Aggregated C=2 consumption
