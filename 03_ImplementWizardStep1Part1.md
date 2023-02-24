@@ -98,12 +98,24 @@ Change the Text property to `Submit`. The property `OnSelect` contains the actio
 
 As you have already seen there are a lot of different artefacts like screens and pages that need to be linked. Our page is not yet correctly wired.
 
-Both buttons `Previous`and `Home` at the footer still need to be configured.
-TODO What are the expressions
+Both buttons `Next` and `Home` at the footer still need to be configured.
 
-Switch to the custom page TODO. There the `OnSelect` property of the buttons `New`and `Edit` needs still to be implemented. In that case we have to achieve two things: (1) jump to the first screen within the wizard and (2) set the context accordingly.
-TODO What are the expressions
+`Next`means we just refer to another screen within the same page. The `Navigate(<name of screen>)` taks you there. Set the `OnSelect` property of this expression with the name of the screen as parameter.
 
+The `Home` button is a bit more difficult since the code shall jump back to the overview custom page we come from. When you search the internet you find various options. Therefore a quick overview:
+* Referencing by URL
+
+  Custom pages have URL of the following format: `https://<orgname>.crm16.dynamics.com/main.aspx?appid=<app id>&pagetype=custom&name=<internal name of page>`. The expressions to use this are `Launch(URL)`. On the targeted custom page you can read the with `Param` (Sources: [URL Format](https://powerusers.microsoft.com/t5/Building-Power-Apps/Navigating-from-one-custom-page-to-another-with-parameters/td-p/1418875), [MS Docs](https://learn.microsoft.com/en-us/power-platform/power-fx/reference/function-param)).
+
+  Although technically feasible it is not recommended for the following reasons:
+  * Works only in final app and not in the emedded testing app
+  * No check support since url is black box
+
+* Navigate
+
+  This is the recommended way. The required expression is `IF(TODOContext, Navigate(<name page imp>, Navigate(<name page appr>)`. 
+  A special challenge is navigating to a page and passing parameters. We already did it for you at the overview pages as follows: `Navigate(<name of list>.Selected, { Page: <name of page>})` (note that the names are without single or double quotes). The biggest problem was the missing designer support for the second argument (See also [here](https://www.google.com/search?q=power+platform+passing+context+to+custom+page&rlz=1C1UEAD_enDE999DE999&oq=power+platform+passing+context+to+custom+page&aqs=chrome..69i57.14024j0j9&sourceid=chrome&ie=UTF-8#fpstate=ive&vld=cid:e81c6c9f,vid:UDmGd5Qb4rY)).
+  
 # 3. Testing changes
 
 Testing changes is quite easy trough the `Play` button that is provided by the web portal as shown below:
@@ -113,7 +125,7 @@ Testing changes is quite easy trough the `Play` button that is provided by the w
 Don't forget to save and publish your changes before testing. You have to run the application in the right scope. That means:
 * Local changes within a custom page
 
-  Just press the play button to start the custom page. The crseenshot below shows an example. Use the `X` button at the right top corner to switch back into edit mode.
+  Just press the play button to start the custom page. The scrseenshot below shows an example. Use the `X` button at the right top corner to switch back into edit mode.
   TODO screenshot
 
 * Changes that span Custom Changes
@@ -121,4 +133,11 @@ Don't forget to save and publish your changes before testing. You have to run th
   Make first sure you switch back to the model driven app. Press the `Back` button at the top of the screen to switch to the App. Just press the play button to start the custom page. The screenshot below shows an example. Use the `X` button at the right top corner to switch back into edit mode.
   TODO screenshot
 
-A full test will require to test on app level due to the cross navigation.
+Thanks to your changes the following scenarios should now work:
+|Test                                             |Scope | Expected Result                          |
+|-------------------------------------------------|------|------------------------------------------|
+|Wizard first step: Main content displayed correctly |Local |Next screen is displayed               |
+|Wizard first step: Click on next button          |Local |Next screen is displayed                  |
+|Wizard first step: Click on home button          |Global|Overview page is shown from where wizard wa striggered|
+|Import Overview Page: Click on new import button |Global|Fields on the form are empty|
+|Import Overview Page: Select a single record and click on edit import button|Global|Fields on the form are prefilled with the record you selected|

@@ -2,11 +2,11 @@
 
 You should now have Completed the Following things:
 
-1. Importing database
+1. Importing Implemented Artefacts
 2. Implement Wizard Step 1 (Part1)
 3. Implement Wizard Step 1 (Part2)
 
-Next you will complete the implementation of the first step of the wizard.
+Next you will complete the implementation the last step of the wizard.
 
 # 2. Implementation Task
 
@@ -43,14 +43,10 @@ Now we have to add a condition to trigger the correct action based on the decisi
 
 Now we have to move the existing steps for copying the data to accumulated CO2 consumption in the `If yes` part. Do the the following for all steps top down. Drag the steps with an initial left click on the header over the yes-area and drop them. At the end your flow should look like the screenshot below:
 
-TODO
-
-## Implement Custom Connector
-
-TODO
-Would be interesting scenarion - checkout that
-https://learn.microsoft.com/en-us/connectors/custom-connectors/paconn-cli
-
 # 3. Testing changes
 
-TODO
+Thanks to your changes the following scenarios should now work:
+|Test                                             |Scope | Expected Result                          |
+|-------------------------------------------------|------|------------------------------------------|
+|Wizard last step: Click on Submit button (new)   |Global|The approver should get a mail. After approval you should see a new record in the dataverse table|
+|Wizard last step: Click on Submit button (edit)  |Global|The approver should get a mail. After approval you should see a new record in the dataverse table|
