@@ -1,10 +1,10 @@
-# 1. Introduction to Import Database
+# 1. Introduction to Import Implemented Artefacts
 
-Due to time constraints we won't create all required tables step by step within dataverse. We will use instead a transport mechanism to deploy a fully implemented database model. This approach can be used for any artefact that has been created within PowerPlatform. Microsoft calls deployable code packages also "Solutions". Essentially they boil down to a Zip file that contains the artefacts in an internal Microsoft format that you should always treat as black box.
+Due to time we cannot create the data model step by step nor can we oimplement the complete application. We will use instead a transport mechanism to deploy a fully implemented database model and the partially implemented application as starting point. This approach can be used for any artefact that has been created within PowerPlatform. Microsoft calls deployable code packages also "Solutions". Essentially they boil down to a Zip file that contains the artefacts in an internal Microsoft format that you should always treat as black box.
 
-# 3. Importing database solution
+# 3. Importing Prerequisites
 
-WePerform the following steps:
+Perform the following steps:
 1. Download the file `Solution_DbTables_Hackathon_managed_2_0_0_0.zip` from [our code repo](https://github.com/DevOps-Gilde/Hackathon_PP_ModelDrivenApp_CstPages_Code) 
 
 2. Switch to "Solutions" in the main menu
@@ -23,6 +23,8 @@ WePerform the following steps:
 
    As a result you should see now the custom tables we need for our application that all start with the prefix "IMP" as sown below:
    <br><img src="./images/imp_sol_step_check.png" /><br>
+
+Repeat the same steps with the zip file `Solution_App_Hackathon_managed_2_0_0_0.zip` to import the partially implemented application.
 
 # 4. Working with tables
 

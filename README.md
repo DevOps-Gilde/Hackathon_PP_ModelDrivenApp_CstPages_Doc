@@ -2,7 +2,7 @@
 
 ## Focus
 
-This repo contains the documentation for the Power Apps hackathon that is focusing at an example scenario using **model driven apps with Custom Pages**. The business scenario of our example app is the import of CO2 consumption figures from a local file. They will have to approved before showing up in a consolidated table.
+This repo contains the documentation for the Power Apps hackathon. The application to complete will be a **model driven apps with Custom Pages**. The business scenario of our example app is the import of CO2 consumption figures from a local file. They will have to approved before showing up in a consolidated table.
 
 The hackathon includes the following technologies:
 * Power Apps: Model driven apps with custom pages
@@ -11,12 +11,12 @@ The hackathon includes the following technologies:
 Out of scope are the following technologies:
 * Power Apps: Other app types such as Power Pages/ Canvas apps
 * Model driven apps: Dashboards/ Dataverse Table based pages
-* Creation of underlying dataverse data model (We provide a full implementation by a zip file that only needs to be imported by you into the environment)
+* Creation of underlying dataverse data model (We provide a full implementation that only needs to be imported by you into the environment)
 
 The following things will be provided to you:
 * Power Platform Environment and user to develop our application
 * Fully implemented data model
-* A partially implemented application with gaps
+* A partially implemented application with gaps for you to fill
 
 [This repo](https://github.com/DevOps-Gilde/Hackathon_PP_ModelDrivenApp_CstPages_Code) contains the assumed code for this documentation.
 
@@ -29,11 +29,12 @@ No extra tooling will be required due to the LowCode platform except for a brows
 Power Platform is loc code environment that is probably new to most of us. Therefore read the followin chapters beforehand. Otherwise you won't be able to do much coding:
 
 1. Get familiar with Platform & Application Scenario [here](/01_PrimerPPAppScenario.md)<br>
-2. Import the database solution [here](/02_ImportDataverseDatamodel.md)<br>
 
 ## Session implementation tasks
 
-The following implementation tasks will expect you:
+The following tasks will expect you:
+
+2. Import the already implemented artefacts [here](/02_ImportImplementedArtefacts.md)<br>
 
 3. Implement Wizard Step Create/ Update (Part1) [here](/03_ImplementWizardStep1Part1.md)
 

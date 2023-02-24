@@ -48,7 +48,13 @@ These three options are also reflected by the main choice you have to make when 
 
 Custom pages can give you a citizen developer like experience. Compared to  the dataverse table option they are closer to architecture principles for professional developers since the UI is not directly bound to the tables. However unexpected shortcomings were identified during that hackathon and the licensing is still per user. Only power pages provide licenses that are for a bunch of users.
 
-Editing custom pages is a step process. First you switch the Model-driven-app in edit mode. Then you select the page to be edited. Changing something is also a two step process. They must be saved AND published to take effect.
+Editing custom pages is a two step process. First you switch the Model-driven-app in edit mode. Then you select the page to be edited.
+
+<br><img src="./images/intro_app_stepwise_edit.png" /><br>
+
+Changing something is also a two step process. They must be saved AND published to take effect. First then you see changes for a certain custom page also in the application screen. The picture below shows the icons for svaing and publishing:
+
+<br><img src="./images/intro_app_save_publish.png" /><br>
 
 ## Power Automate
 
@@ -70,7 +76,7 @@ We will use the second option since option one requires higher licenses.
 
 The standard way to program in a low code platform is rather clicking instead of coding. That is fine for dev/ test environments. But think of production as environment. There clicking together is no option. You rather want to transfer what you clicked together as it is to production. That requires a programmatic way to export something from your dev/ test environment and import it to production.
 
-The vehicle is a solution which can transport any artefact from power platform. You can click it together in the portal or by exporting it.
+The vehicle is a solution which can transport any artefact from power platform. You can click it together in the portal or by exporting it. Exporting a solution gives you a zip file. The reverse operation reinstates the objects you exported in the designated environment. We will use that mechanism to quickly provision your environment with th fully implemented data model and the partially implemented application.
 
 # 3. Application Scenario
 
@@ -95,22 +101,31 @@ Our application is centeredaround CO2 consumption data that is uploaded by the u
 Our application knows two types of users:
 * Users that are eligible for import (all employees that are not part of the COMPLIANCE department)
 * Users that are eligible for approval (all employees that are  part of the COMPLIANCE department)
+The application will internally track the user type by a sign in process that we already implemented for you.
 
-The application provides importing users a search mask as entry point. It contains the list of imports with the possibility to filter. The screenshot below is a conceptual one that shows the search mask:
+The application provides importing users a search mask as entry point. It contains the list of imports with the possibility to filter. The screenshots below are not the final ones from the programmed application (e.g. a more professional look and feel is missing). They are conceptual ones that shall just better explain which functionality is provided per screen:
 
 <br><img src="./images/intro_apps_imp_mask_ovr.png" /><br>
 
 It allows the user to either
 * Start a new import or
-* editing an existing one as long as the import is not yet approved
+* Editing an existing one as long as the import is not yet finalized
 
-Major mechanism to manage the import is a wizard. The context of the wizard is either (1) the import to be edited or (2) null. that consists of three steps:
+Major mechanism to manage the import is a wizard. The context of the wizard is either (1) the import to be edited or (2) creating a new one. that consists of three steps:
 * Create/ Update - Creates/ updates the header depending on the wizard context
-<br><img src="./images/intro_apps_imp_mask_wiz_cre.png" /><br>
+
+  This step is only intended for the importing user. If the approver navigates to that screen all controls are disabled. For simplicity reasons the newly created header will be written directly to the dataverse when submit is clicked. The screenshot below shows the conceptual screen:
+  <br><img src="./images/intro_apps_imp_mask_wiz_cre.png" /><br>
+
 * Upload - Uploads the local file containing the consumption data
-<br><img src="./images/intro_apps_imp_mask_wiz_upl.png" /><br>
-* Approve - Step reserved for approver.
-<br><img src="./images/intro_apps_imp_mask_wiz_appr.png" /><br>
+
+  This step is only intended for the importing user. If the approver navigates to that screen all controls are disabled. The upload will always refer to an existing import. Either the header import from the wizard context is edited or the newly created one. The screenshot below shows the conceptual screen:
+  <br><img src="./images/intro_apps_imp_mask_wiz_upl.png" /><br>
+
+* Approve - This step depends is intended ofr importing ad approving user alike.
+
+  If the importer clicks the `approve` button the import header is set to finalized. The same click from the approver sets the header to `approved` what starts the taking over to the final table. The screenshot below shows the conceptual screen:
+  <br><img src="./images/intro_apps_imp_mask_wiz_appr.png" /><br>
 
 The approving user also gets a search mask as entry point that is geared towards finalized imports that have not been approved yet. Approval is done by directly jumping to the third step of the wizard based on the selected import. Additionally the approver can display the accumulated CO2 consumptions per year.
 
@@ -125,7 +140,7 @@ The picture below shows the data model:
 
 <br><img src="./images/intro_dataverse_app_model.png" /><br>
 
-The tabe meaning is as follows:
+The table meaning is as follows:
 * IMP_CO2_CONS_ACC - Aggregated C=2 consumption
 * IMP_CO2_CONS_RAW_HDR - Import
 * IMP_CO2_CONS_RAW - Consumption data

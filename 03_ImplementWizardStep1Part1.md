@@ -2,7 +2,7 @@
 
 You should now have Completed the Following things:
 
-1. Importing database
+1. Importing Implemented Artefacts
 
 Next you add the required controls to the first step of the wizard and wire it with the rest of the application.
 
@@ -16,39 +16,45 @@ Each step of the wizard is implemented as a separate screen within the same cust
 
 In that step you will implement the first half of the first step of the wizard which enables the user to edit or create a new import. In the first half you will create the main content page. 
 
-TODO picture
+<br><img src="./images/wiz_layout_scope_tasks.png" /><br>
 
 After having completed everything the application will display an information message when you click the submit button.
 
 The learning goals are as stated before:
 * Layouting controls
 * Working with the form control (New Mode)
-* Power FX expressions for navigation
+* Expressions for navigation
 
-## Layouting controls
+## Layouting Form and Button
 
-As you know it from other environments our application shall support responsive layout so we will avoid pixel based statements. A key are containers that allow to layout their children components are horizontally or vertically. Child controls can be seized relatively based on a percentage (1 corresponds to entire space). The screenshot below shows how to layout the controls when we think in containers:
+As you know it from other environments our application shall support responsive layout so we will avoid pixel based statements. A key are containers that allow to layout their children components are horizontally or vertically. Child controls can be seized relatively based on a percentage (1 corresponds to entire space). We already implemented the first container for you that uses the expressions `Parent.Width`and `Parent.Height` to occupy all space of the screen. The screenshot below shows how to layout the controls when we think in containers:
 
 <br><img src="./images/wiz_layout_start_point.png" /><br>
 
 Let's now implement the layout with the indicated controls. We will start with the first one which is the vertical container for the content. Adding controls always follows the same pattern which is as follows:
-* Select the parent control on the canvas
-* Pick the control from the list
+* Select the parent control `WizardLayout_Create` on the canvas
+* Pick the control
+
+  THis will add the new container to the end of the children list. That is not what we want, since it must be placed between header and footer.
+
+* Reorder newly added container
+
+  You have to click on the context menu (...) dots of the control in the tree view. There yu find the option to move it as shown below:
+  <br><img src="./images/wiz_layout_reorder.png" /><br>
+
 * Adjust properties
 We have to do the following adjustments for our newly added container:
-* Reorder
-<br><img src="./images/wiz_layout_reorder.png" /><br>
 * Set fill
-* Rename
+* Rename the newly added control to `Content_Create`
 
-Insert the remaining controls and name them accordingly:
+Insert the remaining controls according in the same way and name them accordingly:
 
 |Control   |Name Parent   |Name  |
 |---|---|---|
-|Form   |   |   |
-|Button   |   |   |
+|EditForm   |Content_Create   |up to you   |
+|Button   |Content_Create   |up to you  |
 
-## Create or Edit Header
+## Configure Form and Button
 
 In this step of the wizard we either create or update the header of an existing import. We will use the form to achieve that combined with a button that is triggering create or edit. As a first intermediate step the button will first display the values of the form in an alert window.
 
