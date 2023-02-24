@@ -4,17 +4,22 @@ Due to time constraints we won't create all required tables step by step within 
 
 # 3. Importing database solution
 
-Perform the following steps:
-1. Switch to "Solutions" in the main menu
+WePerform the following steps:
+1. Download the file `Solution_DbTables_Hackathon_managed_2_0_0_0.zip` from [our code repo](https://github.com/DevOps-Gilde/Hackathon_PP_ModelDrivenApp_CstPages_Code) 
+
+2. Switch to "Solutions" in the main menu
 <br><img src="./images/imp_sol_step_start.png" /><br>
 
-2. Click on "import solution" and select TODO this file
+3. Click on "import solution" and select the downloaded file from the repo and click next.
+<br><img src="./images/imp_sol_step_imp_sol.png" /><br>
 
-3. Confirm by clicking Next
+4. Start the import by clicking the button import as shown below
+<br><img src="./images/imp_sol_step_conf_imp.png" /><br>
 
-4. TODO subsequent steps
+5. Wait until the portal shows at the top the message "Solution successfully imported"
+<br><img src="./images/imp_sol_step_succ.png" /><br>
 
-5. Check success by example
+6. Check success by example
 
    As a result you should see now the custom tables we need for our application that all start with the prefix "IMP" as sown below:
    <br><img src="./images/imp_sol_step_check.png" /><br>

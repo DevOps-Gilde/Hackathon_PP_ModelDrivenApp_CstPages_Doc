@@ -5,17 +5,18 @@ Power Platform is the low code platform from Microsoft. If required also coding 
 # 2. Introduction to Power Platform
 ## Web portal of Power Platform
 
-The most important tool from the hackathon perspective is the web portal. It allows to work with all relevant components for our hackathon such as the Dataverse, Power Apps and solutions. The portal is scoped to a certain environment and a user. A PowerPlatform environment represents an environment such as dev or prod as you know it from software engineering. PowerPlatform environment types are for instance sandbox or production. The pictur below shows a screenshot of the portal.
+The most important tool from the hackathon perspective is the web portal. It allows you to work with all relevant components for our hackathon such as the Dataverse, Power Apps and solutions. The portal is scoped to a certain environment. A PowerPlatform environment represents an environment such as dev or prod as you know it from software engineering. PowerPlatform environment types are for instance sandbox or production. The picture below shows a screenshot of the portal.
 
 <br><img src="./images/intro_power_platform.png" /><br>
 
 Cooments regarding the picture:
 * The red boxes in the picture mark the environment and the user.
 * On the left hand side you have the main navigation that allows you to reach Dataverse, Power Apps and solutions.
+* Make sure you are always LOGGED IN with the user we provide in the hackathon and not with your Capgemini EMail account
 
 ## Dataverse
 
-Dataverse are managed services that can live in an environment. They allow ypu to persist data and is designed for transactional data. For analytic worloads Microsoft recommends switching to Azure. The core service is a SQL server but as you can see in the picture Dataverse is a implemented behind the sceen by a bunch of services.
+Dataverse is the built-in persistence mechanism for Power Platform. It is designed for transactional data. For analytic worloads Microsoft recommends switching to Azure. The core service is a SQL server but as you can see in the picture Dataverse is a implemented behind the sceen by a bunch of services.
 
 <br><img src="./images/intro_dataverse.png" /><br>
 
@@ -75,7 +76,7 @@ The vehicle is a solution which can transport any artefact from power platform. 
 
 ## Business Problem
 
-Our application is centered CO2 consumption data that is uploaded by the user. Once the upload is final it must be approved. An upload is also known as "Import". An import consits of the following two entities (1 Header - N Consumptions):
+Our application is centeredaround CO2 consumption data that is uploaded by the user. Once the upload is final it must be approved. First then it appears in the final destination table that holds the accumulated CO2 consumption per year. Importing consumption data consists of two parts:
 * Import Header
 
   The header summarizes an import. It contains important general importing and approving details such as user and timestamps. Business rules enforce consistency e.g. an approving user must be stored if the state is approved. One tracks the current state of the import which has the following state model:
@@ -85,11 +86,9 @@ Our application is centered CO2 consumption data that is uploaded by the user. O
   * Approved - Figures habe been approved and can be processed
   * Processed - Figures have been added to the accumated CO2 consumption by the system.
 
-* Consumption data
+* Import data
 
   Each record in the table denotes a CO2 consumption. Driver refers to the substance that caused the CO2 emission.
-
-First then it appears in the final destination table that holds the accumulated CO2 consumption per year.
 
 ## Application Functionality
 
