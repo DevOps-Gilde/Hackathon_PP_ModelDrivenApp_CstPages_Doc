@@ -2,7 +2,7 @@
 
 ## Focus
 
-This repo contains the documentation for the Power Apps hackathon. The application to complete will be a **model driven apps with Custom Pages**. The business scenario of our example app is the import of CO2 consumption figures from a local file. They will have to approved before showing up in a consolidated table.
+This repo contains the documentation for the Power Apps hackathon. The application to complete will be a **model driven app with Custom Pages**. The business scenario of our example app is the import of CO2 consumption figures from a local file. They will have to approved before showing up in a consolidated table. A wizard will guide the importing and approving user to the import/ approval.
 
 The hackathon includes the following technologies:
 * Power Apps: Model driven apps with custom pages
@@ -14,7 +14,7 @@ Out of scope are the following technologies:
 * Creation of underlying dataverse data model (We provide a full implementation that only needs to be imported by you into the environment)
 
 The following things will be provided to you:
-* Power Platform Environment and user to develop our application
+* Power Platform Environment and user to fill the gaps our application
 * Fully implemented data model
 * A partially implemented application with gaps for you to fill
 
@@ -26,7 +26,7 @@ No extra tooling will be required due to the LowCode platform except for a brows
 
 ## Session preparation
 
-Power Platform is loc code environment that is probably new to most of us. Therefore read the followin chapters beforehand. Otherwise you won't be able to do much coding:
+Power Platform is LowCode environment that is probably new to most of us. Therefore read the following chapters beforehand. Otherwise you won't be able to do much coding:
 
 1. Get familiar with Platform & Application Scenario [here](/01_PrimerPPAppScenario.md)<br>
 
@@ -46,9 +46,9 @@ The following tasks will expect you:
 
 4. Implement Wizard Step Create/ Update (Part2) [here](/04_ImplementWizardStep1Part2.md)
 
-   Part two includes implementing the creation of a new import with a flow. Reason is a limitation of the EditForm control that does not return the values for the newly created record. For the edit case the standard functionality is sufficient.
+   In that step the import header will be created without that acts as empty shell for the uploaded import data. Reason for the involving an embedded flow are limitations of the used controls.
 
-5. **Optional advanced extra task:** Implement approval [here](/05_ImplementApprovalFlow.md)
+5. **Optional advanced extra task:** Implement approval flow [here](/05_ImplementApprovalFlow.md)
 
 :white_check_mark: We also created a working solution located in the branch [Solution](https://github.com/DevOps-Gilde/Hackathon_PP_ModelDrivenApp_CstPages_Doc/tree/Solution) of your forked repository that covers all tasks. The solution is provided as solution so you have to import it to your environment.
 If at any Point you need assistance nevertheless do not hesitate to ask. We are here to Help you.

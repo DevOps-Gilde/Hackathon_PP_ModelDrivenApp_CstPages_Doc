@@ -1,6 +1,6 @@
 # 1. Introduction to Import Implemented Artefacts
 
-Due to time we cannot create the data model step by step nor can we oimplement the complete application. We will use instead a transport mechanism to deploy a fully implemented database model and the partially implemented application as starting point. This approach can be used for any artefact that has been created within PowerPlatform. Microsoft calls deployable code packages also "Solutions". Essentially they boil down to a Zip file that contains the artefacts in an internal Microsoft format that you should always treat as black box.
+Due to time we cannot create the data model step by step nor can we implement the complete application. We will use instead a transport mechanism to deploy a fully implemented database model and the partially implemented application as starting point. This approach can be used for any artefact that has been created within PowerPlatform. Microsoft calls deployable code packages also `Solutions`. Essentially they boil down to a Zip file that contains the artefacts in an internal Microsoft format that you should always treat as black box.
 
 # 3. Importing Prerequisites
 

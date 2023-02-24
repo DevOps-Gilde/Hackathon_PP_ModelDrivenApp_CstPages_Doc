@@ -27,24 +27,30 @@ The learning goals are as stated before:
 
 ## Layouting Form and Button
 
-As you know it from other environments our application shall support responsive layout so we will avoid pixel based statements. A key are containers that allow to layout their children components are horizontally or vertically. Child controls can be seized relatively based on a percentage (1 corresponds to entire space). We already implemented the first container for you that uses the expressions `Parent.Width`and `Parent.Height` to occupy all space of the screen. The screenshot below shows how to layout the controls when we think in containers:
+As you know it from other environments our application shall support responsive layout so we will avoid pixel based statements. A key are containers that allow to layout their child components based on relative a measurement such as a percentage. Container layout their children either horizontally or vertically and can be nested. We already implemented the first container for you that uses the expressions `Parent.Width`and `Parent.Height` to occupy all space of the screen. The screenshot below shows the starting point. As you can see theer is a gap in the sense that the main content is missing:
 
 <br><img src="./images/wiz_layout_start_point.png" /><br>
 
-Let's now implement the layout with the indicated controls. We will start with the first one which is the vertical container for the content. Adding controls always follows the same pattern which is as follows:
+Let's now implement the content for which we need an additional container (to block the bulk of the screen) and the child controls (Form and button). We will start with the vertical container for the content. Adding controls always follows the same pattern which is as follows:
 * Select the parent control `WizardLayout_Create` on the canvas
-* Pick the control
+* Pick the control from the list `+Insert`
 
-  THis will add the new container to the end of the children list. That is not what we want, since it must be placed between header and footer.
+  This will add the new container to the end of the children list. That is not what we want, since it must be placed between header and footer.
 
 * Reorder newly added container
 
-  You have to click on the context menu (...) dots of the control in the tree view. There yu find the option to move it as shown below:
+  You have to click on the context menu (...) dots of the control in the tree view. There you find the option to move it as shown below:
   <br><img src="./images/wiz_layout_reorder.png" /><br>
 
 * Adjust properties
-We have to do the following adjustments for our newly added container:
-* Set fill
+
+  First we have to make sure that container fills the bulk of the screen. The screenshot belows shows the relevant settings:
+  <br><img src="./images/wiz_layout_fill.png" /><br>
+  Adjust the following peoperties as follows:
+  * Activate flexible height if not already done
+  * Set the first figure of `Fill posrtions' to `0.8`which corresonds to 80 percent of the space
+  * make sure that the `Alignment in container` is as shown
+
 * Rename the newly added control to `Content_Create`
 
 Insert the remaining controls according in the same way and name them accordingly:
@@ -56,29 +62,37 @@ Insert the remaining controls according in the same way and name them accordingl
 
 ## Configure Form and Button
 
-In this step of the wizard we either create or update the header of an existing import. We will use the form to achieve that combined with a button that is triggering create or edit. As a first intermediate step the button will first display the values of the form in an alert window.
+In this step of the wizard we either create or update the header of an existing import. We will use a form to achieve that combined with a button that is triggering create or edit. As a first intermediate step the button will first display the values of the form in an alert window.
 
-First we have to wire our form with the underlying ...HDR table. Go to the data source property and select the table.
+To add the form as child control select the newly added container. Pick the control `EditForm` in the same way as you did the container. All further explanation refer to the newly added form. 
 
-TODO screenshot
+First we have to wire our form with the underlying IMP_CO2_CONS_RAW_HDR table. Go to the data source property and select the table.
 
-In our case we need all custom columns that start with CST. Select them as indicated in the screenshot.
+<br><img src="./images/wiz_layout_ctrls_frm_ds.png" /><br>
 
-TODO screenshot
+Next we have to pick all relevant columns. Click on `Edit fields` and select all custom columns that start with `CST`. Select them as indicated in the screenshot.
 
-Creating or editing is defined by the property mode. The value depends in our case of the context that was passed when the first step was called. Enter the following expression for property TODO. 
+<br><img src="./images/wiz_layout_ctrls_frm_sel_cols.png" /><br>
 
-TODO screenshot
+Creating or editing is defined by the property mode. The value depends in our case of the context that was passed when the first step was called. That is the first case where we need a formula to determine the correct value. That is not possible using the predefined values at the right-hand side. We have to use formular bar that is similar to excel as shown below:
 
-For the mode NEW we have completed all major fields. However in case of edit the control has no idea which record we want to edit. The control provides the Item property we want to edit (In the mode New the value is ignored). Set the expression as follows:
+<br><img src="./images/wiz_layout_ctrls_frm_mode_fx.png" /><br>
 
-TODO expression
- 
-As a last step we set the relative height so that the form occupies minimum space.
+To enter any formular for a given property do the following:
+* select the name of the property on the left-hand side (here DefaultMode)
+* set the expression on the right hand side after the Fx icon
 
-TODO expression
+  The expression in our case is a simple if expression: `If(TODOVarMode, FormMode.New, FormMode.Edit)`. The tested expression refers to the context wizard. The setting of the value for `TODOVarMode` we alraedy implemented for you when you click the buttons on the overview page. 
 
-Now only the button needs to be configured. Change the Text property to "Submit". The property "OnSelect" contains the action when the button is pressed. For now this shall include a popup window. You can reference each value for a given input field by following the hierarchy. E.g. the expression TODO yields the value of the TODO. Enter the following expression TODO in the "OnSelect" property.
+For the mode `New` we have completed all major fields. However in case of edit the control has no idea which record we want to edit. The control provides the Item property we want to edit (In the mode New the value is ignored). Set the expression as follows: `TODOSelectedItem`. The setting of the value for `TODOSelectedItem` we alraedy implemented for you when you click the buttons on the overview page. 
+
+As a last step we set the relative height so that the form occupies minimum space. Set `Fill portions` to `0.2`.
+
+We are fnished and can switch over to the button. Select the newly added container again. Pick the control `Button` in the same way as you did the 
+
+Change the Text property to `Submit`. The property `OnSelect` contains the action when the button is pressed. For now we will just display an information that proofs we can access the values in the form. Enter the following expression in the "OnSelect" property: `Notify(<name of the value below the card within the form>, NotificationType.Information)`. The name can be obtained by the tree view as shown below:
+
+<br><img src="./images/wiz_layout_ctrls_btn_frm_value.png" /><br>
 
 ## Navigation
 
@@ -92,7 +106,11 @@ TODO What are the expressions
 
 # 3. Testing changes
 
-Testing changes is quite easy trough the `Play` button that is provided by the web portal. Don't forget to save and publish your changes before testing. You have to run the application in the right scope. That means:
+Testing changes is quite easy trough the `Play` button that is provided by the web portal as shown below:
+
+<br><img src="./images/wiz_layout_test.png" /><br>
+
+Don't forget to save and publish your changes before testing. You have to run the application in the right scope. That means:
 * Local changes within a custom page
 
   Just press the play button to start the custom page. The crseenshot below shows an example. Use the `X` button at the right top corner to switch back into edit mode.
