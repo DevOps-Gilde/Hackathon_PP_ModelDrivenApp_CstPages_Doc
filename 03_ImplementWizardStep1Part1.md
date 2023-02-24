@@ -118,20 +118,19 @@ The `Home` button is a bit more difficult since the code shall jump back to the 
   
 # 3. Testing changes
 
-Testing changes is quite easy trough the `Play` button that is provided by the web portal as shown below:
+Testing changes is quite easy trough the `Play` button that is provided by the web portal as shown by the first screenshot. To finish the test mode click the `X`as shown in the second screenshot below:
 
 <br><img src="./images/wiz_layout_test.png" /><br>
+<br><img src="./images/wiz_layout_stop.png" /><br>
 
 Don't forget to save and publish your changes before testing. You have to run the application in the right scope. That means:
 * Local changes within a custom page
 
-  Just press the play button to start the custom page. The scrseenshot below shows an example. Use the `X` button at the right top corner to switch back into edit mode.
-  TODO screenshot
+  In that case you don't have dependencies to other custom pages. An example is correctly layouting the controls.
 
 * Changes that span Custom Changes
 
-  Make first sure you switch back to the model driven app. Press the `Back` button at the top of the screen to switch to the App. Just press the play button to start the custom page. The screenshot below shows an example. Use the `X` button at the right top corner to switch back into edit mode.
-  TODO screenshot
+  In that case dependencies exist. Dependencies might mean targeting other pages or setting values as context for the custom page under test.
 
 Thanks to your changes the following scenarios should now work:
 |Test                                             |Scope | Expected Result                          |

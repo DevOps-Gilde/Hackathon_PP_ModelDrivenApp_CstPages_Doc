@@ -2,7 +2,9 @@
 
 Due to time we cannot create the data model step by step nor can we implement the complete application. We will use instead a transport mechanism to deploy a fully implemented database model and the partially implemented application as starting point. This approach can be used for any artefact that has been created within PowerPlatform. Microsoft calls deployable code packages also `Solutions`. Essentially they boil down to a Zip file that contains the artefacts in an internal Microsoft format that you should always treat as black box.
 
-# 3. Importing Prerequisites
+# 2. Importing data model
+
+## Import solution
 
 Perform the following steps:
 1. Download the file `Solution_DbTables_Hackathon_managed_2_0_0_0.zip` from [our code repo](https://github.com/DevOps-Gilde/Hackathon_PP_ModelDrivenApp_CstPages_Code) 
@@ -24,9 +26,7 @@ Perform the following steps:
    As a result you should see now the custom tables we need for our application that all start with the prefix "IMP" as sown below:
    <br><img src="./images/imp_sol_step_check.png" /><br>
 
-Repeat the same steps with the zip file `Solution_App_Hackathon_managed_2_0_0_0.zip` to import the partially implemented application.
-
-# 4. Working with tables
+## Working with tables
 
 The following points are relevant for the later hackathon:
 * Edit tables to enter data manually
@@ -50,3 +50,6 @@ To understand the columns checkout the column definitions. Click on "Columns" as
 Select the column you are interested in. You can limit the columns by filtering according to the prefix "CST". The screenshot below shows the definition of the column that references a choice.
 <br><img src="./images/work_tables_cols_check_def.png" /><br>
 
+# 3. Importing app
+
+Repeat the same steps with the zip file `Solution_App_Hackathon_managed_2_0_0_0.zip` to import the partially implemented application.
