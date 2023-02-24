@@ -12,7 +12,7 @@ Next you add the required controls to the first step of the wizard and wire it w
 
 Each step of the wizard is implemented as a separate screen within the same custom page. In the default the ability to create multiple screens is disabled. The screenshot below shows the setting if you want to create your own application:
 
-TODO screenshot
+<br><img src="./images/wiz_layout_mul_scr_setUntitled.png" /><br>
 
 In that step you will implement the first half of the first step of the wizard which enables the user to edit or create a new import. In the first half you will create the main content page. 
 
@@ -29,7 +29,7 @@ The learning goals are as stated before:
 
 As you know it from other environments our application shall support responsive layout so we will avoid pixel based statements. A key are containers that allow to layout their children components are horizontally or vertically. Child controls can be seized relatively based on a percentage (1 corresponds to entire space). The screenshot below shows how to layout the controls when we think in containers:
 
-TODO picture
+<br><img src="./images/wiz_layout_start_point.png" /><br>
 
 Let's now implement the layout with the indicated controls. We will start with the first one which is the vertical container for the content. Adding controls always follows the same pattern which is as follows:
 * Select the parent control on the canvas
@@ -37,6 +37,7 @@ Let's now implement the layout with the indicated controls. We will start with t
 * Adjust properties
 We have to do the following adjustments for our newly added container:
 * Reorder
+<br><img src="./images/wiz_layout_reorder.png" /><br>
 * Set fill
 * Rename
 
