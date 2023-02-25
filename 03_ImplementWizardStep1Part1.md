@@ -27,7 +27,7 @@ The learning goals are as stated before:
 
 ## Layouting Form and Button
 
-As you know it from other environments our application shall support responsive layout so we will avoid pixel based statements. A key are containers that allow to layout their child components based on relative a measurement such as a percentage. Container layout their children either horizontally or vertically and can be nested. We already implemented the first container for you that uses the expressions `Parent.Width`and `Parent.Height` to occupy all space of the screen. The screenshot below shows the starting point. As you can see theer is a gap in the sense that the main content is missing:
+As you know it from other environments our application shall support responsive layout so we will avoid pixel based statements. A key are containers that allow to layout their child components based on relative a measurement such as a percentage. Container layout their children either horizontally or vertically and can be nested. We already implemented the first container for you that uses the expressions `Parent.Width` and `Parent.Height` to occupy all space of the screen. The screenshot below shows the starting point. As you can see theer is a gap in the sense that the main content is missing:
 
 <br><img src="./images/wiz_layout_start_point.png" /><br>
 
@@ -66,7 +66,7 @@ In this step of the wizard we either create or update the header of an existing 
 
 To add the form as child control select the newly added container. Pick the control `EditForm` in the same way as you did the container. All further explanation refer to the newly added form. 
 
-First we have to wire our form with the underlying IMP_CO2_CONS_RAW_HDR table. Go to the data source property and select the table.
+First we have to wire our form with the underlying `IMP_CO2_CONS_RAW_HDR` table. Go to the data source property and select the table.
 
 <br><img src="./images/wiz_layout_ctrls_frm_ds.png" /><br>
 
@@ -96,47 +96,37 @@ Change the Text property to `Submit`. The property `OnSelect` contains the actio
 
 ## Navigation
 
-As you have already seen there are a lot of different artefacts like screens and pages that need to be linked. Our page is not yet correctly wired.
+As you have already seen we work with screens to separate things. They are linked and the first step of our wizard is not yet correctly wired. Both buttons `Next` and `Home` at the footer still need to be configured.
 
-Both buttons `Next` and `Home` at the footer still need to be configured.
+`Next`means we just refer to the screen representing the second step in our wizard. In addition to that we have to pass required context information for the next step. This context information includes:
+* The primary key of the newly created/ edited record
+* The import state of the newly created/ edited record
+The `Navigate` command allows to jump to the designated screen and to pass parameters. Set the `OnSelect` propery of the button to `Navigate(<name of screen>, ScreenTransition.None, {TODO})`. `{}` is an arbitrary json structure that we use to pass the information. The property names can be used as they are in the referenced page.
 
-`Next`means we just refer to another screen within the same page. The `Navigate(<name of screen>)` taks you there. Set the `OnSelect` property of this expression with the name of the screen as parameter.
-
-The `Home` button is a bit more difficult since the code shall jump back to the overview custom page we come from. When you search the internet you find various options. Therefore a quick overview:
-* Referencing by URL
-
-  Custom pages have URL of the following format: `https://<orgname>.crm16.dynamics.com/main.aspx?appid=<app id>&pagetype=custom&name=<internal name of page>`. The expressions to use this are `Launch(URL)`. On the targeted custom page you can read the with `Param` (Sources: [URL Format](https://powerusers.microsoft.com/t5/Building-Power-Apps/Navigating-from-one-custom-page-to-another-with-parameters/td-p/1418875), [MS Docs](https://learn.microsoft.com/en-us/power-platform/power-fx/reference/function-param)).
-
-  Although technically feasible it is not recommended for the following reasons:
-  * Works only in final app and not in the emedded testing app
-  * No check support since url is black box
-
-* Navigate
-
-  This is the recommended way. The required expression is `IF(TODOContext, Navigate(<name page imp>, Navigate(<name page appr>)`. 
-  A special challenge is navigating to a page and passing parameters. We already did it for you at the overview pages as follows: `Navigate(<name of list>.Selected, { Page: <name of page>})` (note that the names are without single or double quotes). The biggest problem was the missing designer support for the second argument (See also [here](https://www.google.com/search?q=power+platform+passing+context+to+custom+page&rlz=1C1UEAD_enDE999DE999&oq=power+platform+passing+context+to+custom+page&aqs=chrome..69i57.14024j0j9&sourceid=chrome&ie=UTF-8#fpstate=ive&vld=cid:e81c6c9f,vid:UDmGd5Qb4rY)).
+The `Home` button shall reference the entry page for the importer. Passing any parameters is not required. Therefore just set the `OnSelect` of the button to `Navigate(TODO)`.
   
 # 3. Testing changes
 
-Testing changes is quite easy trough the `Play` button that is provided by the web portal as shown by the first screenshot. To finish the test mode click the `X`as shown in the second screenshot below:
+For the testing options below your changes must be at least saved. For testing there are two options:
+* Quicktests
 
-<br><img src="./images/wiz_layout_test.png" /><br>
-<br><img src="./images/wiz_layout_stop.png" /><br>
+  Ad hoc test of changes is quite easy trough the `Play` button that is provided by the web portal as shown by the first screenshot. The current screen selected in the tree view is assumed as screen under test. To finish the test mode click the `X`as shown in the second screenshot below:
+  <br><img src="./images/wiz_layout_test.png" /><br>
+  <br><img src="./images/wiz_layout_stop.png" /><br>
 
-Don't forget to save and publish your changes before testing. You have to run the application in the right scope. That means:
-* Local changes within a custom page
+  A problem of that approach is the setting of the context. In our case you can achieve it by starting with the importing overview screen. In a more complex case with many test cases this might mean a lot of clicking.
 
-  In that case you don't have dependencies to other custom pages. An example is correctly layouting the controls.
+* Test Studio
 
-* Changes that span Custom Changes
-
-  In that case dependencies exist. Dependencies might mean targeting other pages or setting values as context for the custom page under test.
-
-Thanks to your changes the following scenarios should now work:
-|Test                                             |Scope | Expected Result                          |
-|-------------------------------------------------|------|------------------------------------------|
-|Wizard first step: Main content displayed correctly |Local |Next screen is displayed               |
-|Wizard first step: Click on next button          |Local |Next screen is displayed                  |
-|Wizard first step: Click on home button          |Global|Overview page is shown from where wizard wa striggered|
-|Import Overview Page: Click on new import button |Global|Fields on the form are empty|
-|Import Overview Page: Select a single record and click on edit import button|Global|Fields on the form are prefilled with the record you selected|
+  It allows you to define test cases that consist of steps. Each step can have an action such as `Navigate()`. Running these tests greatly reduces clicking. The two screenshots below shall give you only an idea:
+  <br><img src="./images/tst_start_studio.png" /><br>
+  <br><img src="./images/tst_studio_define_tc.png" /><br>
+  
+For our case ad-hoc testing is sufficient. Start from the import overview page to ensure a correct screen context. Press the play button after selecting the overview screen to start the tests. Thanks to your changes the following scenarios should now work:
+|Test                                             |Expected Result                          |
+|-------------------------------------------------|------------------------------------------|
+|Wizard first step: Main content displayed correctly |Next screen is displayed               |
+|Wizard first step: Click on next button          |Next screen is displayed                  |
+|Wizard first step: Click on home button          |Overview page is shown from where wizard wa striggered|
+|Import Overview Page: Click on new import button |Fields on the form are empty|
+|Import Overview Page: Select a single record and click on edit import button|Fields on the form are prefilled with the record you selected|

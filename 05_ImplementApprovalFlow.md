@@ -12,7 +12,7 @@ Next you will complete the implementation the last step of the wizard.
 
 ## Introduction
 
-Now we will implement the approval flow. The flow is triggered by the importing user when the importing state is set to finalized. The approver will be informed via mail that an action from his side is required.
+Now we will implement the approval flow. The flow is triggered by the importing user when the he clicks the `Request Approval` button.In the first step the flow will adjust the state. Besides the approver will be informed via mail that an action from his side is required.
 
 From there the approval can be triggered in two ways:
 1. The approver confirms the mail sent
@@ -29,7 +29,6 @@ The following things are already implemented:
 What needs to be implemented by you within the flow:
 * Triggering sending an EMail to the approver
 * Only execute action when approval was given by mail
-* Writing of comment if approval refused
 
 Click on the plus sign after the first step to add a new one. Select `Approvals`as category and select the action `Start and wait for an approval`. The screenshot shows the fields:
 
@@ -45,8 +44,8 @@ Now we have to move the existing steps for copying the data to accumulated CO2 c
 
 # 3. Testing changes
 
-Thanks to your changes the following scenarios should now work:
-|Test                                             |Scope | Expected Result                          |
-|-------------------------------------------------|------|------------------------------------------|
-|Wizard last step: Click on Submit button (new)   |Global|The approver should get a mail. After approval you should see a new record in the dataverse table|
-|Wizard last step: Click on Submit button (edit)  |Global|The approver should get a mail. After approval you should see a new record in the dataverse table|
+Start from the import overview page to ensure a correct screen context. Press the play button after selecting the overview screen to start the tests. Thanks to your changes the following scenarios should now work:
+|Test                                             |Expected Result                          |
+|-------------------------------------------------|------------------------------------------|
+|Wizard last step: Click on Submit button (new)   |The approver should get a mail. After approval the state of the import should have changed and accumulated CO2 consumption should include your import.|
+|Wizard last step: Click on Submit button (edit)  |The approver should get a mail. After approval the state of the import should have changed and accumulated CO2 consumption should include your import.|

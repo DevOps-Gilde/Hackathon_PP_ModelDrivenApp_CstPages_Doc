@@ -50,5 +50,5 @@ The following tasks will expect you:
 
 5. **Optional advanced extra task:** Implement approval flow [here](/05_ImplementApprovalFlow.md)
 
-:white_check_mark: We also created a working solution located in the branch [Solution](https://github.com/DevOps-Gilde/Hackathon_PP_ModelDrivenApp_CstPages_Doc/tree/Solution) of your forked repository that covers all tasks. The solution is provided as solution so you have to import it to your environment.
+:white_check_mark: We also created a fully implemented applicazion including data model located in the branch [Solution](https://github.com/DevOps-Gilde/Hackathon_PP_ModelDrivenApp_CstPages_Doc/tree/Solution) of your forked repository that covers all tasks. You only have to import it to your environment.
 If at any Point you need assistance nevertheless do not hesitate to ask. We are here to Help you.

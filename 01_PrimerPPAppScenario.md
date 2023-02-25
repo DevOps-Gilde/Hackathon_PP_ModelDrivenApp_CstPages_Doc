@@ -41,7 +41,27 @@ These three options are also reflected by the main choice you have to make when 
 
 <br><img src="./images/intro_apps_page_types.png" /><br>
 
-Custom pages can give you a citizen developer like experience. Compared to the dataverse table option they are closer to architecture principles for professional developers since the UI is not directly bound to the tables. However unexpected shortcomings were identified during that hackathon and the licensing is still per user. Only power pages provide licenses that are for a bunch of users.
+Custom pages can give you a citizen developer like experience. Compared to the dataverse table option they are closer to architecture principles for professional developers since the UI is not directly bound to the tables. Only power pages provide licenses that are for a bunch of users.
+
+A major design decision is also whether you use multiple screens within the same custom page or multiple custom pages. According to our experience from that hackathon custom pages come with a serious limitation regarding communication with other pages:
+* Navigate() command only allows to pass a record to the called page
+
+  This is for instance a problem if you want to pass additional infos beyond the record. Reading record information such as `id` on the target page is also done with `Param`.
+
+* Including the parameters in the URL is also not recommended
+
+  Custom pages have URL of the following format: `https://<orgname>.crm16.dynamics.com/main.aspx?appid=<app id>&pagetype=custom&name=<internal name of page>`. The expressions to use this are `Launch(URL)`. On the targeted custom page you can read the with `Param` (Sources: [URL Format](https://powerusers.microsoft.com/t5/Building-Power-Apps/Navigating-from-one-custom-page-to-another-with-parameters/td-p/1418875), [MS Docs](https://learn.microsoft.com/en-us/power-platform/power-fx/reference/function-param)).
+
+  Although technically feasible it is not recommended for the following reasons:
+  * Works only in final app and not in the emedded testing app
+  * No check support since url is black box
+
+Using multiple screens instead has the following advantages:
+* More leightweight solution than multiple pages
+* Arbitrary parameters possible with `Navigate()`
+* Parameters can be passed as Context that is scoped per screen
+
+  Scoping means that the values are not visible outside the screen. Compared to global variables this greatly reduces side effects. This context is very close to parameters in function calls that you know from standard programming languages.
 
 Editing custom pages is a two step process. First you switch the Model-driven-app in edit mode. Then you select the page to be edited as shown below:
 
@@ -114,27 +134,30 @@ It allows the user to either
   That option requires selecting a single record in the list. Moreover the import state must not yet be finalized.
 
 Major mechanism to manage the import is a wizard. The context of the wizard is either (1) the import to be edited or (2) none if a new import shall be created. The wizard consists of three steps:
-* Create/ Update - Creates/ updates the header depending on the wizard context
+* Create/ Update
 
-  This step is only intended for the importing user. If the approver navigates to that screen all controls are disabled. For simplicity reasons the changes (new or edit) will be written directly to the dataverse when submit is clicked. The screenshot below shows the conceptual screen:
+  The functionality of that step is only available if the state of the header is not yet `Finalized` or higher. In that step the importer creates or updates the header depending on the wizard context. For simplicity reasons the changes (new or edit) will be written directly to the dataverse when submit is clicked. The screenshot below shows the conceptual screen:
   <br><img src="./images/intro_apps_imp_mask_wiz_cre.png" /><br>
 
-* Upload - Uploads the local file containing the consumption data
+* Upload
 
-  This step is only intended for the importing user. If the approver navigates to that screen all controls are disabled. The upload will always refer to an existing import. Either the header import from the wizard context is edited or the newly created one. The screenshot below shows the conceptual screen:
+  The functionality of that step is only available if the state of the header is not yet `Finalized` or higher. In that step the importer uploads the local file containing the consumption data.
+  The upload will always refer to an existing import. Either the header import from the wizard context is edited or the newly created one. The screenshot below shows the conceptual screen:
   <br><img src="./images/intro_apps_imp_mask_wiz_upl.png" /><br>
 
-* Approve - This step depends is intended for importing and approving users alike.
+* Approve
 
-  If the importer clicks the `approve` button the import header is set to finalized. The same click from the approver sets the header to `approved` what starts the taking over to the final table. The screenshot below shows the conceptual screen:
+  The functionality of that step is only available if the state of the header is not yet `Finalized` or higher. This step signals to the approver that the import is ready for approval. Signaling is triggered by clicking the button which sets the state of the import header to `Finalized`. The screenshot below shows the conceptual screen:
   <br><img src="./images/intro_apps_imp_mask_wiz_appr.png" /><br>
 
-The approving user also gets a search mask as entry point that is geared towards finalized imports that have not been approved yet. Approval is done by directly jumping to the third step of the wizard based on the selected import. Additionally the approver can display the accumulated CO2 consumptions per year.
+The approving user also gets a search mask as entry point that is geared towards finalized imports that have not been approved yet. Approval is done by filtering the relevant records and clicking the approve button. Additionally the approver can display the accumulated CO2 consumptions per year.
 
 <br><img src="./images/intro_apps_appr_mask_ovr.png" /><br>
 <br><img src="./images/intro_apps_appr_mask_co2_cons.png" /><br>
 
 Our application does not provide functionality to maintain users and their corresponding departments. The idea is to use the built-in dataverse functionality to modify the data if required.
+
+Custom pages are used to bundle the functionality for the importer and approver since both are independent from the workflow. Depending on the department only the relevant page is shown. All functionality within a page is implemented by using multiple screens.
 
 ## Data Model
 
@@ -150,3 +173,27 @@ The meaning of the tables are as follows. The names are the ones that are also u
 * IMP_DEARTMENTS - Departments
 * IMP_STATES_CHOICE - Eligible import states
 * IMP_CO2_DRIVER_TYPES_CHOICE - Drivers for CO2 emission
+
+## Working with tables
+
+The following points are relevant for the later hackathon:
+* Edit tables to enter data manually
+* Understanding of the column definition of the table IMP_CO2_CONS_RAW_HDR
+
+To edit table data you just have to click on the table name. You can use the filter in the top right corner to limit the displayed tables.
+<br><img src="./images/work_tables_open_table.png" /><br>
+
+The lower part shows now a grid where you can directly edit the values.
+<br><img src="./images/work_tables_edit_data.png" /><br>
+
+Specifics resulting from the column definition are automatically reflected by the grid. That means:
+* You cannot directly edit the primary key since it is defined as autogenerated
+* You can only select as user names that are entered in the table CST_USERS
+* You can only select a value from the predefined state values
+
+To understand the columns checkout the column definitions. Click on "Columns" as shown below.
+
+<br><img src="./images/work_tables_cols_ovr.png" /><br>
+
+Select the column you are interested in. You can limit the columns by filtering according to the prefix "CST". The screenshot below shows the definition of the column that references a choice.
+<br><img src="./images/work_tables_cols_check_def.png" /><br>
