@@ -63,9 +63,19 @@ Using multiple screens instead has the following advantages:
 
   Scoping means that the values are not visible outside the screen. Compared to global variables this greatly reduces side effects. This context is very close to parameters in function calls that you know from standard programming languages.
 
-Editing custom pages is a two step process. First you switch the Model-driven-app in edit mode. Then you select the page to be edited as shown below:
+Editing custom pages is a two step process. First you switch the Model-driven-app in edit mode. Then you select the page to be edited. The picture below illustrates the two levels starting from the portal:
 
 <br><img src="./images/intro_app_stepwise_edit.png" /><br>
+
+The major controls to switch between the levels are:
+* Portal => App in Edit Mode
+ 
+  Select `Apps` in the main navigation on the left hand side. Right-click on the app in question and select `Edit` in the context menu. To get back to the entry portal click the `Back`button in the top left corner.
+
+* App => page
+
+  Hoovering over the page in question should already activate the pen icon. Click on that to edit the page. To get back to the app level click the `Back`button in the top left corner.
+  <br><img src="./images/intro_app_edit_pg.png" /><br>
 
 Changing something is also a two step process. Changes must be saved AND published to take effect. For example first after publishing you see changes for a certain custom page also on model driven app level. The picture below shows the icons for svaing and publishing:
 
