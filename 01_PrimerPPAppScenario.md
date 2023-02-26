@@ -176,13 +176,41 @@ The picture below shows the data model (Table names are abbreviated):
 <br><img src="./images/intro_dataverse_app_model.png" /><br>
 
 The meaning of the tables are as follows. The names are the ones that are also used in dataverse:
-* IMP_CO2_CONS_ACC - Aggregated C=2 consumption
-* IMP_CO2_CONS_RAW_HDR - Import
-* IMP_CO2_CONS_RAW - Consumption data
-* IMP_USERS - Users and associated department
-* IMP_DEARTMENTS - Departments
-* IMP_STATES_CHOICE - Eligible import states
-* IMP_CO2_DRIVER_TYPES_CHOICE - Drivers for CO2 emission
+* Table IMP_CO2_CONS_ACC - Aggregated CO2 consumption
+* Table IMP_CO2_CONS_RAW_HDR - Import
+* Table IMP_CO2_CONS_RAW - Consumption data
+* Table IMP_USERS - Users and associated department
+* Table IMP_DEARTMENTS - Departments
+* Choice IMP_STATES_CHOICE - Eligible import states
+* Choice IMP_CO2_DRIVER_TYPES_CHOICE - Drivers for CO2 emission
+
+The table below gives a short overview of the columns for the custom tables. Choices contain key value pairs. In our hackathon we did not check the default columns for reuse. In a real world scenario you would only the columns you need on top. All relevant columns have the prefx `CST` to quickly identify them. :
+
+|Table name          |Column name           |Purpose                                     |
+|--------------------|----------------------|--------------------------------------------|
+|IMP_CO2_CONS_ACC    |CST_ACC_CODE          |Logical primary Key of table                |
+|IMP_CO2_CONS_ACC    |CST_CO2_CONS_YEAR_TONS|Accumulated CO2 emission per year in tons   |
+|IMP_CO2_CONS_ACC    |CST_CO2_DRIVER        |Substance causing CO2 emission              |
+|IMP_CO2_CONS_ACC    |CST_DEP_CODE          |Year of CO2 consumption                     |
+|IMP_CO2_CONS_RAW_HDR|CST_IMP_CODE          |Logical primary Key of table                |
+|IMP_CO2_CONS_RAW_HDR|CST_IMP_CODE          |Logical primary Key of table                |
+|IMP_CO2_CONS_RAW_HDR|CST_IMP_STATE         |Overall state of import                     |
+|IMP_CO2_CONS_RAW_HDR|CST_IMP_TS            |Timestamp of import creation                |
+|IMP_CO2_CONS_RAW_HDR|CST_IMP_USERNAME      |User name of importing user                 |
+|IMP_CO2_CONS_RAW_HDR|CST_IMP_YEAR          |Year of CO2 emission                        |
+|IMP_CO2_CONS_RAW_HDR|CST_IMP_DESC          |Additional import description               |
+|IMP_CO2_CONS_RAW_HDR|CST_APPR_TS           |Timestamp of approval                       |
+|IMP_CO2_CONS_RAW_HDR|CST_APPR_USERNAME     |Name of approving user                      |
+|IMP_CO2_CONS_RAW    |CST_IMP_ITM_CODE      |Logical primary Key of table                |
+|IMP_CO2_CONS_RAW    |CST_IMP_CODE          |Rfeerence to import header                  |
+|IMP_CO2_CONS_RAW    |CST_CO2_CONS_YEAR_TONS|CO2 consumption caused by the department    |
+|IMP_CO2_CONS_RAW    |CST_CO2_DRIVER        |Substance causing CO2 emission              |
+|IMP_CO2_CONS_RAW    |CST_DEP_CODE          |Department causing the CO2 emission         |
+|IMP_DEPARTMENTS     |CST_DEP_CODE          |Code of the department and logical primary key|
+|IMP_DEPARTMENTS     |CST_DEP_NAME          |Name of the department                      |
+|IMP_USER            |CST_USERNAME          |Logical primary Key of table                |
+|IMP_USER            |CST_EMAIL             |EMAIL of user                               |
+|IMP_USER            |CST_DEP_CODE          |Department code of user                     |
 
 ## Working with tables
 
