@@ -2,7 +2,7 @@
 
 ## Focus
 
-This repo contains the documentation for the Power Apps hackathon. The application to complete will be a **model driven app with Custom Pages**. The business scenario of our example app is the import of CO2 consumption figures from a local file. They will have to approved before showing up in a consolidated table. A wizard will guide the importing and approving user to the import/ approval.
+This repo contains the documentation for the Power Apps hackathon. The application to complete will be a **model driven app with Custom Pages**. The business scenario of our example app is the import of CO2 consumption figures from a local file. They will have to approved before showing up in a consolidated table. A wizard will guide the importing user.
 
 The hackathon includes the following technologies:
 * Power Apps: Model driven apps with custom pages
@@ -14,11 +14,11 @@ Out of scope are the following technologies:
 * Creation of underlying dataverse data model (We provide a full implementation that only needs to be imported by you into the environment)
 
 The following things will be provided to you:
-* Power Platform Environment and user to fill the gaps our application
+* Power Platform Environment and user to fill the gaps in our application
 * Fully implemented data model
 * A partially implemented application with gaps for you to fill
 
-[This repo](https://github.com/DevOps-Gilde/Hackathon_PP_ModelDrivenApp_CstPages_Code) contains the assumed code for this documentation.
+[This repo](https://github.com/DevOps-Gilde/Hackathon_PP_ModelDrivenApp_CstPages_Code) contains the code for this documentation. Code includes the starting point for this hackathon and a fully implemented application.
 
 ## Prerequirements
 
@@ -44,11 +44,13 @@ The following tasks will expect you:
    * Configuring controls (EditForm, Button)
    * Defining actions when certain events happen such as a click of a button
 
+   After that task the first step of the wizard won't trigger any changes within the data model.
+
 4. Implement Wizard Step Create/ Update (Part2) [here](/04_ImplementWizardStep1Part2.md)
 
-   In that step the import header will be created without that acts as empty shell for the uploaded import data. Reason for the involving an embedded flow are limitations of the used controls.
+   In that step you add the persistence in the data model. Reason for the involving an embedded flow are limitations of the used controls.
 
 5. **Optional advanced extra task:** Implement approval flow [here](/05_ImplementApprovalFlow.md)
 
-:white_check_mark: We also created a fully implemented applicazion including data model located in the branch [Solution](https://github.com/DevOps-Gilde/Hackathon_PP_ModelDrivenApp_CstPages_Doc/tree/Solution) of your forked repository that covers all tasks. You only have to import it to your environment.
+:white_check_mark: We also created a fully implemented application including data model located in the branch [Solution](https://github.com/DevOps-Gilde/Hackathon_PP_ModelDrivenApp_CstPages_Doc/tree/Solution) of your forked repository that covers all tasks. You only have to import it to your environment.
 If at any Point you need assistance nevertheless do not hesitate to ask. We are here to Help you.

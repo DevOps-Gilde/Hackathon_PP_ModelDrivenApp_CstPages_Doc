@@ -44,7 +44,7 @@ Set the fields as shown in the table:
 | Select columns | MetadataId                |
 | Row count      | 1                         |
 
-The expression for `Filter rows` we use for filtering the rows by the importing username that was specified in the form. The expression is `cst_username eq <value from form>`. Technically the value from the form is passed as parameter. We have to tell now Power Platform to generate a parameter for us. The screenshot below shows how that is done by selecting the expression `Ask in PowerApps`:
+The expression for `Filter rows` we use for filtering the rows by the importing username that was specified in the form. The expression is `hackpp_sceapp_cst_username eq '<value from form>'`. Technically the value from the form is passed as parameter. We have to tell now Power Platform to generate a parameter for us. The screenshot below shows how that is done by selecting the expression `Ask in PowerApps`:
 
 <br><img src="./images/flow_new_list_rows_add_para.png" /><br>
 
@@ -58,11 +58,27 @@ As a first value we will set the value for CST_IMP_USERNAMES. Power Platform exp
 
 <br><img src="./images/flow_new_set_imp_user.png" /><br>
 
-Set the fields as shown in the table below. When you selected the value you will notice a change, Dataverse embeds the new `Add new row`task in a for each loop since the previous command might return multiple rows. The screenshot below shows this new situation:
+When you selected the value you will notice a change, Dataverse embeds the new `Add new row` task in a for each loop since the previous command might return multiple rows. The screenshot below shows this new situation:
 
 <br><img src="./images/flow_new_apply_each.png" /><br>
 
-Expand the `Add new row`action and set now the remaining fields as shown below:
+Let's try to understand `Apply tp each` better. It is working as major input on the output from the previous step displayed as ` value x`. To understand it you have to be aware of the JSON structure that is returned by `List rows`. Below you find a sample:
+```
+{
+	"@odata.context": "https://orgc9bd3046.crm6.dynamics.com/api/data/v9.1/$metadata#cr953_workflowmaxes(cr953_jobid,cr953_...)",
+	"@Microsoft.Dynamics.CRM.totalrecordcount": -1,
+	"@Microsoft.Dynamics.CRM.totalrecordcountlimitexceeded": false,
+	"value": [{
+		"@odata.type": "#Microsoft.Dynamics.CRM.cst_users",
+		"@odata.id": "https://domain.crm6.dynamics.com/api/data/v9.1/cst_users(cf5033a4-c9c8-eb11-bacc-00224817f...)",
+		"hackpp_sceapp_imp_userid": "cf5033a4-c9c8-eb11-bacc-00154817f386"
+    ...
+	}]
+}
+```
+The used path `body/value` is another word navigate to the `value` property. As you can see in the JSON it is an array. The loop now cycles over each entry. We need the id which is shown as `IMP_USER x`. The expression `items('Apply_to_each')?['hackpp_sceapp_imp_userid']` behind is easy to understand.
+
+Expand the `Add new row` action again and set now the remaining fields as shown below:
 |Field           |Value                                         |
 |----------------|----------------------------------------------|
 | CST_IMP_TS     | utcNow                                       |

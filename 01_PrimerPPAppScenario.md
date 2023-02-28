@@ -9,14 +9,14 @@ The most important tool from the hackathon perspective is the web portal. It all
 
 <br><img src="./images/intro_power_platform.png" /><br>
 
-Cooments regarding the picture:
+Comments regarding the picture:
 * The red boxes in the picture mark the environment and the user.
 * On the left hand side you have the main navigation that allows you to reach Dataverse, Power Apps and solutions.
 * Make sure you are always LOGGED IN with the user we provide in the hackathon and not with your Capgemini EMail account
 
 ## Dataverse
 
-Dataverse is the built-in persistence mechanism for Power Platform. It is designed for transactional data. For analytic worloads Microsoft recommends switching to Azure. The core service is a SQL server but as you can see in the picture Dataverse is a implemented behind the sceen by a bunch of services.
+Dataverse is the built-in persistence mechanism for Power Platform. It is designed for transactional data. For analytic worloads Microsoft recommends switching to Azure. The core service is a SQL server but as you can see in the picture Dataverse is a implemented behind the scene by a bunch of services.
 
 <br><img src="./images/intro_dataverse.png" /><br>
 
@@ -37,14 +37,14 @@ Model driven apps are a special application type within power apps. Others are a
 1. Based on dataverse tables
 2. Custom Pages (Our focus)
 3. Dashboards
-These three options are also reflected by the main choice you have to make when adding a page:
+These three options are also reflected by the UI when you add a page:
 
 <br><img src="./images/intro_apps_page_types.png" /><br>
 
 Custom pages can give you a citizen developer like experience. Compared to the dataverse table option they are closer to architecture principles for professional developers since the UI is not directly bound to the tables. Only power pages provide licenses that are for a bunch of users.
 
-A major design decision is also whether you use multiple screens within the same custom page or multiple custom pages. According to our experience from that hackathon custom pages come with a serious limitation regarding communication with other pages:
-* Navigate() command only allows to pass a record to the called page
+The next major design decision within custom pages is multiple screens within the same custom page or multiple custom pages. According to our experience from that hackathon custom pages come with a serious limitation regarding communication with other pages:
+* The `Navigate()` command only allows to pass a record to the called page
 
   This is for instance a problem if you want to pass additional infos beyond the record. Reading record information such as `id` on the target page is also done with `Param`.
 
@@ -59,7 +59,7 @@ A major design decision is also whether you use multiple screens within the same
 Using multiple screens instead has the following advantages:
 * More leightweight solution than multiple pages
 * Arbitrary parameters possible with `Navigate()`
-* Parameters can be passed as Context that is scoped per screen
+* Parameters can be passed as context that is scoped per screen
 
   Scoping means that the values are not visible outside the screen. Compared to global variables this greatly reduces side effects. This context is very close to parameters in function calls that you know from standard programming languages.
 
@@ -72,7 +72,7 @@ The major controls to switch between the levels are:
  
   Select `Apps` in the main navigation on the left hand side. Right-click on the app in question and select `Edit` in the context menu. To get back to the entry portal click the `Back`button in the top left corner.
 
-* App => page
+* App => page in Edit Mode
 
   Hoovering over the page in question should already activate the pen icon. Click on that to edit the page. To get back to the app level click the `Back`button in the top left corner.
   <br><img src="./images/intro_app_edit_pg.png" /><br>
@@ -89,35 +89,37 @@ Power automate propagates a workflow like business logic programming style that 
 
 Comments regarding the picture:
 * Trigger of the flow is manual
-* Arrows represent what comes next so in our case it is a pure seuqnetial execution
+* Arrows represent what comes next so in our case it is a pure sequential execution
 * A box corresponds to a step within the flow performing a certain action
 
 There are various types of flows but the major distinction for us is the following:
 1. Stand alone flow that is defined in Power Automate
 2. Flow that is embedded in a Power App
-We will use the second option since option one requires higher licenses.
+
+   We will use the second option since option one requires higher licenses.
 
 ## Solutions
 
-The standard way to program in a low code platform is rather clicking instead of coding. That is fine for dev/ test environments. But think of production as environment. There clicking together is no option. You rather want to transfer what you clicked together as it is to production. That requires a programmatic way to export something from your dev/ test environment and import it to production.
+The standard way to program in a low code platform is rather clicking instead of coding. That is fine for dev/ test environments. But think of production where clicking together is no option. You rather want to transfer what you clicked together as it to production. That requires a programmatic way to export something from your dev/ test environment and import it to production.
 
-The vehicle is a solution which can transport any artefact from power platform. You can click it together in the portal or by exporting it. Exporting a solution gives you a zip file. The reverse operation reinstates the objects you exported in the designated environment. We will use that mechanism to quickly provision your environment with th fully implemented data model and the partially implemented application.
+The vehicle is a solution which can transport any artefact from power platform. 
+A solution is a container on its own and you add the existing PowerPlatform artefacts to it after creation. Exporting a solution gives you a zip file. The reverse operation reinstates the objects you exported in the designated environment. We will use that mechanism to quickly provision your environment with the fully implemented data model and the partially implemented application.
 
 # 3. Application Scenario
 
 ## Business Problem
 
-Our application is centeredaround CO2 consumption data that is uploaded by the user. Once the upload is final it must be approved. First then it appears in the final destination table that holds the accumulated CO2 consumption per year. Importing consumption data consists of two parts:
+Our application is centered around CO2 consumption data that is uploaded by the user. Once the upload is final it must be approved. First then it appears in the final destination table that holds the accumulated CO2 consumption per year. Importing consumption data consists of two parts:
 * Import Header
 
-  The header summarizes an import. It contains important general importing and approving details such as user and timestamps. Business rules enforce consistency e.g. an approving user must be stored if the state is approved. One tracks the current state of the import which has the following state model:
+  The header summarizes an import. It contains important general importing and approving details such as user and timestamps. The state of the import controls the overall business process. The following values are possible:
   
   * Pending - Import has been done but the figures are not ready for approval
   * Finalized - Figures are ready for approval
   * Approved - Figures habe been approved and can be processed
   * Processed - Figures have been added to the accumated CO2 consumption by the system.
 
-  Changes of the import state trigger the next step in the business flow. E.g. setting the state to `Finalized` allows to trigger the approval.
+  Changes of the import state trigger the next step in the business flow. E.g. setting the state to `Finalized` allows to trigger the approval. Business rules enforce consistency e.g. an approving user must be stored if the state is approved. 
 
 * Import data
 
@@ -184,7 +186,7 @@ The meaning of the tables are as follows. The names are the ones that are also u
 * Choice IMP_STATES_CHOICE - Eligible import states
 * Choice IMP_CO2_DRIVER_TYPES_CHOICE - Drivers for CO2 emission
 
-The table below gives a short overview of the columns for the custom tables. Choices contain key value pairs. In our hackathon we did not check the default columns for reuse. In a real world scenario you would only the columns you need on top. All relevant columns have the prefx `CST` to quickly identify them. :
+The table below gives a short overview of the columns for the custom tables. Choices contain key value pairs. In our hackathon we only the defazlt feature for attachments. All other required ones we defined manually. In a real world scenario you would only the columns you need on top. All relevant columns have the prefx `CST` to quickly identify them:
 
 |Table name          |Column name           |Purpose                                     |
 |--------------------|----------------------|--------------------------------------------|
@@ -201,6 +203,7 @@ The table below gives a short overview of the columns for the custom tables. Cho
 |IMP_CO2_CONS_RAW_HDR|CST_IMP_DESC          |Additional import description               |
 |IMP_CO2_CONS_RAW_HDR|CST_APPR_TS           |Timestamp of approval                       |
 |IMP_CO2_CONS_RAW_HDR|CST_APPR_USERNAME     |Name of approving user                      |
+|IMP_CO2_CONS_RAW_HDR|Attachment            |Uploaded data                               |
 |IMP_CO2_CONS_RAW    |CST_IMP_ITM_CODE      |Logical primary Key of table                |
 |IMP_CO2_CONS_RAW    |CST_IMP_CODE          |Rfeerence to import header                  |
 |IMP_CO2_CONS_RAW    |CST_CO2_CONS_YEAR_TONS|CO2 consumption caused by the department    |
