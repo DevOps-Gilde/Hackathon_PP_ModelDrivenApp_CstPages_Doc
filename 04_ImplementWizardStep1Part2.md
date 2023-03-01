@@ -44,17 +44,17 @@ Set the fields as shown in the table:
 | Select columns | MetadataId                |
 | Row count      | 1                         |
 
-The expression for `Filter rows` we use for filtering the rows by the importing username that was specified in the form. The expression is `hackpp_sceapp_cst_username eq '<value from form>'`. Technically the value from the form is passed as parameter. We have to tell now Power Platform to generate a parameter for us. The screenshot below shows how that is done by selecting the expression `Ask in PowerApps`:
+The expression for `Filter rows` we use for filtering the rows by the importing username that was specified in the form. The expression is `hackpp_sceapp_cst_username eq '<value from form>'`. Technically the value from the form is passed as parameter. We have to tell now Power Platform to generate a parameter for us. The screenshot below shows how that is done by selecting from the tab `Dynamic Content` the expression `Ask in PowerApps`:
 
 <br><img src="./images/flow_new_list_rows_add_para.png" /><br>
 
 When you hover over the generated expression you also the name of the expected parameter which is `Listrows_Filterrows` (Corresponds to `<name of action>_<name of field>`).
 
-In the next step we will add a new row that represents our import. We will use the `Add a new row` action within dataverse. Click `New Step` and enter `dataverse` in the search field. Pick the action `List rows`. The screenshot below shows the action. Select `IMP_CO2_CONS_RAW_HDR` as table name. As a result the table specific tables will be shown as illustrated in the screenshot below:
+In the next step we will add a new row that represents our import. We will use the `Add a new row` action within dataverse. Click `New Step` and enter `dataverse` in the search field. Pick the action `List rows`. The screenshot below shows the action. Select `IMP_CO2_CONS_RAW_HDR` as table name. As a result the table specific tables will be shown as illustrated in the screenshot below. Mandatory fields are marked with an asteriks. The generated UI is not correct reagrding `CST_IMP_CODE`. Yes as logical primary key it is mandatory. However due to the auto generated definition no value would be mandatory. We will provide a dummy to satisfy the constraints:
 
 <br><img src="./images/flow_new_add_row.png" /><br>
 
-As a first value we will set the value for CST_IMP_USERNAMES. Power Platform expects an expression `<EntitySetName>(<GUID of record>)>`. The entity set name in our case is `<EntityName>` and `<GUID of record>` is the result of the previous action. Enter `cst_users()` and position the mouse cursor into the parentheses. Power Platform will assist you in completing the dynamic expression needed here. Pick `OData Id` from the displayed options as shown in the screenshot.
+As a first value we will set the value for CST_IMP_USERNAMES. Power Platform expects an expression `<EntitySetName>(<GUID of record>)>`. The entity set name in our case is `<EntityName>` and `<GUID of record>` is the result of the previous action. Enter `hackpp_sceapp_imp_users()` and position the mouse cursor into the parentheses. Power Platform will assist you in completing the dynamic expression needed here. Pick `IMP_USR` from the displayed options in the tab `Dynamic content` as shown in the screenshot.
 
 <br><img src="./images/flow_new_set_imp_user.png" /><br>
 
@@ -76,14 +76,23 @@ Let's try to understand `Apply tp each` better. It is working as major input on 
 	}]
 }
 ```
-The used path `body/value` is another word navigate to the `value` property. As you can see in the JSON it is an array. The loop now cycles over each entry. We need the id which is shown as `IMP_USER x`. The expression `items('Apply_to_each')?['hackpp_sceapp_imp_userid']` behind is easy to understand.
+The used path `body/value` is another word for navigating to the `value` property. As you can see in the JSON the property `value` is an array. The loop now cycles over each entry. We need the id which is shown as `IMP_USER x`. With the expression `items('Apply_to_each')?['hackpp_sceapp_imp_userid']` we pick the technical id we are interested in.
 
-Expand the `Add new row` action again and set now the remaining fields as shown below:
+Expand the `Add new row` action again to set now the remaining fields. For setting `CST_IMP_TS` the built-in function `utcNow`. As you can see in the screenshot we are in the tab `Expression` and enter it as formula bar:
+
+<br><img src="./images/flow_new_add_row_ts_utcnow.png" /><br>
+
+Follow the instructions in the table for the rest:
 |Field           |Value                                         |
 |----------------|----------------------------------------------|
-| CST_IMP_TS     | utcNow                                       |
+| CST_IMP_CODE   | Set `''` to indicate an empty string     |
 | CST_IMP_YEAR   | Use the way for adding a parameter as before |
+| CST_IMP_DESC   | Use the way for adding a parameter as before |
 | CST_IMP_STATE  | Fixed value for Pending                      |
+
+When you have filled out everything your action should like the following:
+
+<br><img src="./images/flow_new_row_final.png" /><br>
 
 As a last step we now have to return primary key of the newly created record. Enter `PowerApp` as category and add a new action `Respond to a PowerApp or flow`. In the beginning the task is empty and we have to create a return parameter by clicking on `Add an output`. Click on the button and select `Text`. You will then get the fields for a new named output as shown below:
 
@@ -99,13 +108,33 @@ Before you leave the designer note the name of the flow you have defined. You wi
 
 The following steps are necessary to add your flow:
 * Add the new flow to your application
-
-  Click on the power automate icon and click the button `Add flow`. Enter the name under which you saved the flow.
-
 * Submit Button
 
-  Enter the following formula in the property `OnSelected`: `If(Form1.Mode = "New",
-TestFlowInp.Run(CST_IMP_CODE_DataCard1.DataCardValue1), SubmitForm(Form1))`
+**Regarding add flow)**
+
+Click on the power automate icon and click the button `Add flow`. Enter the name under which you saved the flow.
+
+**Submit Button)**
+
+Enter the following formula in the property `OnSelected`: 
+```
+If(locImpMode = "New", 
+   UpdateContext(
+	{locParaUserName: DataCardValue3.Selected.CST_USERNAME,
+	 locParaYear: DataCardValue3.Text,
+	 locParaDesc: DataCardValue3.Text});
+   UpdateContext(
+	 {locNewImpCode: TestFlowInp.Run(
+		locParaUserName,
+		locParaYear,
+		locParaDesc
+		).returnedval });
+   Notify(locNewImpCode & " has been created."), 
+   SubmitForm(<TODOName of form>);
+   Notify(LastSubmit().CST_IMP_CODE & " has been updated."))
+```
+
+TODO explain this code
 
 # 3. Testing changes
 
