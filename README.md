@@ -4,7 +4,7 @@
 
 This repo contains the documentation for the Power Apps hackathon. The application to complete will be a **model driven app with Custom Pages**. 
 
-warning:: Note this documentation is a preliminary state where not all features of the application are already imlemented!
+:warning: Note this documentation is a preliminary state where not all features of the application are already imlemented!
 
 The business scenario of our example app is the import of CO2 consumption figures from a local file. They will have to approved before showing up in a consolidated table. A wizard will guide the importing user.
 
