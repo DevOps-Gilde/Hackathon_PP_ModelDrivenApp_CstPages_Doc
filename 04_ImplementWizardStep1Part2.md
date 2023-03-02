@@ -85,7 +85,7 @@ Expand the `Add new row` action again to set now the remaining fields. For setti
 Follow the instructions in the table for the rest:
 |Field           |Value                                         |
 |----------------|----------------------------------------------|
-| CST_IMP_CODE   | Set `''` to indicate an empty string     |
+| CST_IMP_CODE   | Set the field to the special expression `null` as you did it for `utcNow`     |
 | CST_IMP_YEAR   | Use the way for adding a parameter as before |
 | CST_IMP_DESC   | Use the way for adding a parameter as before |
 | CST_IMP_STATE  | Fixed value for Pending                      |
@@ -116,25 +116,44 @@ Click on the power automate icon and click the button `Add flow`. Enter the name
 
 **Submit Button)**
 
-Enter the following formula in the property `OnSelected`: 
+Our submit is different for edit and new. In the edit case we can use the standard `SubmitForm` to persist the changes. We just add a confirmation message for the user. For new we have run our flow and store returned value for later processing in a local variable. The user is also informed with an additional message. Enter the following formula in the property `OnSelected` that is doing all that: 
 ```
 If(locImpMode = "New", 
    UpdateContext(
 	{locParaUserName: DataCardValue3.Selected.CST_USERNAME,
-	 locParaYear: DataCardValue3.Text,
-	 locParaDesc: DataCardValue3.Text});
+	 locParaYear: 999,
+	 locParaDesc: DataCardValue7.Value});
    UpdateContext(
 	 {locNewImpCode: TestFlowInp.Run(
-		locParaUserName,
-		locParaYear,
-		locParaDesc
-		).returnedval });
-   Notify(locNewImpCode & " has been created."), 
-   SubmitForm(<TODOName of form>);
-   Notify(LastSubmit().CST_IMP_CODE & " has been updated."))
+		locParaUserName, 
+		locParaYear, 
+		locParaDesc).returnedval });
+   Notify("Import " & locNewImpCode & " has been created."), 
+   SubmitForm(Form1);
+   Notify("Import " & Form1.LastSubmit.CST_IMP_CODE & " has been updated."))
 ```
+The important takeaways from that code:
+* Multiple expressions
 
-TODO explain this code
+  No special block identifiers as curl brackets in C are required to run multiple commands. Commands are just separated by semikolon.
+
+* If expression
+
+  The generic form of the if is `if(<test cond>, <expressions to run if true>, <expressions to run if false>). in our case the expressions for the if and the true case are just a bit longer.
+
+* UpdateContext
+
+  The expressions inside is compareable to define local variables as in standard programming languages. Variables are declared and initialised in JSON like notation inside the curly brackets. The variables are only visible in the parent screen.
+
+* Calling the flow
+
+  Running a flow with parameters requires the run command as follows: `<flowname>.Run(<parameters separated by comma>)`. Referencing the return value is done by `.<name of return parameter>`.
+
+* Notify: The expression shows an information message. The operator `&` concatenates strings.
+* LastSubmit: Refers to the stored data. Unfortunately it only works for edit only.
+* DataCardValue3XXX
+
+  They represent the form controls that hold our data. Note that the way you access the data differs depending on the type.
 
 # 3. Testing changes
 

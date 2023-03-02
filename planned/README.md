@@ -2,11 +2,7 @@
 
 ## Focus
 
-This repo contains the documentation for the Power Apps hackathon. The application to complete will be a **model driven app with Custom Pages**. 
-
-warning:: Note this documentation is a preliminary state where not all features of the application are already imlemented!
-
-The business scenario of our example app is the import of CO2 consumption figures from a local file. They will have to approved before showing up in a consolidated table. A wizard will guide the importing user.
+This repo contains the documentation for the Power Apps hackathon. The application to complete will be a **model driven app with Custom Pages**. The business scenario of our example app is the import of CO2 consumption figures from a local file. They will have to approved before showing up in a consolidated table. A wizard will guide the importing user.
 
 The hackathon includes the following technologies:
 * Power Apps: Model driven apps with custom pages
@@ -51,11 +47,11 @@ The following tasks will expect you:
    After that task the first step of the wizard won't trigger any changes within the data model.
 
 4. Implement Wizard Step Create/ Update (Part2) [here](/04_ImplementWizardStep1Part2.md)
+
    
    In that step you add the persistence in the data model. Reason for the involving an embedded flow are limitations of the used controls.
 
-5. **Optional advanced extra task:** Adjust consolidated list of CO2 consumption [here](/05_AdjustConsolidatedCO2Consumption.md)
-
+5. **Optional advanced extra task:** Implement approval flow [here](/05_ImplementApprovalFlow.md)
 
 :white_check_mark: We also created a fully implemented application including data model located in the branch [Solution](https://github.com/DevOps-Gilde/Hackathon_PP_ModelDrivenApp_CstPages_Doc/tree/Solution) of your forked repository that covers all tasks. You only have to import it to your environment.
 If at any Point you need assistance nevertheless do not hesitate to ask. We are here to Help you.
