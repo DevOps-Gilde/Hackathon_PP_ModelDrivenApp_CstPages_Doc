@@ -56,6 +56,7 @@ The following tasks will expect you:
 
 5. **Optional advanced extra task:** Adjust consolidated list of CO2 consumption [here](/05_AdjustConsolidatedCO2Consumption.md)
 
+05_AdjustApprovalList
 
 :white_check_mark: We also created a fully implemented application including data model located in the branch [Solution](https://github.com/DevOps-Gilde/Hackathon_PP_ModelDrivenApp_CstPages_Doc/tree/Solution) of your forked repository that covers all tasks. You only have to import it to your environment.
 If at any Point you need assistance nevertheless do not hesitate to ask. We are here to Help you.
