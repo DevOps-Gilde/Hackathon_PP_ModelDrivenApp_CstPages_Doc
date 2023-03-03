@@ -17,7 +17,7 @@ When performing an import you have to distinguish two scenarios:
 # Data Model
 
 Perform the following steps:
-1. Download the file `DbTables_managed_2_0_0_0.zip` from [our code repo](https://github.com/DevOps-Gilde/Hackathon_PP_ModelDrivenApp_CstPages_Code) in the **main branch**
+1. Download the file `DbTables_managed.zip` from [our code repo](https://github.com/DevOps-Gilde/Hackathon_PP_ModelDrivenApp_CstPages_Code) in the **main branch**
 
 2. Switch to "Solutions" in the main menu
 <br><img src="./images/imp_sol_step_start.png" /><br>
@@ -44,15 +44,20 @@ Perform the following steps:
 # Partially implemented model driven app
 
 Importing the application follows the same pattern. major differences are:
-* Step 1 (File you have to import): Use `App_unmanaged_2_0_0_0.zip` from [our code repo](https://github.com/DevOps-Gilde/Hackathon_PP_ModelDrivenApp_CstPages_Code) in the **main branch**
-* Step 6 (Check): You should see now a model driven app
+* Step 1 (File you have to import): Use `HackPPSceApp_unmanaged.zip` from [our code repo](https://github.com/DevOps-Gilde/Hackathon_PP_ModelDrivenApp_CstPages_Code) in the **main branch**
+* Step 6 (Check)
+
+  Go to the solution and open the model driven app in edit mode. You will see a screen that requests republishing the application as shown below.
+  <br><img src="./images/imp_sol_app_error.png" /><br>
+  
+  Clicking the publish button should fix the problem. Now you can start editing the pages as stated in the upcoming tasks.
 
 # Fully implemented model driven app
 
 :warning: **Note:** The import overwrites your work => do it only at the end :warning:
 
 The process differs in one major aspect. Perform the following steps:
-1. Download the file `App_unmanaged_2_0_0_0.zip` from [our code repo](https://github.com/DevOps-Gilde/Hackathon_PP_ModelDrivenApp_CstPages_Code) in the **solution branch**
+1. Download the file `HackPPSceApp_unmanaged.zip` from [our code repo](https://github.com/DevOps-Gilde/Hackathon_PP_ModelDrivenApp_CstPages_Code) in the **solution branch**
 
 2. Switch to "Solutions" in the main menu
 <br><img src="./images/imp_sol_step_start.png" /><br>
