@@ -4,7 +4,7 @@
 
 This repo contains the documentation for the Power Apps hackathon. The application to complete will be a **model driven app with Custom Pages**. 
 
-:warning: Note this documentation is a preliminary state where not all features of the application are already imlemented! :warning:
+:warning: Note this documentation is a preliminary state where not all features of the application are already imlemented!
 
 The business scenario of our example app is the import of CO2 consumption figures from a local file. They will have to approved before showing up in a consolidated table. A wizard will guide the importing user.
 
@@ -40,7 +40,7 @@ The following tasks will expect you:
 
 2. Import the already implemented artefacts [here](/02_ImportImplementedArtefacts.md)<br>
 
-3. Implement Wizard Step Create/ Update (Part1) [here](/03_ImplementWizardStep1Part1.md)
+3. Implement Wizard Step Header (Part1) [here](/03_ImplementWizardStep1Part1.md)
 
    Part one only includes adding the control and wiring them with the rest. Learning goals of this step are:
 
@@ -50,13 +50,11 @@ The following tasks will expect you:
 
    After that task the first step of the wizard won't trigger any changes within the data model.
 
-4. Implement Wizard Step Create/ Update (Part2) [here](/04_ImplementWizardStep1Part2.md)
+4. Implement Wizard Step Header (Part2) [here](/04_ImplementWizardStep1Part2.md)
    
    In that step you add the persistence in the data model. Reason for the involving an embedded flow are limitations of the used controls.
 
-5. **Optional advanced extra task:** Adjust consolidated list of CO2 consumption [here](/05_AdjustConsolidatedCO2Consumption.md)
-
-05_AdjustApprovalList
+5. **Optional advanced extra task:** Adjust list of imports for approval [here](/05_AdjustApprovalList.md)
 
 :white_check_mark: We also created a fully implemented application including data model located in the branch [Solution](https://github.com/DevOps-Gilde/Hackathon_PP_ModelDrivenApp_CstPages_Doc/tree/Solution) of your forked repository that covers all tasks. You only have to import it to your environment. Note that the import slightly differs in that case. Check out [here](/02_ImportImplementedArtefacts.md) how to do it.
 
