@@ -44,3 +44,5 @@ Relevant for the applying the layout is not a built-in property in the right-han
 Implement with these guidelines the same tabular layout as shown in the second picture above. The next chapter is about the extra header.
 
 ## Add header row
+
+TODO as discussed Preethi 

@@ -4,7 +4,7 @@
 
 This repo contains the documentation for the Power Apps hackathon. The application to complete will be a **model driven app with Custom Pages**. 
 
-:warning: Note this documentation is a preliminary state where not all features of the application are already imlemented!
+:warning: Note this documentation is a preliminary state where not all features of the application are already imlemented! :warning:
 
 The business scenario of our example app is the import of CO2 consumption figures from a local file. They will have to approved before showing up in a consolidated table. A wizard will guide the importing user.
 
@@ -58,5 +58,6 @@ The following tasks will expect you:
 
 05_AdjustApprovalList
 
-:white_check_mark: We also created a fully implemented application including data model located in the branch [Solution](https://github.com/DevOps-Gilde/Hackathon_PP_ModelDrivenApp_CstPages_Doc/tree/Solution) of your forked repository that covers all tasks. You only have to import it to your environment.
+:white_check_mark: We also created a fully implemented application including data model located in the branch [Solution](https://github.com/DevOps-Gilde/Hackathon_PP_ModelDrivenApp_CstPages_Doc/tree/Solution) of your forked repository that covers all tasks. You only have to import it to your environment. Note that the import slightly differs in that case. Check out [here](/02_ImportImplementedArtefacts.md) how to do it.
+
 If at any Point you need assistance nevertheless do not hesitate to ask. We are here to Help you.
