@@ -31,7 +31,7 @@ To apply the layout you first have to understand better the way how the designer
 Relevant for the applying the layout is not a built-in property in the right-hand side. Important to understand is the template mechanism of the first row. The layout of the first row is applied to all others. The controls below the gallery show the controls of the first row. The rectangle serves as container for all controls on it. That means:
 * Removing existing controls
 
-  2To drop controls just deletem them from the container. In our case we don't need the image.
+  To drop controls just deletem them from the container. In our case we don't need the image.
 
 * Adding additional controls
 
@@ -46,3 +46,13 @@ Implement with these guidelines the same tabular layout as shown in the second p
 ## Add header row
 
 TODO as discussed Preethi 
+
+# 3. Testing changes
+
+Thanks to your changes the following scenarios should now work:
+|Test                                             |Expected Result                          |
+|-------------------------------------------------|------------------------------------------|
+|Run page with existing data  |The data should be displayed correctly, it should be sorted accrding to the default column and the corresponding button should have a different background color.|
+|Click on button in the header |The list should be sorted according to that column|
+|Enter values in the form fields |The rows in the form should be filtered according to your criteria|
+
