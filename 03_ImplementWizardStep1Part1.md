@@ -110,8 +110,13 @@ The `Home` button shall reference the entry page for the importer. Passing any p
 For the testing options below your changes must be at least saved. For testing there are two options:
 * Quicktests
 
-  Ad hoc test of changes is quite easy trough the `Play` button that is provided by the web portal as shown by the first screenshot. The current screen selected in the tree view is assumed as screen under test. To finish the test mode click the `X`as shown in the second screenshot below:
+  Ad hoc test of changes is quite easy trough the `Play` button that is provided by the web portal as shown by the first screenshot. The current screen selected in the tree view is assumed as screen under test. 
   <br><img src="./images/wiz_layout_test.png" /><br>
+  
+  An important setting is the icon besides the `X`. When you click on it choose the option `Canvas size` as shown below. The rendering is then shown as in the designer.
+<br><img src="./images/wiz_layout_test_scr_opt.png" /><br>
+
+  To finish the test mode click the `X`as shown in the second screenshot below:
   <br><img src="./images/wiz_layout_stop.png" /><br>
 
   A problem of that approach is the setting of the context. In our case you can achieve it by starting with the importing overview screen. In a more complex case with many test cases this might mean a lot of clicking.
@@ -125,8 +130,8 @@ For the testing options below your changes must be at least saved. For testing t
 For our case ad-hoc testing is sufficient. Start from the import overview page to ensure a correct screen context. Press the play button after selecting the overview screen to start the tests. Thanks to your changes the following scenarios should now work:
 |Test                                             |Expected Result                          |
 |-------------------------------------------------|------------------------------------------|
-|Wizard first step: Main content displayed correctly |Next screen is displayed               |
+|Wizard first step: Run wizard first step |Main content should displayed correctly               |
 |Wizard first step: Click on next button          |Next screen is displayed                  |
-|Wizard first step: Click on home button          |Overview page is shown from where wizard wa striggered|
+|Wizard first step: Click on home button          |Overview page is shown from where wizard was triggered|
 |Import Overview Page: Click on new import button |Fields on the form are empty|
 |Import Overview Page: Select a single record and click on edit import button|Fields on the form are prefilled with the record you selected|
