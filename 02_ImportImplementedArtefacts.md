@@ -52,7 +52,7 @@ Perform the following steps to import the app:
 3. Click on "import solution" and select the downloaded file from the repo and click next.
 <br><img src="./images/imp_sol_step_imp_sol.png" /><br>
 
-4. Start the import by clicking the button import as shown below
+4. Specify dataverse connection
 
    Under the hood the flow dataverse maintains a connection to dataverse. This is specific for the environment. Therefore you have to map the connection from the imported solution to one in your environment. If you start from scratch you would have to select `+ New connection`. Click on `+ New connection`to create a new connection as shown below:
 
