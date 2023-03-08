@@ -149,7 +149,7 @@ The important takeaways from that code:
 
 * UpdateContext
 
-  The expressions inside is compareable to define local variables as in standard programming languages. Variables are declared and initialised in JSON like notation inside the curly brackets. The variables are only visible in the parent screen.
+  Sets the local variables to the values specified in curly brackets. The variables are only visible in the parent screen.
 
 * Calling the flow
 

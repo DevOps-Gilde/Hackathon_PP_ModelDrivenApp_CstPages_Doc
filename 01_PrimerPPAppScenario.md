@@ -79,7 +79,7 @@ The major controls to switch between the levels are:
   Hoovering over the page in question should already activate the pen icon. Click on that to edit the page. To get back to the app level click the `Back` button in the top left corner.
   <br><img src="./images/intro_app_edit_pg.png" /><br>
 
-Changing something is also a two step process. Changes must be saved AND published to take effect. For example first after publishing you see changes for a certain custom page also on model driven app level. The picture below shows the icons for svaing and publishing:
+Saving is also a two step process if changes shall take effect outside your current scope. Current scope might be a concrete page or the application as a whole. Besides saving you also have to publish the changed artefact to take effect. For example first after publishing you see changes for a certain custom page also on model driven app level. The picture below shows the icons for saving and publishing:
 
 <br><img src="./images/intro_app_save_publish.png" /><br>
 
@@ -150,7 +150,7 @@ It allows the user to either
   That option requires selecting a single record in the list. Moreover the import state must not yet be finalized.
 
 Major mechanism to manage the import is a wizard. The context of the wizard is either (1) the import to be edited or (2) none if a new import shall be created. The wizard consists of three steps:
-* Create/ Update
+* Create/ Update import header
 
   The functionality of that step is only available if the state of the header is `Pending`. Otherwise the screen is read only. In that step the importer creates or updates the header. For simplicity reasons the changes (new or edit) will be written directly to the dataverse when submit is clicked. The screenshot below shows the conceptual screen:
   <br><img src="./images/intro_apps_imp_mask_wiz_cre.png" /><br>

@@ -48,7 +48,7 @@ Let's now implement the content for which we need an additional container (to bl
   <br><img src="./images/wiz_layout_fill.png" /><br>
   Adjust the following properties as follows:
   * Activate flexible height if not already done
-  * Set the first figure of `Fill posrtions' to `0.8`which corresonds to 80 percent of the space
+  * Set the first figure of `Fill portions` to `0.8` which corresonds to 80 percent of the space
   * make sure that the `Alignment in container` is as shown
 
 * Rename the newly added control to `Content_Create`
@@ -82,9 +82,18 @@ To enter any formular for a given property do the following:
 * select the name of the property on the left-hand side (here DefaultMode)
 * set the expression on the right hand side after the Fx icon
 
-  The expression in our case is a simple if expression: `If(TODOVarMode, FormMode.New, FormMode.Edit)`. The tested expression refers to the context wizard. The setting of the value for `TODOVarMode` we alraedy implemented for you when you click the buttons on the overview page. 
+  The expression in our case is a simple if expression: `If(locImpMode = "Edit", FormMode.Edit, FormMode.New)`. `locImpMode` is the local variable that contains the mode. The setting of the value for `locImpMode` we already implemented for you when you click the buttons on the overview page. 
 
-For the mode `New` we have completed all major fields. However in case of edit the control has no idea which record we want to edit. The control provides the Item property we want to edit (In the mode New the value is ignored). Set the expression as follows: `TODOSelectedItem`. The setting of the value for `TODOSelectedItem` we alraedy implemented for you when you click the buttons on the overview page. 
+For the mode `New` we have completed all major fields. However in case of edit the control has no idea which record we want to edit. The control provides the Item property we want to edit (In the mode New the value is ignored). Set the expression as follows: `LookUp(IMP_CO2_CONS_RAW_HDR, CST_IMP_CODE = locImpCode)`. Explanations:
+* `IMP_CO2_CONS_RAW_HDR` denotes the table we are looking at
+* `LookUp` retrieves the record the fulfills the condition
+* `CST_IMP_CODE = locImpCode`represents the condition that filters the currently edited record
+
+Some of the fields within the form are set internally for a new record. Therefore we want to disable them for new to make it more clear. Sometimes properties are locked as shown in the screenshot below. To unlock them click on the lock icon:
+
+<br><img src="./images/wiz_layout_ctrls_frm_enabled_lock.png" /><br>
+
+Click on the lock and adjust the property `DisplayMode` for CST_IMP_CODE, CST_IMP_STATE and CST_IMP_USER. The required expression is `If(locImpMode = "New", DisplayMode.Disabled, Parent.DisplayMode)`. 
 
 As a last step we set the relative height so that the form occupies minimum space. Set `Fill portions` to `0.2`.
 
@@ -101,7 +110,7 @@ As you have already seen we work with screens to separate things. They are linke
 `Next`means we just refer to the screen representing the second step in our wizard. In addition to that we have to pass required context information for the next step. This context information includes:
 * The primary key of the newly created/ edited record
 * The import state of the newly created/ edited record
-The `Navigate` command allows to jump to the designated screen and to pass parameters. Set the `OnSelect` propery of the button to `Navigate(WizardStepUploadData, ScreenTransition.None, { locImpState: locImpState, locImpCode: locImpCode})`. `{}` is an arbitrary json structure that we use to pass the information. `WizardStepUploadData` is the name of new screen and we just pass the current values of the local variables.
+The `Navigate` command allows to jump to the designated screen and to pass parameters. Set the `OnSelect` property of the button to `Navigate(WizardStepUploadData, ScreenTransition.None, { locImpState: locImpState, locImpCode: locImpCode})`. `{}` is an arbitrary json structure that we use to pass the information. `WizardStepUploadData` is the name of new screen and we just pass the current values of the local variables.
 
 The `Home` button shall reference the entry page for the importer. Passing any parameters is not required. Therefore just set the `OnSelect` of the button to `Navigate(OvrImports, ScreenTransition.None, {})`. Local variables will be correctly adjusted because in the overview page because we implemented the `OnVisible` property of the overview screen.
   

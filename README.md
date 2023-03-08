@@ -9,14 +9,15 @@ This repo contains the documentation for the Power Apps hackathon. The applicati
 The business scenario of our example app is the import of CO2 consumption figures from a local file. They will have to approved before showing up in a consolidated table. A wizard will guide the importing user.
 
 The hackathon includes the following technologies:
-
 * Power Apps: Model driven apps with custom pages
 * Power Automate: Flows (embedded in Power Apps)
 * Using dataverse & solutions
 
 Out of scope are the following technologies:
-* Power Apps: Other app types such as Power Pages/ Canvas apps
-* Model driven apps: Dashboards/ Dataverse Table based pages
+* Power Apps
+
+  Other app types such as Power Pages/ Canvas apps. Model driven apps based on dashboards/ dataverse Table based pages are also out of scope.
+  
 * Creation of underlying dataverse data model (We provide a full implementation that only needs to be imported by you into the environment)
 
 The following things will be provided to you:
