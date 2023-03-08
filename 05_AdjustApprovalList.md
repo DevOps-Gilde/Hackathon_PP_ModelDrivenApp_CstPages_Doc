@@ -4,7 +4,7 @@ You should now have Completed the Following things:
 
 1. Importing Implemented Artefacts
 2. Implement Wizard Step 1 (Part1)
-2. Implement Wizard Step 2 (Part2)
+3. Implement Wizard Step 2 (Part2)
 
 Next you will adjust the standard layout according to the requirements of the customer.
 
@@ -16,7 +16,7 @@ Custom pages come with a gallery control that allows you to display lists. The s
 
 <br><img src="./images/appr_list_def_layout.png" /><br>
 
-The final goal is the approach we already implemented for showing the existing imports.
+The final goal is the approach we already implemented for showing the existing imports. For simplicity reasons we did it only for the import code.
 
 <br><img src="./images/appr_list_def_goal.png" /><br>
 
@@ -28,7 +28,7 @@ To apply the layout you first have to understand better the way how the designer
 
 <br><img src="./images/appr_list_ctrls_tree.png" /><br>
 
-Relevant for the applying the layout is not a built-in property in the right-hand side. Important to understand is the template mechanism of the first row. The layout of the first row is applied to all others. The controls below the gallery show the controls of the first row. The rectangle serves as container for all controls on it. That means:
+Relevant for applying the tabular layout is not a built-in property in the right-hand side. The key is the template mechanism of the first row. The layout of the first row is applied to all others. The controls below the gallery show the controls of the first row. The rectangle serves as container for all controls on it. That means:
 * Removing existing controls
 
   To drop controls just delete them from the container. In our case we don't need the image.
@@ -54,7 +54,19 @@ Checkout for the existing import the tree to infer which controls are needed in 
 ## Filtering & Sorting
 
 The basic idea is to store the filtered records in a local variable. The following adjustments are necessary to get the right behavior:
-* Initialization TODO
+* Initialization
+
+  When we enter the page we must ensure the local variable is correct. Entering page might be triggered by visiting the page initially or because we press the `Home` button in the wizard. To achieve we have to set the property `OnVisisble` to the following value:
+```
+  UpdateContext(
+    {
+        ...,
+        locSelectedItems: Filter(IMP_CO2_CONS_RAW_HDR, Find(OvrImpMainSectFilterImportCodeTextBox.Value,CST_IMP_CODE))
+    }
+)   
+```
+  `Find` checks each row from the table `IMP_CO2_CONS_RAW_HDR` whether the import code matches the text in the filter.
+
 * Enable Edit Button
 
   The button must be only enabled if  exactly one row is selected. Hence the `DislayMode` has the following formula: `If(CountRows(locSelectedItems) = 1 , DisplayMode.Edit, DisplayMode.Disabled)`
@@ -76,24 +88,22 @@ Navigate(WizardStepImpHeader, ScreenTransition.None, {
 UpdateContext({locSelectedItems: Filter(IMP_CO2_CONS_RAW_HDR, Find(OvrImpMainSectFilterImportCodeTextBox.Value,CST_IMP_CODE))})
 ```
 
-Keeping track of the sorted column:
+Sorting the columns is also based on a local variable `locSortColumn`. It denotes the column we want to sort after. The following pieces ensure that the variable is kept up to date:
 * Initialization
 
-  When you enter overview screen which boils down to the event `OnVisible`. The expression below applies the filter (so far only implemented for the code) and stores the filtered records in a local variable.
+  When we enter the page we must ensure the local variable is correct. Entering page might be triggered by visiting the page initially or because we press the `Home` button in the wizard. To achieve we have to set the property `OnVisisble` to the following value:
 ```
 UpdateContext(
     {
         locSortColumn: "Code",
-        locSelectedItems: 
-          Filter(IMP_CO2_CONS_RAW_HDR, 
-            Find(OvrImpMainSectFilterImportCodeTextBox.Value,CST_IMP_CODE))
+        ...
     }
 )     
 ```
 
 * List
 
-  The list is using as data source now the local variable and not the original table IMP_CO2_CONS_RAW_HDR anymore. We have to ensure that we sort the content according to the selected column.
+  The list is using as data source now the local variable and not the original table `IMP_CO2_CONS_RAW_HDR` anymore. We have to ensure that we sort the content according to the selected column. The following expression is doing the job:
 ```
 Switch(
     locSortColumn,
@@ -112,12 +122,13 @@ Switch(
     locSelectedItems
 )
 ```
+  The major new command is now `Switch`. It allows to sort according to the value in `locSortColumn`. `locSelectedItems` contains the filtered records. If `locSortColumn` does not match any of the cases, the data is simply returned unsorted.
 
 * Buttons in the header
 
-  The color of the button shall change when we sort after that column. SEtting the property `FillColor` to the following formula gets the job done: `If(locSortColumn = "State", RGBA(0, 0, 200, 1), RGBA(0, 120, 212, 1))`
+  The color of the button shall change when we sort after that column. Setting the property `FillColor` to the following formula gets the job done: `If(locSortColumn = "State", RGBA(0, 0, 200, 1), RGBA(0, 120, 212, 1))`
 
-  When we press the column the sort order needs to be changed which boils down to update our local variable in `OnSelect`:
+  When we press the button the sort order needs to be changed which boils down to update our local variable in `OnSelect`:
 
 ```
 UpdateContext(
