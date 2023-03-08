@@ -27,7 +27,7 @@ The learning goals are as stated before:
 
 ## Layouting Form and Button
 
-As you know it from other environments our application shall support responsive layout so we will avoid pixel based statements. A key are containers that allow to layout their child components based on a relative measurement such as a percentage. Container layout their children either horizontally or vertically and can be nested. We already implemented the first container for you that uses the expressions `Parent.Width` and `Parent.Height` to occupy all space of the screen. The screenshot below shows the starting point. As you can see theer is a gap in the sense that the main content is missing:
+As you know it from other environments our application shall support responsive layout so we will avoid pixel based statements. A key are containers that allow to layout their child components based on relative a measurement such as a percentage. Container layout their children either horizontally or vertically and can be nested. We already implemented the first container for you that uses the expressions `Parent.Width` and `Parent.Height` to occupy all space of the screen. The screenshot below shows the starting point. As you can see theer is a gap in the sense that the main content is missing:
 
 <br><img src="./images/wiz_layout_start_point.png" /><br>
 
@@ -44,11 +44,11 @@ Let's now implement the content for which we need an additional container (to bl
 
 * Adjust properties
 
-  First we have to make sure that container fills the bulk of the screen. The screenshot belows shows the relevant settings:
+  First we have to make sure that container fills the bulk of the screen. The screenshot below shows the relevant settings:
   <br><img src="./images/wiz_layout_fill.png" /><br>
   Adjust the following properties as follows:
   * Activate flexible height if not already done
-  * Set the first figure of `Fill portions` to `0.8` which corresonds to 80 percent of the space
+  * Set the first figure of `Fill posrtions' to `0.8`which corresonds to 80 percent of the space
   * make sure that the `Alignment in container` is as shown
 
 * Rename the newly added control to `Content_Create`
@@ -78,26 +78,17 @@ Creating or editing is defined by the property mode. The value depends in our ca
 
   <br><img src="./images/wiz_layout_ctrls_frm_mode_fx.png" /><br>
 
-  To enter any formular for a given property here `DefaultMode` do the following:
-  * select the name of the property on the right-hand side
-  * set the expression on the right hand side after the `Fx` icon which gives you more editing space
+To enter any formular for a given property do the following:
+* select the name of the property on the left-hand side (here DefaultMode)
+* set the expression on the right hand side after the Fx icon
 
-  The expression in our case is a simple if expression: `If(locImpMode = "Edit", FormMode.Edit, FormMode.New)`. `locImpMode` is a local variable that is initialized when you navigate to that screen. We alraedy implemented that for you when you click the buttons on the overview page. 
+  The expression in our case is a simple if expression: `If(TODOVarMode, FormMode.New, FormMode.Edit)`. The tested expression refers to the context wizard. The setting of the value for `TODOVarMode` we alraedy implemented for you when you click the buttons on the overview page. 
 
-For the mode `New` we have completed all major fields. However in case of edit the control has no idea which record we want to edit. The `Item` property defines the record for the edit case (In the mode New the value is ignored). Set the expression as follows: `LookUp(IMP_CO2_CONS_RAW_HDR, CST_IMP_CODE = locImpCode)`. Explanations:
-* LookUp retrieves the record given by the condition
-* IMP_CO2_CONS_RAW_HDR denotes our table
-* `CST_IMP_CODE = locImpCode` states that we are interested in the record that matches our local variable
-
-Some of the displayed fields by the form are filled automatically when we create a new record. We want to disable them for new so that is more clear to the user. Sometimes properties are locked per default and we first have to unlock them. Click on the lock icon a the top that is shown below:
-
-<br><img src="./images/wiz_layout_ctrls_frm_enabled_lock.png" /><br>
-
-Unlock the Cards for CST_IMP_CODE, CST_IMP_STATE and CST_IMP_TS. Enter the following expression for `DisplayMode`: `If(locImpMode = "New", DisplayMode.Disabled, Parent.DisplayMode)`. `Parent.DisplayMode` is the default and the rest should be self explaining.
+For the mode `New` we have completed all major fields. However in case of edit the control has no idea which record we want to edit. The control provides the Item property we want to edit (In the mode New the value is ignored). Set the expression as follows: `TODOSelectedItem`. The setting of the value for `TODOSelectedItem` we alraedy implemented for you when you click the buttons on the overview page. 
 
 As a last step we set the relative height so that the form occupies minimum space. Set `Fill portions` to `0.2`.
 
-We are fnished and can switch over to the button. Select the newly added container again. Pick the control `Button` in the same way as you did the 
+We are finished and can switch over to the button. Select the newly added container again. Pick the control `Button` in the same way as you did the 
 
 Change the Text property to `Submit`. The property `OnSelect` contains the action when the button is pressed. For now we will just display an information that proofs we can access the values in the form. Enter the following expression in the "OnSelect" property: `Notify(<name of the value below the card within the form>, NotificationType.Information)`. The name can be obtained by the tree view as shown below:
 
