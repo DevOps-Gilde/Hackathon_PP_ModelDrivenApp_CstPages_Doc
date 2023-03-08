@@ -39,7 +39,7 @@ Perform the following steps:
    As a result you should see now the custom tables/ choices we need for our application that all start with the prefix "IMP" as sown below:
    <br><img src="./images/imp_sol_step_nav_to_tables2.png" /><br>
 
-   The custom tables don't contain any rows. To work with our application you must enter some data since our application soes not cover all tables. Enter data for the tables IMP_USERS and IMP_DEPARTMENT via the dataverse. Right click on the table and choose the option `Edit`.
+   The custom tables don't contain any rows. To work with our application you must enter some data since our application does not cover all tables. Enter data for the tables IMP_USERS and IMP_DEPARTMENT via the dataverse. Right click on the table and choose the option `Edit`.
 
 # Partially implemented model driven app
 
