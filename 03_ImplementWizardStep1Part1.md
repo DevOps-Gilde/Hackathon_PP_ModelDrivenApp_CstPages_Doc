@@ -97,7 +97,7 @@ Click on the lock and adjust the property `DisplayMode` for CST_IMP_CODE, CST_IM
 
 As a last step we set the relative height so that the form occupies minimum space. Set `Fill portions` to `0.2`.
 
-We are finished and can switch over to the button. Select the newly added container again. Pick the control `Button` in the same way as you did the 
+We are finished and can switch over to the button. Select the newly added container again. Pick the control `Button` in the same way as you did before.
 
 Change the Text property to `Submit`. The property `OnSelect` contains the action when the button is pressed. For now we will just display an information that proofs we can access the values in the form. Enter the following expression in the "OnSelect" property: `Notify(<name of the value below the card within the form>, NotificationType.Information)`. The name can be obtained by the tree view as shown below:
 
