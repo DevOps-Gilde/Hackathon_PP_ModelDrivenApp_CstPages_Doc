@@ -43,7 +43,7 @@ Perform the following steps:
 
 # Partially implemented model driven app
 
-Perform the following steps to impart the app:
+Perform the following steps to import the app:
 1. Download the file `HackPPSceApp_unmanaged.zip` from [our code repo](https://github.com/DevOps-Gilde/Hackathon_PP_ModelDrivenApp_CstPages_Code) in the **main branch**
 
 2. Switch to "Solutions" in the main menu
