@@ -2,22 +2,25 @@
 
 ## Focus
 
-This repo contains the documentation for the Power Apps hackathon. The application to complete will be a **model driven app with Custom Pages**. 
+This repo contains the documentation for the Power Apps hackathon. The application to complete will be a **model driven app with Custom Pages**.
 
-:warning: Note this documentation is a preliminary state where not all features of the application are already imlemented!
+:warning: Note this documentation is a preliminary state where not all features of the application are already implemented!
 
 The business scenario of our example app is the import of CO2 consumption figures from a local file. They will have to approved before showing up in a consolidated table. A wizard will guide the importing user.
 
 The hackathon includes the following technologies:
+
 * Power Apps: Model driven apps with custom pages
 * Power Automate: Flows (embedded in Power Apps)
 
 Out of scope are the following technologies:
+
 * Power Apps: Other app types such as Power Pages/ Canvas apps
 * Model driven apps: Dashboards/ Dataverse Table based pages
 * Creation of underlying dataverse data model (We provide a full implementation that only needs to be imported by you into the environment)
 
 The following things will be provided to you:
+
 * Power Platform Environment and user to fill the gaps in our application
 * Fully implemented data model
 * A partially implemented application with gaps for you to fill

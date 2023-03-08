@@ -27,7 +27,7 @@ The learning goals are as stated before:
 
 ## Layouting Form and Button
 
-As you know it from other environments our application shall support responsive layout so we will avoid pixel based statements. A key are containers that allow to layout their child components based on relative a measurement such as a percentage. Container layout their children either horizontally or vertically and can be nested. We already implemented the first container for you that uses the expressions `Parent.Width` and `Parent.Height` to occupy all space of the screen. The screenshot below shows the starting point. As you can see theer is a gap in the sense that the main content is missing:
+As you know it from other environments our application shall support responsive layout so we will avoid pixel based statements. A key are containers that allow to layout their child components based on relative a measurement such as a percentage. Container layout their children either horizontally or vertically and can be nested. We already implemented the first container for you that uses the expressions `Parent.Width` and `Parent.Height` to occupy all space of the screen. The screenshot below shows the starting point. As you can see there is a gap in the sense that the main content is missing:
 
 <br><img src="./images/wiz_layout_start_point.png" /><br>
 
@@ -44,11 +44,11 @@ Let's now implement the content for which we need an additional container (to bl
 
 * Adjust properties
 
-  First we have to make sure that container fills the bulk of the screen. The screenshot belows shows the relevant settings:
+  First we have to make sure that container fills the bulk of the screen. The screenshot below shows the relevant settings:
   <br><img src="./images/wiz_layout_fill.png" /><br>
-  Adjust the following peoperties as follows:
+  Adjust the following properties as follows:
   * Activate flexible height if not already done
-  * Set the first figure of `Fill posrtions' to `0.8`which corresonds to 80 percent of the space
+  * Set the first figure of `Fill positions' to `0.8`which corresonds to 80 percent of the space
   * make sure that the `Alignment in container` is as shown
 
 * Rename the newly added control to `Content_Create`
@@ -80,15 +80,15 @@ Creating or editing is defined by the property mode. The value depends in our ca
 
 To enter any formular for a given property do the following:
 * select the name of the property on the left-hand side (here DefaultMode)
-* set the expression on the right hand side after the Fx icon
+* set the expression on the right hand side in the formula Field after the fx Symbol 
 
-  The expression in our case is a simple if expression: `If(TODOVarMode, FormMode.New, FormMode.Edit)`. The tested expression refers to the context wizard. The setting of the value for `TODOVarMode` we alraedy implemented for you when you click the buttons on the overview page. 
+  The expression in our case is a simple if expression: `If(TODOVarMode, FormMode.New, FormMode.Edit)`. The tested expression refers to the context wizard. The setting of the value for `TODOVarMode` we already implemented for you when you click the buttons on the overview page. 
 
-For the mode `New` we have completed all major fields. However in case of edit the control has no idea which record we want to edit. The control provides the Item property we want to edit (In the mode New the value is ignored). Set the expression as follows: `TODOSelectedItem`. The setting of the value for `TODOSelectedItem` we alraedy implemented for you when you click the buttons on the overview page. 
+For the mode `New` we have completed all major fields. However in case of edit the control has no idea which record we want to edit. The control provides the Item property we want to edit (In the mode New the value is ignored). Set the expression as follows: `TODOSelectedItem`. The setting of the value for `TODOSelectedItem` we already implemented for you when you click the buttons on the overview page. 
 
 As a last step we set the relative height so that the form occupies minimum space. Set `Fill portions` to `0.2`.
 
-We are fnished and can switch over to the button. Select the newly added container again. Pick the control `Button` in the same way as you did the 
+We are finished and can switch over to the button. Select the newly added container again. Pick the control `Button` in the same way as you did the 
 
 Change the Text property to `Submit`. The property `OnSelect` contains the action when the button is pressed. For now we will just display an information that proofs we can access the values in the form. Enter the following expression in the "OnSelect" property: `Notify(<name of the value below the card within the form>, NotificationType.Information)`. The name can be obtained by the tree view as shown below:
 
@@ -116,7 +116,7 @@ For the testing options below your changes must be at least saved. For testing t
   An important setting is the icon besides the `X`. When you click on it choose the option `Canvas size` as shown below. The rendering is then shown as in the designer.
 <br><img src="./images/wiz_layout_test_scr_opt.png" /><br>
 
-  To finish the test mode click the `X`as shown in the second screenshot below:
+  To finish the test mode click the `X` as shown in the second screenshot below:
   <br><img src="./images/wiz_layout_stop.png" /><br>
 
   A problem of that approach is the setting of the context. In our case you can achieve it by starting with the importing overview screen. In a more complex case with many test cases this might mean a lot of clicking.

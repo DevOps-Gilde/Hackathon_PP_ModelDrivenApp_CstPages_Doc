@@ -49,7 +49,7 @@ The expression for `Filter rows` we use for filtering the rows by the importing 
 
 When you hover over the generated expression you also the name of the expected parameter which is `Listrows_Filterrows` (Corresponds to `<name of action>_<name of field>`).
 
-In the next step we will add a new row that represents our import. We will use the `Add a new row` action within dataverse. Click `New Step` and enter `dataverse` in the search field. Pick the action `List rows`. The screenshot below shows the action. Select `IMP_CO2_CONS_RAW_HDR` as table name. As a result the table specific tables will be shown as illustrated in the screenshot below. Mandatory fields are marked with an asteriks. The generated UI is not correct reagrding `CST_IMP_CODE`. Yes as logical primary key it is mandatory. However due to the auto generated definition no value would be mandatory. We will provide a dummy to satisfy the constraints:
+In the next step we will add a new row that represents our import. We will use the `Add a new row` action within dataverse. Click `New Step` and enter `dataverse` in the search field. Pick the action `List rows`. The screenshot below shows the action. Select `IMP_CO2_CONS_RAW_HDR` as table name. As a result the table specific tables will be shown as illustrated in the screenshot below. Mandatory fields are marked with an asterisk. The generated UI is not correct regarding `CST_IMP_CODE`. Yes as logical primary key it is mandatory. However due to the auto generated definition no value would be mandatory. We will provide a dummy to satisfy the constraints:
 
 <br><img src="./images/flow_new_add_row.png" /><br>
 
@@ -61,7 +61,7 @@ When you selected the value you will notice a change, Dataverse embeds the new `
 
 <br><img src="./images/flow_new_apply_each.png" /><br>
 
-Let's try to understand `Apply tp each` better. It is working as major input on the output from the previous step displayed as ` value x`. To understand it you have to be aware of the JSON structure that is returned by `List rows`. Below you find a sample:
+Let's try to understand `Apply to each` better. It is working as major input on the output from the previous step displayed as ` value x`. To understand it you have to be aware of the JSON structure that is returned by `List rows`. Below you find a sample:
 ```
 {
 	"@odata.context": "https://orgc9bd3046.crm6.dynamics.com/api/data/v9.1/$metadata#cr953_workflowmaxes(cr953_jobid,cr953_...)",
@@ -142,7 +142,7 @@ The important takeaways from that code:
 
 * UpdateContext
 
-  The expressions inside is compareable to define local variables as in standard programming languages. Variables are declared and initialised in JSON like notation inside the curly brackets. The variables are only visible in the parent screen.
+  The expressions inside is comparable to define local variables as in standard programming languages. Variables are declared and initialised in JSON like notation inside the curly brackets. The variables are only visible in the parent screen.
 
 * Calling the flow
 

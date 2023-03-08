@@ -12,7 +12,7 @@ Next you will adjust the standard layout according to the requirements of the cu
 
 ## Introduction
 
-Custom pages come with a gallery control that allows you to display lists. The standard layout is as shown below. You have some flexibility to change the layout per entry but standard functinality such as filtering per column needs to be added manually.
+Custom pages come with a gallery control that allows you to display lists. The standard layout is as shown below. You have some flexibility to change the layout per entry but standard functionality such as filtering per column needs to be added manually.
 
 <br><img src="./images/appr_list_def_layout.png" /><br>
 
@@ -20,7 +20,7 @@ The final goal is the approach we already implemented for showing the existing i
 
 <br><img src="./images/appr_list_def_goal.png" /><br>
 
-As you can see we have now a tabular list layout and an extra header that allows us to sort the list according to a certain column. The column after we sort is indicated by the a different background color in the header.
+As you can see we have now a tabular list layout and an extra header that allows us to sort the list according to a certain column. The column after we sort is indicated by different background color in the header.
 
 ## Apply tabular layout
 
@@ -31,7 +31,7 @@ To apply the layout you first have to understand better the way how the designer
 Relevant for the applying the layout is not a built-in property in the right-hand side. Important to understand is the template mechanism of the first row. The layout of the first row is applied to all others. The controls below the gallery show the controls of the first row. The rectangle serves as container for all controls on it. That means:
 * Removing existing controls
 
-  To drop controls just deletem them from the container. In our case we don't need the image.
+  To drop controls just delete them from the container. In our case we don't need the image.
 
 * Adding additional controls
 
@@ -47,7 +47,7 @@ Implement with these guidelines the same tabular layout as already done for the 
 
 ## Inserting the extra header row
 
-Checkout for the existing import the tree to infer which controls are needed in addition (Basically just a horizontal layout container + inlcuding buttons + a rectangle to fill the rest). Since this is nothing new compared to the first step of the wizard no further details are given.
+Checkout for the existing import the tree to infer which controls are needed in addition (Basically just a horizontal layout container + including buttons + a rectangle to fill the rest). Since this is nothing new compared to the first step of the wizard no further details are given.
 
 <br><img src="./images/appr_list_blueprint_hdr_ctrls.png" /><br>
 
@@ -132,7 +132,7 @@ UpdateContext(
 Thanks to your changes the following scenarios should now work:
 |Test                                             |Expected Result                          |
 |-------------------------------------------------|------------------------------------------|
-|Run page with existing data  |The data should be displayed correctly, it should be sorted accrding to the default column and the corresponding button should have a different background color.|
+|Run page with existing data  |The data should be displayed correctly, it should be sorted according to the default column and the corresponding button should have a different background color.|
 |Click on button in the header |The list should be sorted according to that column|
 |Enter values in the form fields |The rows in the form should be filtered according to your criteria|
 

@@ -2,7 +2,7 @@
 
 Due to time we cannot create the data model step by step nor can we implement the complete application. We will use instead a transport mechanism to deploy a fully implemented database model and the partially implemented application as starting point. This approach can be used for any artefact that has been created within PowerPlatform. Microsoft calls deployable code packages also `Solutions`. Essentially they boil down to a Zip file that contains the artefacts in an internal Microsoft format that you should always treat as black box.
 
-A solution can either be `managed`or `unmanaged`, which differ regarding the possibility to edit and the lifecycle. Only the `unmanaged` solution gives you the possibility to edit the imported artefacts. Artefacts inside the solution are not automatically removed, when you remove the solution. `managed` don't allow editing and a removal also removes also all containing artefacts. Therefore `managed` is intended for a production deployment scenario whereas `unmanaged` for development scenarios.
+A solution can either be `managed` or `unmanaged`, which differ regarding the possibility to edit and the lifecycle. Only the `unmanaged` solution gives you the possibility to edit the imported artefacts. Artefacts inside the solution are not automatically removed, when you remove the solution. `managed` don't allow editing and a removal also removes also all containing artefacts. Therefore `managed` is intended for a production deployment scenario whereas `unmanaged` for development scenarios.
 
 We will use both types:
 * Data model: `managed` since we already implemented everything
@@ -33,13 +33,13 @@ Perform the following steps:
 
 6. Check success by example
 
-   Go to the `solution`in the main menu and open it by clicking edit as shown below:
+   Go to the `solution` in the main menu and open it by clicking edit as shown below:
    <br><img src="./images/imp_sol_step_nav_to_tables1.png" /><br>
 
    As a result you should see now the custom tables/ choices we need for our application that all start with the prefix "IMP" as sown below:
    <br><img src="./images/imp_sol_step_nav_to_tables2.png" /><br>
 
-   The custom tables don't contain any rows. To work with our application you must enter some data since our application soes not cover all tables. Enter data for the tables IMP_USERS and IMP_DEPARTMENT via the dataverse. Right click on the table and choose the option `Edit`.
+   The custom tables don't contain any rows. To work with our application you must enter some data since our application does not cover all tables. Enter data for the tables IMP_USERS and IMP_DEPARTMENT via the dataverse. Right click on the table and choose the option `Edit`.
 
 # Partially implemented model driven app
 
