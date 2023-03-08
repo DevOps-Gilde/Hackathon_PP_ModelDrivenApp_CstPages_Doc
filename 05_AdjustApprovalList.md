@@ -24,7 +24,7 @@ As you can see we have now a tabular list layout and an extra header that allows
 
 ## Apply tabular layout
 
-To apply the layout you first have to understand better the way how the designer displays the control. The screenshot below illustrates import points:
+To apply the layout you first have to understand better how the designer displays the control. The screenshot below illustrates important points:
 
 <br><img src="./images/appr_list_ctrls_tree.png" /><br>
 
@@ -56,7 +56,7 @@ Check the tree for the existing import to infer which additional controls are ne
 The basic idea is to store the filtered records in a local variable. The following adjustments are necessary to get the right behavior:
 * Initialization
 
-  When we enter the page we must ensure the local variable is correct. Entering page might be triggered by visiting the page initially or because we press the `Home` button in the wizard. To achieve we have to set the property `OnVisisble` to the following value:
+  When we enter the page we must ensure the local variable is correct. Entering page might be triggered by visiting the page initially or because we press the `Home` button in the wizard. Set the property `OnVisisble` to the following value:
 ```
   UpdateContext(
     {
@@ -91,7 +91,7 @@ UpdateContext({locSelectedItems: Filter(IMP_CO2_CONS_RAW_HDR, Find(OvrImpMainSec
 Sorting the columns is also based on a local variable `locSortColumn`. It denotes the column we want to sort after. The following pieces ensure that the variable is kept up to date:
 * Initialization
 
-  When we enter the page we must ensure the local variable is correct. Entering page might be triggered by visiting the page initially or because we press the `Home` button in the wizard. To achieve we have to set the property `OnVisisble` to the following value:
+  When we enter the page we must ensure the local variable is correct. Entering page might be triggered by visiting the page initially or because we press the `Home` button in the wizard. Set the property `OnVisisble` to the following value:
 ```
 UpdateContext(
     {
