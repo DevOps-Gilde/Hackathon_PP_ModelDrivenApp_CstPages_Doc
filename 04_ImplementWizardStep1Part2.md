@@ -53,7 +53,7 @@ Set the fields as shown in the table:
 | Table name     | IMP_USERS                 |
 | Row count      | 1                         |
 
-The expression for `Filter rows` we use for filtering the rows by the importing username that was specified in the form. The expression is `hackpp_sceapp_cst_username eq '<value from form>'`. Technically the value from the form is passed as parameter. We have to tell now Power Platform to generate a parameter for us. The screenshot below shows how that is done by selecting from the tab `Dynamic Content` the expression `Ask in PowerApps`:
+The expression for `Filter rows` we use for filtering the rows by the importing username that was specified in the form. The expression is `hackpp_sceapp_cst_username eq '<value from form>'`. Technically the value from the form is passed as parameter. We have to tell now Power Platform to generate a parameter for us. The screenshot below shows how that is done. Position the cursor in the parentheses and click in the field. Select in the tab `Dynamic Content` the expression `Ask in PowerApps`:
 
 <br><img src="./images/flow_new_list_rows_add_para.png" /><br>
 
