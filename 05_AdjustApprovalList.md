@@ -47,7 +47,7 @@ Implement with these guidelines the same tabular layout as already done for the 
 
 ## Inserting the extra header row
 
-Checkout for the existing import the tree to infer which controls are needed in addition (Basically just a horizontal layout container + including buttons + a rectangle to fill the rest). Since this is nothing new compared to the first step of the wizard no further details are given.
+Check the tree for the existing import to infer which additional controls are needed (Basically just a horizontal layout container + including buttons + a rectangle to fill the rest). You should be ramped up by now how controls are added. Therefore no further details are given.
 
 <br><img src="./images/appr_list_blueprint_hdr_ctrls.png" /><br>
 

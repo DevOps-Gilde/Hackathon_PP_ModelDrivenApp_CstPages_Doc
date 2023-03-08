@@ -130,7 +130,7 @@ Our submit is different for edit and new. In the edit case we can use the standa
 If(locImpMode = "New", 
    UpdateContext(
 	{locParaUserName: <WizardStepImpHdrMainViewImportUserNameDropDown>.Selected.CST_USERNAME,
-	 locParaYear: WizardStepImpHdrMainViewImportYearTextBox.Text,
+	 locParaYear: <WizardStepImpHdrMainViewImportYearTextBox>.Text,
 	 locParaDesc: <WizardStepImpHdrMainViewImportDescTextBox>.Value});
    UpdateContext(
 	 {locNewImpCode: TestFlowInp.Run(locParaUserName, locParaYear, locParaDesc).returnedval });
