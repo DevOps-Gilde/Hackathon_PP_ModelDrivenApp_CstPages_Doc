@@ -53,7 +53,7 @@ Check the tree for the existing import to infer which additional controls are ne
 
 ## Filtering & Sorting
 
-The basic idea is to store the filtered records in a local variable. The following adjustments are necessary to get the right behavior:
+The basic idea is to store the filtered records in the local variable `locSelectedItems`. The following adjustments are necessary to get the right behavior:
 * Initialization
 
   When we enter the page we must ensure the local variable is correct. Entering page might be triggered by visiting the page initially or because we press the `Home` button in the wizard. Set the property `OnVisisble` to the following value:
@@ -61,7 +61,7 @@ The basic idea is to store the filtered records in a local variable. The followi
   UpdateContext(
     {
         ...,
-        locSelectedItems: Filter(IMP_CO2_CONS_RAW_HDR, Find(OvrImpMainSectFilterImportCodeTextBox.Value,CST_IMP_CODE))
+        locSelectedItems: Filter(IMP_CO2_CONS_RAW_HDR, Find(OvrApprViewMainSearchFormImpCodeTextBox.Value,CST_IMP_CODE))
     }
 )   
 ```
@@ -83,9 +83,9 @@ Navigate(WizardStepImpHeader, ScreenTransition.None, {
 
 * Filter records
 
-  When the user changes the test filters the list must be updated. We have overwritten the `OnChange` event that is firing if we enter something.
+  When the user changes the test filters the list must be updated. Overwrite the `OnChange` event that is firing if we enter something.
 ```
-UpdateContext({locSelectedItems: Filter(IMP_CO2_CONS_RAW_HDR, Find(OvrImpMainSectFilterImportCodeTextBox.Value,CST_IMP_CODE))})
+UpdateContext({locSelectedItems: Filter(IMP_CO2_CONS_RAW_HDR, Find(OvrApprViewMainSearchFormImpCodeTextBox.Value,CST_IMP_CODE))})
 ```
 
 Sorting the columns is also based on a local variable `locSortColumn`. It denotes the column we want to sort after. The following pieces ensure that the variable is kept up to date:
@@ -103,7 +103,7 @@ UpdateContext(
 
 * List
 
-  The list is using as data source now the local variable and not the original table `IMP_CO2_CONS_RAW_HDR` anymore. We have to ensure that we sort the content according to the selected column. The following expression is doing the job:
+  The list must use as data source now the local variable and not the original table `IMP_CO2_CONS_RAW_HDR`. We have to ensure that we sort the records according to the selected column. In our case we only implemented the case for "Code". The following expression for the `Items`property is doing the job:
 ```
 Switch(
     locSortColumn,

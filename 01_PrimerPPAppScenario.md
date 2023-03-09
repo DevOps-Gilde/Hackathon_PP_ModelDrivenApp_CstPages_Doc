@@ -13,7 +13,10 @@ The most important tool from the hackathon perspective is the web portal. It all
 Comments regarding the picture:
 * The purple boxes in the picture mark the environment and the user.
 * On the left hand side you have the main navigation that allows you to reach Dataverse, Power Apps and solutions.
-* Important for the later hackathon: Make sure you are always LOGGED IN with the user we provide in the hackathon and not WITH YOUR Capgemini EMail account
+
+Important settings for the later hackathon. You will get user + credentials and environment id from us before the hackathon starts:
+* URL to your environment: https://make.powerapps.com/environments/<your environment id>/home
+* Make sure you are always LOGGED IN with the user we provide in the hackathon and not WITH YOUR Capgemini EMail account
 
 ## Dataverse
 
