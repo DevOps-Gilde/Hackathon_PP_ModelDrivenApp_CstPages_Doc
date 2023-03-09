@@ -57,8 +57,8 @@ Insert the remaining controls in the same way and order. The form will be refere
 
 |Control   |Name Parent   |Name  |
 |---|---|---|
-|EditForm   |Content_Create   |WizardStepImpHdrMainView   |
-|Button   |Content_Create   |up to you  |
+|EditForm   |newy added `Container1`    |WizardStepImpHdrMainView   |
+|Button   |newy added `Container1`   |up to you  |
 
 ## Configure Added Form and Button
 
