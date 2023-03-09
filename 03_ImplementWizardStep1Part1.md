@@ -90,7 +90,7 @@ Since we need the user input later for the database rename the control with the 
 |Year               |TextInput                         |                            WizardStepImpHdrMainViewImportYearTextBox|
 |Description        |TextBox                           |WizardStepImpHdrMainViewImportDescTextBox|
 
-Creating or editing is defined by the property mode. The value depends in our case of the context that was passed when the first step was called. That is the first case where we need a formula to determine the correct value. Two ways exist:
+Creating or editing is defined by the property mode. The new and the edit scenario require different values. That is the first case where we need a formula to determine the correct value. Two ways exist:
 * Entering it in the properties on the right-hand side
 * Formular bar
 
