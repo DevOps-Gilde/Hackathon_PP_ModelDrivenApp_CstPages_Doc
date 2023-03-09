@@ -125,13 +125,13 @@ Click on the power automate icon and click the button `Add flow`. Enter the name
 
 **Submit Button)**
 
-Our submit is different for edit and new. In the edit case we can use the standard `SubmitForm` to persist the changes. We just add a confirmation message for the user. For new we have run our flow and store returned value for later processing in a local variable. The user is also informed with an additional message. Enter the following formula in the property `OnSelected` that is doing all that (For <> you have to use the names you defined):
+Our submit is different for edit and new. In the edit case we can use the standard `SubmitForm` to persist the changes. We just add a confirmation message for the user. For new we have run our flow and store returned value for later processing in a local variable. The user is also informed with an additional message. Enter the following formula in the property `OnSelected` that is doing all that:
 ```
 If(locImpMode = "New", 
    UpdateContext(
-	{locParaUserName: <WizardStepImpHdrMainViewImportUserNameDropDown>.Selected.CST_USERNAME,
-	 locParaYear: <WizardStepImpHdrMainViewImportYearTextBox>.Text,
-	 locParaDesc: <WizardStepImpHdrMainViewImportDescTextBox>.Value});
+	{locParaUserName: WizardStepImpHdrMainViewImportUserNameDropDown.Selected.CST_USERNAME,
+	 locParaYear: WizardStepImpHdrMainViewImportYearTextBox.Text,
+	 locParaDesc: WizardStepImpHdrMainViewImportDescTextBox.Value});
    UpdateContext(
 	 {locNewImpCode: TestFlowInp.Run(locParaUserName, locParaYear, locParaDesc).returnedval });
    Notify("Import " & locNewImpCode & " has been created."), 
@@ -157,9 +157,6 @@ The important takeaways from that code:
 
 * Notify: The expression shows an information message. The operator `&` concatenates strings.
 * LastSubmit: Refers to the stored data. Unfortunately it only works for edit only.
-* <...> Controls
-
-  They represent the form controls that hold our data. Note that the way you access the data differs depending on the type.
 
 # 3. Testing changes
 

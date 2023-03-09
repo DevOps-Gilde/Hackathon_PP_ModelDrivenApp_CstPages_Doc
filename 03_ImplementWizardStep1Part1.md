@@ -32,10 +32,10 @@ As you know it from other environments our application shall support responsive 
 <br><img src="./images/wiz_layout_start_point.png" /><br>
 
 Let's now implement the content for which we need an additional container (to block the bulk of the screen) and the child controls (EditForm and Button). We will start with the vertical container for the content. Adding controls always follows the same pattern which is as follows:
-* Select the parent control `WizardLayout_Create` on the canvas or in the tree on the left-hand side
-* Pick the control from the list `+Insert`
+* Select the parent control `WizardStepImpHdrLayout` on the canvas or in the tree on the left-hand side
+* Add the control `Vertical container` from the list under `+Insert`
 
-  This will add the new container to the end of the children list. That is not what we want, since it must be placed between header and footer.
+  If you don't see the control in the list you have to look under `Layout`. The newly added container will be added to the end of the children list. That is not what we want, since it must be placed between header and footer.
 
 * Reorder newly added container
 
@@ -44,20 +44,20 @@ Let's now implement the content for which we need an additional container (to bl
 
 * Adjust properties
 
-  First we have to make sure that container fills the bulk of the screen. The screenshot below shows the relevant settings:
+  First we have to make sure that container fills the bulk of the screen. The screenshot below shows the relevant settings on the right-hand side:
   <br><img src="./images/wiz_layout_fill.png" /><br>
   Adjust the following properties as follows:
   * Activate flexible height if not already done
   * Set the first figure of `Fill portions` to `0.8` which corresonds to 80 percent of the space
   * make sure that the `Alignment in container` is as shown
 
-* Rename the newly added control to `Content_Create`
+  We won't need the container anymore later so the name is up to you.
 
-Insert the remaining controls in the same way and name them accordingly:
+Insert the remaining controls in the same way and order. The form will be referenced later in code snippets. Therefore the name must be as stated below:
 
 |Control   |Name Parent   |Name  |
 |---|---|---|
-|EditForm   |Content_Create   |up to you   |
+|EditForm   |Content_Create   |WizardStepImpHdrMainView   |
 |Button   |Content_Create   |up to you  |
 
 ## Configure Added Form and Button
@@ -66,9 +66,29 @@ First we have to wire our form with the underlying `IMP_CO2_CONS_RAW_HDR` table.
 
 <br><img src="./images/wiz_layout_ctrls_frm_ds.png" /><br>
 
-Next we have to pick all relevant columns. Click on `Edit fields` and select all custom columns that start with `CST`. Select them as indicated in the screenshot.
+Next we have to pick all relevant columns. Click on `Edit fields`. You see then the already selected columns.
+
+<br><img src="./images/wiz_layout_ctrls_frm_fields.png" /><br>
+
+Remove the column `Created On` by hovering over the entry. In the appearing context menu (...) on the right hand side you find an option to delete it. Select now all missing columns that start with `CST_IMP` by clicking on `+ Add field` as shown below:
 
 <br><img src="./images/wiz_layout_ctrls_frm_sel_cols.png" /><br>
+
+As a reaction you will now see additional input card per column. Each card consists of multiple controls. We will need them later. Therefore naming and a better understanding of the control structure is important. The screenshot belows shwos the description card:
+
+<br><img src="./images/wiz_layout_ctrls_frm_desc_card.png" /><br>
+
+The important take aways:
+* A card contains of multiple controls
+* Control holding the user input => here `DataCardValue3`
+* Other controls that contain other visual parts such as column label, asteriks etc.
+
+Since we need the user input later for the database rename the control with the user input as follows:
+|Card               |Technical Control Type| Name|
+|-------------------|-----------------------------------|-----|
+|Importing user name|ComboBox                          | WizardStepImpHdrMainViewImportUserNameDropDown|
+|Year               |TextInput                         |                            WizardStepImpHdrMainViewImportYearTextBox|
+|Description        |TextBox                           |WizardStepImpHdrMainViewImportDescTextBox|
 
 Creating or editing is defined by the property mode. The value depends in our case of the context that was passed when the first step was called. That is the first case where we need a formula to determine the correct value. Two ways exist:
 * Entering it in the properties on the right-hand side
@@ -78,9 +98,9 @@ Creating or editing is defined by the property mode. The value depends in our ca
 
   <br><img src="./images/wiz_layout_ctrls_frm_mode_fx.png" /><br>
 
-To enter any formular for a given property do the following:
-* select the name of the property on the left-hand side (here DefaultMode)
-* set the expression on the right hand side after the Fx icon
+  To enter any formular for a given property do the following:
+  * select the name of the property on the left-hand side (here DefaultMode)
+  * set the expression on the right hand side after the Fx icon
 
   The expression in our case is a simple if expression: `If(locImpMode = "Edit", FormMode.Edit, FormMode.New)`. `locImpMode` is the local variable that contains the mode. The setting of the value for `locImpMode` we already implemented for you when you click the buttons on the overview page. 
 
@@ -99,15 +119,15 @@ As a last step we set the relative height so that the form occupies minimum spac
 
 We are finished and can switch over to the button. Select the newly added container again. Pick the control `Button` in the same way as you did before.
 
-Change the Text property to `Submit`. The property `OnSelect` contains the action when the button is pressed. For now we will just display an information that proofs we can access the values in the form. Enter the following expression in the "OnSelect" property: `Notify(<name of the value below the card within the form>, NotificationType.Information)`. The name can be obtained by the tree view as shown below:
-
-<br><img src="./images/wiz_layout_ctrls_btn_frm_value.png" /><br>
+Change the Text property to `Submit`. The property `OnSelect` contains the action when the button is pressed. For now we will just display an information that proofs we can access the values in the form. Enter the following expression in the "OnSelect" property: `Notify("Changes submitted.", NotificationType.Information)`.
 
 ## Navigation
 
 As you have already seen we work with screens to separate things. They are linked and the first step of our wizard is not yet correctly wired. Both buttons `Next` and `Home` at the footer still need to be configured.
 
-`Next`means we just refer to the screen representing the second step in our wizard. In addition to that we have to pass required context information for the next step. This context information includes:
+<br><img src="./images/wiz_nav_buttons.png" /><br>
+
+`Next` means we just refer to the screen representing the second step in our wizard. In addition to that we have to pass required context information for the next step. This context information includes:
 * The primary key of the newly created/ edited record
 * The import state of the newly created/ edited record
 The `Navigate` command allows to jump to the designated screen and to pass parameters. Set the `OnSelect` property of the button to `Navigate(WizardStepUploadData, ScreenTransition.None, { locImpState: locImpState, locImpCode: locImpCode})`. `{}` is an arbitrary json structure that we use to pass the information. `WizardStepUploadData` is the name of new screen and we just pass the current values of the local variables.

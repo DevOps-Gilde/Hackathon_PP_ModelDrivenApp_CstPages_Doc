@@ -79,7 +79,7 @@ The major controls to switch between the levels are:
   Hoovering over the page in question should already activate the pen icon. Click on that to edit the page. To get back to the app level click the `Back` button in the top left corner.
   <br><img src="./images/intro_app_edit_pg.png" /><br>
 
-Saving is also a two step process if changes shall take effect outside your current scope. Current scope might be a concrete page or the application as a whole. Besides saving you also have to publish the changed artefact to take effect. For example first after publishing you see changes for a certain custom page also on model driven app level. The picture below shows the icons for saving and publishing:
+Saving is also a two step process if changes shall take effect outside your current scope. Current scope might be a concrete page or the application as a whole. Besides saving you also have to publish the changed artefact to take effect. For example first after publishing you see changes for a certain custom page also on model driven app level. The picture below shows the icons for saving (usual disk symbol) and publishing (the next icon at the right-hand side):
 
 <br><img src="./images/intro_app_save_publish.png" /><br>
 
