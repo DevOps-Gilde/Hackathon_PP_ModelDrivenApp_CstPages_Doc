@@ -4,9 +4,15 @@ Power Platform is the low code platform from Microsoft. If required also coding 
 
 # 2. Introduction to Power Platform
 
+## Environment
+
+Your home for this hackathon is your designated Power Platform environment. A PowerPlatform environment represents an environment such as development or production as you know it from software engineering. PowerPlatform distinguishes certain environment types (such as sandbox or production) that come with less or more functionality. An environment can be equipped with Dataverse or not. Your designated environment comes of course with dataverse since we will use Dataverse for persistency. In the Hackathon we don't work with a repository associated with the environment. 
+
+Artefacts such as dataverse tables, apps etc. can either be directly created in an environment or created indirectly by importing a solution. Solutions are explained further down. In our case you will enhance artefacts that were imported into the environment.
+
 ## Web portal of Power Platform
 
-The most important tool from the hackathon perspective is the web portal. It allows you to work with all relevant components for our hackathon such as the Dataverse, Power Apps and solutions. The portal is scoped to a certain environment. A PowerPlatform environment represents an environment such as dev or prod as you know it from software engineering. PowerPlatform environment types are for instance sandbox or production. The picture below shows a screenshot of the portal.
+The most important tool from the hackathon perspective is the web portal. It allows you to work with all relevant components for our hackathon such as the Dataverse, Power Apps and Solutions. The portal is scoped to a certain environment. The picture below shows a screenshot of the portal.
 
 <br><img src="./images/intro_power_platform.png" /><br>
 

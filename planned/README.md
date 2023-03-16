@@ -20,7 +20,7 @@ The following things will be provided to you:
 
 [This repo](https://github.com/DevOps-Gilde/Hackathon_PP_ModelDrivenApp_CstPages_Code) contains the code for this documentation. Code includes the starting point for this hackathon and a fully implemented application.
 
-## Prerequirements
+## Prerequisites
 
 No extra tooling will be required due to the LowCode platform except for a browser. No deep GitHub/ Git know-how is required. It is only required to download the partially implemented application and the fully implemented data model from GitHub.
 
