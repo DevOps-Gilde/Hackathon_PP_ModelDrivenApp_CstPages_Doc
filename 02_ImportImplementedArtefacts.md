@@ -33,7 +33,7 @@ Perform the following steps:
 
 6. Check success
 
-   The custom tables don't contain any rows. To work with our application you must enter some data in the tables IMP_USERS and IMP_DEPARTMENT since our application does not cover all tables. Understanding of the column definition of the table IMP_CO2_CONS_RAW_HDR is also beneficial.
+   We will jump right into working with dataverse tables to check success. The custom tables don't contain any rows. To work with our application you must enter some data in the tables IMP_USERS and IMP_DEPARTMENT since our application does not cover all tables. Understanding the column definitions of the table IMP_CO2_CONS_RAW_HDR is also beneficial.
 
    Navigate in the main menu to `Solutions` and click on the imported `DbTables`. as shown in the screenshot:
    <br><img src="./images/work_tables_open_solution_tables.png" /><br>
@@ -50,7 +50,6 @@ Perform the following steps:
     * You can only select a value from the predefined state values
 
     To understand the columns checkout the column definitions. Click on `Columns` as shown below.
-
     <br><img src="./images/work_tables_cols_ovr.png" /><br>
 
     Select the column you are interested in. You can limit the columns by filtering according to the prefix "CST". The screenshot below shows the definition of the column that references a choice.
