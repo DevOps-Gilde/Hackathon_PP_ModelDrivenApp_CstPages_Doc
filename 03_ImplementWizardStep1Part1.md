@@ -27,6 +27,9 @@ The learning goals are as stated before:
 
 ## Layouting Form and Button
 
+Navigate to the page for approvals named `pgApprOverview` within the app as shown in the screenshot below and click the edit icon:
+<br><img src="./images/wiz_layout_page_imp.png" /><br>
+
 As you know it from other environments our application shall support responsive layout so we will avoid pixel based statements. A key are containers that allow to layout their child components based on relative a measurement such as a percentage. Container layout their children either horizontally or vertically and can be nested. We already implemented the first container for you that uses the expressions `Parent.Width` and `Parent.Height` to occupy all space of the screen. The screenshot below shows the starting point. As you can see there is a gap in the sense that the main content is missing:
 
 <br><img src="./images/wiz_layout_start_point.png" /><br>
