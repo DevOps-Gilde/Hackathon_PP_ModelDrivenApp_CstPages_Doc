@@ -1,8 +1,8 @@
 # 1. Introduction to Wizard
 
-You should now have Completed the Following things:
+You should now have completed the following things:
 
-1. Importing Implemented Artefacts
+1. Importing implemented artefacts
 
 Next you add the required controls for the first step of the wizard and wire them with the rest of the application.
 
@@ -27,7 +27,7 @@ The learning goals are as stated before:
 
 ## Layouting Form and Button
 
-As you know it from other environments our application shall support responsive layout so we will avoid pixel based statements. A key are containers that allow to layout their child components based on relative a measurement such as a percentage. Container layout their children either horizontally or vertically and can be nested. We already implemented the first container for you that uses the expressions `Parent.Width` and `Parent.Height` to occupy all space of the screen. The screenshot below shows the starting point. As you can see theer is a gap in the sense that the main content is missing:
+As you know it from other environments our application shall support responsive layout so we will avoid pixel based statements. A key are containers that allow to layout their child components based on relative a measurement such as a percentage. Container layout their children either horizontally or vertically and can be nested. We already implemented the first container for you that uses the expressions `Parent.Width` and `Parent.Height` to occupy all space of the screen. The screenshot below shows the starting point. As you can see there is a gap in the sense that the main content is missing:
 
 <br><img src="./images/wiz_layout_start_point.png" /><br>
 
@@ -39,7 +39,7 @@ Let's now implement the content for which we need an additional container (to bl
 
 * Reorder newly added container
 
-  You have to click on the context menu (...) dots of the control in the tree view. There you find the option `Move up` to move it as shown below:
+  Click on the context menu (...) of the container control in the tree view. There you find the option `Move up` to move it as shown below:
   <br><img src="./images/wiz_layout_reorder.png" /><br>
 
 * Adjust properties
@@ -53,14 +53,14 @@ Let's now implement the content for which we need an additional container (to bl
 
   We won't need the container anymore later so the name is up to you.
 
-Insert the remaining controls in the same way and order. The form will be referenced later in code snippets. Therefore the name must be as stated below:
+Select the newly added container so that it is going to become the new parent for insert. Insert the remaining controls in the same way and order. The form will be referenced later in code snippets. Therefore the name must be as stated below:
 
 |Control   |Name Parent   |Name  |
 |---|---|---|
 |EditForm   |newy added `Container1`    |WizardStepImpHdrMainView   |
 |Button   |newy added `Container1`   |up to you  |
 
-## Configure Added Form and Button
+## Configure added Form and Button
 
 First we have to wire our form with the underlying `IMP_CO2_CONS_RAW_HDR` table. Go to the data source property and select the table.
 
@@ -74,7 +74,7 @@ Remove the column `Created On` by hovering over the entry. In the appearing cont
 
 <br><img src="./images/wiz_layout_ctrls_frm_sel_cols.png" /><br>
 
-As a reaction you will now see additional input card per column. Each card consists of multiple controls. We will need them later. Therefore naming and a better understanding of the control structure is important. The screenshot belows shwos the description card:
+As a reaction you will now see additional input cards. Each card covers one column. Each card consists of multiple controls. We will need them later. Therefore naming and a better understanding of the control structure is important. The screenshot belows shows the description card:
 
 <br><img src="./images/wiz_layout_ctrls_frm_desc_card.png" /><br>
 
@@ -83,7 +83,7 @@ The important take aways:
 * Control holding the user input => here `DataCardValue3`
 * Other controls that contain other visual parts such as column label, asteriks etc.
 
-Since we need the user input later for the database rename the control with the user input as follows:
+Rename the controls listed below as stated since we need them later:
 |Card               |Technical Control Type| Name|
 |-------------------|-----------------------------------|-----|
 |Importing user name|ComboBox                          | WizardStepImpHdrMainViewImportUserNameDropDown|
@@ -104,22 +104,20 @@ Creating or editing is defined by the property mode. The new and the edit scenar
 
   The expression in our case is a simple if expression: `If(locImpMode = "Edit", FormMode.Edit, FormMode.New)`. `locImpMode` is the local variable that contains the mode. The setting of the value for `locImpMode` we already implemented for you when you click the buttons on the overview page. 
 
-For the mode `New` we have completed all major fields. However in case of edit the control has no idea which record we want to edit. The control provides the Item property we want to edit (In the mode New the value is ignored). Set the expression as follows: `LookUp(IMP_CO2_CONS_RAW_HDR, CST_IMP_CODE = locImpCode)`. Explanations:
+For the mode `New` we have completed all major fields. Edit requires additional information about the record to edit. The control provides the `Item` property for that purpose (In the mode New the value is ignored). Set the expression as follows: `LookUp(IMP_CO2_CONS_RAW_HDR, CST_IMP_CODE = locImpCode)`. Explanations:
 * `IMP_CO2_CONS_RAW_HDR` denotes the table we are looking at
-* `LookUp` retrieves the record the fulfills the condition
+* `LookUp` retrieves the record that fulfills the condition
 * `CST_IMP_CODE = locImpCode`represents the condition that filters the currently edited record
 
-Some of the fields within the form are set internally for a new record. Therefore we want to disable them for new to make it more clear. Sometimes properties are locked as shown in the screenshot below. To unlock them click on the lock icon:
+Many fields within the cards are configured with defaults such as the card for the import code. With the standard configuration the field is still displayed as editable but you cannot jump into it. To avoid confusion we want to disable it for creating a new record. It also a good example to illustrate that you have to sometimes unlock properties before being able to edit them. To unlock them click on the lock icon:
 
 <br><img src="./images/wiz_layout_ctrls_frm_enabled_lock.png" /><br>
 
-Click on the lock and adjust the property `DisplayMode` for CST_IMP_CODE, CST_IMP_STATE and CST_IMP_USER. The required expression is `If(locImpMode = "New", DisplayMode.Disabled, Parent.DisplayMode)`. 
+Unlock the property `DisplayMode` for CST_IMP_CODE, CST_IMP_STATE and CST_IMP_USER. The required expression is `If(locImpMode = "New", DisplayMode.Disabled, Parent.DisplayMode)`. 
 
 As a last step we set the relative height so that the form occupies minimum space. Set `Fill portions` to `0.2`.
 
-We are finished and can switch over to the button. Select the newly added container again. Pick the control `Button` in the same way as you did before.
-
-Change the Text property to `Submit`. The property `OnSelect` contains the action when the button is pressed. For now we will just display an information that proofs we can access the values in the form. Enter the following expression in the "OnSelect" property: `Notify("Changes submitted.", NotificationType.Information)`.
+We are finished and can switch over to the button. Change the `Text` property to `Submit`. The property `OnSelect` contains the action when the button is pressed. For now we will just display an information that proofs we can access the values in the form. Enter the following expression in the `OnSelect` property: `Notify("Changes submitted for import " & WizardStepImpHdrMainViewImportDescTextBox.Value & " submitted.", NotificationType.Information)`. As you probably have alraedy guessed `&` is the operator for concatenating strings.
 
 ## Navigation
 
@@ -127,7 +125,7 @@ As you have already seen we work with screens to separate things. They are linke
 
 <br><img src="./images/wiz_nav_buttons.png" /><br>
 
-`Next` means we just refer to the screen representing the second step in our wizard. In addition to that we have to pass required context information for the next step. This context information includes:
+`Next` means we just refer to the screen representing the second step in our wizard. In addition to that we have to pass required context information. This context information includes:
 * The primary key of the newly created/ edited record
 * The import state of the newly created/ edited record
 The `Navigate` command allows to jump to the designated screen and to pass parameters. Set the `OnSelect` property of the button to `Navigate(WizardStepUploadData, ScreenTransition.None, { locImpState: locImpState, locImpCode: locImpCode})`. `{}` is an arbitrary json structure that we use to pass the information. `WizardStepUploadData` is the name of new screen and we just pass the current values of the local variables.
@@ -139,13 +137,13 @@ The `Home` button shall reference the entry page for the importer. Passing any p
 For testing you have the following options:
 * Quicktests
 
-  Ad hoc test of changes is quite easy trough the `Play` button that is provided by the web portal as shown by the first screenshot. The current screen selected in the tree view is assumed as screen under test. 
+  Ad hoc test of changes is quite easy trough the `Play` button (Triangle icon) that is provided by the web portal as shown by the first screenshot. The current screen selected in the tree view is assumed as screen under test. 
   <br><img src="./images/wiz_layout_test.png" /><br>
   
-  An important setting is the icon besides the `X`. When you click on it choose the option `Canvas size` as shown below. The rendering is then shown as in the designer.
+  An important setting is the icon besides the `X`. When you click on it choose the option `Canvas size` as shown below. The screen is then rendered as in the designer.
 <br><img src="./images/wiz_layout_test_scr_opt.png" /><br>
 
-  To finish the test mode click the `X` as shown in the second screenshot below:
+  To finish the test mode click the `X` as shown in the screenshot below:
   <br><img src="./images/wiz_layout_stop.png" /><br>
 
   A problem of that approach is the setting of the context. In our case you can achieve it by starting with the importing overview screen. In a more complex case with many test cases this might mean a lot of clicking.
@@ -158,13 +156,12 @@ For testing you have the following options:
 
 * Running application
 
-  In rare edge cases this i sthe last feedback due to observed problems in the Quicktests environment. 
+  In rare edge cases this is the last feedback due to observed problems in the Quicktests environment. 
    
 For our case ad-hoc testing is sufficient. Start from the import overview page to ensure a correct screen context. Press the play button after selecting the overview screen to start the tests. Thanks to your changes the following scenarios should now work:
 |Test                                             |Expected Result                          |
 |-------------------------------------------------|------------------------------------------|
-|Wizard first step: Run wizard first step |Main content should displayed correctly               |
+|Import Overview Page: Click on new import button |Fields on the form are empty. Clicking on the submit button should show an additional info message with the entered description.|
+|Import Overview Page: Select a single record and click on edit import button|Fields on the form are prefilled with the record you selected. Clicking on the submit button should show an additional info message with the entered description.|
 |Wizard first step: Click on next button          |Next screen is displayed                  |
 |Wizard first step: Click on home button          |Overview page is shown from where wizard was triggered (Correct display of list only when you run the app)|
-|Import Overview Page: Click on new import button |Fields on the form are empty|
-|Import Overview Page: Select a single record and click on edit import button|Fields on the form are prefilled with the record you selected|

@@ -60,15 +60,15 @@ Perform the following steps:
 Perform the following steps to import the app:
 1. Download the file `HackPPSceApp_unmanaged.zip` from [our code repo](https://github.com/DevOps-Gilde/Hackathon_PP_ModelDrivenApp_CstPages_Code) in the **main branch**
 
-2. Switch to "Solutions" in the main menu
+2. Switch to `Solutions` in the main menu
 <br><img src="./images/imp_sol_step_start.png" /><br>
 
-3. Click on "import solution" and select the downloaded file from the repo and click next.
+3. Click on `import solution` and select the downloaded file from the repo and click next.
 <br><img src="./images/imp_sol_step_imp_sol.png" /><br>
 
 4. Specify dataverse connection
 
-   Under the hood the flow dataverse maintains a connection to dataverse. This is specific for the environment. Therefore you have to map the connection from the imported solution to one in your environment. If you start from scratch you would have to select `+ New connection`. Click on `+ New connection`to create a new connection as shown below:
+   Under the hood the flow maintains a connection to dataverse. This is specific for the environment. Therefore you have to map the connection from the imported solution to a connection in your environment. If you start from scratch you would have to select `+ New connection`. Click on `+ New connection`to create a new connection as shown below:
 
    <br><img src="./images/imp_sol_step_conn_none.png" /><br>
 
@@ -78,7 +78,7 @@ Perform the following steps to import the app:
    <br><img src="./images/imp_sol_step_conn_new_signin.png" /><br>
    <br><img src="./images/imp_sol_step_conn_new_result.png" /><br>
 
-   Finally you would rerun the import and select the previously created one.
+   Finally you would rerun the import and select the previously created connection.
    <br><img src="./images/imp_sol_step_conn_existing.png" /><br>
 
 5. Wait until the portal shows at the top the message "Solution successfully imported"
