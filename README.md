@@ -6,7 +6,7 @@ This repo contains the documentation for the Power Apps hackathon. The applicati
 
 :warning: Note this documentation is a preliminary state where not all features of the application are already implemented!
 
-The business scenario of our example app is the import of CO2 consumption figures from a local file. They will have to approved before showing up in a consolidated table. A wizard will guide the importing user.
+The business scenario of our example app is the import of CO2 consumption figures from a local file. They will have to be approved before showing up in a consolidated table. A wizard will guide the importing user.
 
 The hackathon includes the following technologies:
 * Power Apps: Model driven apps with custom pages
@@ -16,7 +16,7 @@ The hackathon includes the following technologies:
 Out of scope are the following technologies:
 * Power Apps
 
-  Other app types such as Power Pages/ Canvas apps. Model driven apps based on dashboards/ dataverse Table based pages are also out of scope.
+  Other app types such as Power Pages/ Canvas apps. Model driven apps with pages based on dashboards/ dataverse tables are also out of scope.
   
 * Creation of underlying dataverse data model (We provide a full implementation that only needs to be imported by you into the environment)
 
@@ -28,13 +28,13 @@ The following things will be provided to you:
 
 [This repo](https://github.com/DevOps-Gilde/Hackathon_PP_ModelDrivenApp_CstPages_Code) contains the code for this documentation. Code includes the starting point for this hackathon and a fully implemented application.
 
-## Prerequirements
+## Prerequisits
 
-No extra tooling will be required due to the LowCode platform except for a browser. No deep GitHub/ Git know-how is required. It is only required to download files for the partially implemented application and the fully implemented data model from GitHub.
+No extra tooling will be required due to the LowCode platform except for a browser. No deep GitHub/ Git know-how is required. It is only required to download files for the partially implemented application and the partially implemented data model from GitHub.
 
 ## Session preparation
 
-Power Platform is LowCode environment that is probably new to most of us. Therefore read the following chapters BEFORE the hackathon. Otherwise you won't be able to do much coding:
+Power Platform is a LowCode environment that is probably new to most of us. Therefore read the following chapter BEFORE the hackathon. Otherwise you won't be able to do much coding:
 
 1. Get familiar with Platform & Application Scenario [here](/01_PrimerPPAppScenario.md)<br>
 
@@ -60,6 +60,6 @@ The following tasks will expect you:
 
 5. **Optional advanced extra task:** Adjust list of imports for approval [here](/05_AdjustApprovalList.md)
 
-:white_check_mark: We also created a partially implemented application including data model located in the branch [Solution](https://github.com/DevOps-Gilde/Hackathon_PP_ModelDrivenApp_CstPages_Doc/tree/Solution) of your forked repository that covers all tasks. You only have to import it to your environment. Note that the import slightly differs in that case. Check out [here](/02_ImportImplementedArtefacts.md) how to do it.
+:white_check_mark: We also created a partially implemented application including data model located in the branch [Solution](https://github.com/DevOps-Gilde/Hackathon_PP_ModelDrivenApp_CstPages_Doc/tree/Solution). You only have to import it to your environment. Note that the import slightly differs in that case. Check out [here](/02_ImportImplementedArtefacts.md) how to do it.
 
-If at any Point you need assistance nevertheless do not hesitate to ask. We are here to Help you.
+If at any point you need further assistance do not hesitate to ask. We are here to Help you.
