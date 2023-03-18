@@ -35,7 +35,7 @@ Perform the following steps:
 
    We will jump right into working with dataverse tables to check success. The custom tables don't contain any rows. To work with our application you must enter some data in the tables IMP_USERS and IMP_DEPARTMENT since our application does not cover all tables. Understanding the column definitions of the table IMP_CO2_CONS_RAW_HDR is also beneficial.
 
-   Navigate in the main menu to `Solutions` and click on the imported `DbTables`. as shown in the screenshot:
+   Navigate in the main menu to `Solutions` and click on the imported solution `DbTables` as shown in the screenshot:
    <br><img src="./images/work_tables_open_solution_tables.png" /><br>
 
    To enter data you just have to click on the table name in question. Make sure the category `All` or `tables` is selected as in the screenshot below:
@@ -86,10 +86,13 @@ Perform the following steps to import the app:
 
 6. Prepare for editing the app
 
-   Go to the solution and open the model driven app in edit mode. You will see a screen that requests republishing the application as shown below.
+   Go to the solution `HackPPSceApp` and open the model driven app `HackPPSceAppSol` in edit mode as shown in the screenshot below.
+   <br><img src="./images/imp_sol_app_open_edit.png" /><br>
+   
+   You will see a screen that requests republishing the application as shown below.
   <br><img src="./images/imp_sol_app_error.png" /><br>
   
-   Clicking the publish button should fix the problem. Now you can start editing the pages as stated in the upcoming tasks.
+   Clicking the publish button in the top right corner should fix the problem. Now you can start editing the pages as stated in the upcoming tasks.
 
 # Fully implemented model driven app
 
