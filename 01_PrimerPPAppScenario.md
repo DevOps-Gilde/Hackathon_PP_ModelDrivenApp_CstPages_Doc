@@ -83,20 +83,20 @@ The picture below illustrates the two levels starting from the portal:
 The major controls to switch between the levels are:
 * Portal => App in Edit Mode
  
-  Select `Apps` in the main navigation on the left hand side. Right-click on the app in question and select `Edit` in the context menu. To get back to the entry portal click the `Back` button in the top left corner.
+  Select `Apps` in the main navigation of the portal or navigate to the app within the imported solution on the left hand side. Right-click on the app in question and select `Edit` in the context menu. To get back to the entry portal click the `Back` button in the top left corner.
 
 * App => page in Edit Mode
 
   Hoovering over the page in question should already activate the pen icon. Click on that to edit the page. To get back to the app level click the `Back` button in the top left corner.
   <br><img src="./images/intro_app_edit_pg.png" /><br>
 
-Saving is also a two step process if changes shall take effect outside your current scope. Current scope might be a concrete page or the application as a whole. Besides saving you also have to publish the changed artefact to take effect. For example first after publishing you see changes for a certain custom page also on model driven app level. The picture below shows the icons for saving (usual disk symbol) and publishing (the next icon at the right-hand side):
+Saving is also a two step process if changes shall take effect outside your current scope. Current scope might be a concrete page or the application as a whole. Besides saving you also have to publish the changed artefact to take effect. For example first after publishing you see changes for a certain custom page also on model driven app level. The picture below shows the icons for saving (usual disk symbol) and publishing (the next icon to the right):
 
 <br><img src="./images/intro_app_save_publish.png" /><br>
 
 ## Power Automate
 
-Power automate propagates a workflow like business logic programming style that boils down to a graph. The trigger is the starting point, actions are represented by boxes and the arrows between the boxes determine what comes next. Access to data sources or third party systems is provided by connectors that are used by the actions under the hood. The picture below shows a simple example of a few sequential steps:
+Power automate is the workhorse to implement your business logic. It propagates a workflow like programming style that boils down to a graph. The trigger is the starting point, actions are represented by boxes and the arrows between the boxes determine what comes next. Access to data sources or third party systems is provided by connectors that are used by the actions under the hood. The picture below shows a simple example of a few sequential steps:
 
 <br><img src="./images/intro_flows_example.png" /><br>
 
@@ -109,14 +109,13 @@ There are various types of flows but the major distinction for us is the followi
 1. Stand alone flow that is defined in Power Automate
 2. Flow that is embedded in a Power App
 
-   We will use the second option since option one requires higher licenses.
+   We will use the second option since option one would requires additional licenses. Embedded flows can only be called from Power Apps.
 
 ## Solutions
 
 The standard way to program in a low code platform is rather clicking instead of coding. That is fine for dev/ test environments. But think of production where clicking together is no option. You rather want to transfer what you clicked together as it is to production. That requires a programmatic way to export something from your dev/ test environment and import it to production.
 
-The vehicle is a solution which can transport any artefact from power platform. 
-A solution is a container on its own and you add the existing PowerPlatform artefacts to it after creation. Exporting a solution gives you a zip file. The reverse operation reinstates the objects you exported in the designated environment. We will use that mechanism to quickly provision your environment with the fully implemented data model and the partially implemented application.
+The vehicle is a solution which can transport any artefact from power platform. A solution is a container on its own and you add the existing PowerPlatform artefacts to it after creation. Exporting a solution gives you a zip file. The reverse operation reinstates the objects you exported in the designated environment. We will use that mechanism to quickly provision your environment with the fully implemented data model and the partially implemented application.
 
 # 3. Application Scenario
 
@@ -125,7 +124,7 @@ A solution is a container on its own and you add the existing PowerPlatform arte
 Our application is centered around CO2 consumption data that is uploaded by the user. Once the upload is final it must be approved. First then it appears in the final destination table that holds the accumulated CO2 consumption per year. Importing consumption data consists of two parts:
 
 * Import Header
-  The header summarizes an import. It contains important general importing and approving details such as user and timestamps. The state of the import controls the overall business process. The following values are possible:
+  The header summarizes an import. It contains important general details for import and approval such as user and timestamps. The state of the import controls the overall business process. The following values are possible:
   
   * Pending - Import has been done but the figures are not ready for approval
   * Finalized - Figures are ready for approval
@@ -144,6 +143,7 @@ Our application knows two types of users:
 
 * Users that are eligible for import (all employees that are not part of the COMPLIANCE department)
 * Users that are eligible for approval (all employees that are part of the COMPLIANCE department)
+
 The application will internally track the user type by a sign in process that we already implemented for you.
 
 The application provides importing users a search mask as entry point. It contains the list of imports with the possibility to filter. The screenshots below are not the final ones from the programmed application (e.g. a more professional look and feel is missing). They are conceptual ones that shall just better explain which functionality is provided per screen:
@@ -154,11 +154,11 @@ It allows the user to either
 
 * Start a new import
 
-  This is optin is always enabled. No matter whether how many records where filtered.
+  This is optin is always enabled. No matter how many records where filtered.
 
 * Editing an existing one
 
-  That option requires selecting a single record in the list. Moreover the import state must not yet be finalized.
+  That option requires selecting a single record in the list
 
 Major mechanism to manage the import is a wizard. The context of the wizard is either (1) the import to be edited or (2) none if a new import shall be created. The wizard consists of three steps:
 * Create/ Update import header
@@ -172,7 +172,7 @@ Major mechanism to manage the import is a wizard. The context of the wizard is e
   The upload will always refer to an existing import. Either because you are editing an existing import or because you are editing the newly created one. The screenshot below shows the conceptual screen:
   <br><img src="./images/intro_apps_imp_mask_wiz_upl.png" /><br>
 
-* Approve
+* Trigger approval
 
   The functionality of that step is only available if the state of the header is `Pending`. Otherwise the screen is read only. This step triggers the state change by pressing the button to `Finalized`. The screenshot below shows the conceptual screen:
   <br><img src="./images/intro_apps_imp_mask_wiz_appr.png" /><br>
@@ -201,7 +201,7 @@ The meaning of the tables are as follows. The names are the ones that are also u
 * Choice IMP_STATES_CHOICE - Possible import states
 * Choice IMP_CO2_DRIVER_TYPES_CHOICE - Possible drivers for CO2 emission
 
-The table below gives a short overview of the columns for the custom tables. Choices contain key value pairs. In our hackathon we only the defazlt feature for attachments. All other required ones we defined manually. In a real world scenario you would only the columns you need on top. All relevant columns have the prefx `CST` to quickly identify them:
+The table below gives a short overview of the columns for the custom tables. Choices contain key value pairs. In our hackathon the only used default column feature is attachments. All other required ones we defined manually. In a real world scenario you would only define missing columns on top of the existing ones. All relevant columns except attachments have the prefx `CST` to quickly identify them:
 
 |Table name          |Column name           |Purpose                                     |
 |--------------------|----------------------|--------------------------------------------|
@@ -232,10 +232,13 @@ The table below gives a short overview of the columns for the custom tables. Cho
 ## Working with tables
 
 The following points are relevant for the later hackathon:
-* Edit tables to enter data manually
+* Enter table data
 * Understanding of the column definition of the table IMP_CO2_CONS_RAW_HDR
 
-To edit table data you just have to click on the table name. You can use the filter in the top right corner to limit the displayed tables.
+Navigate in the main menu to `Solutions` and click on the imported `DbTables`. as shown in the screenshot:
+<br><img src="./images/work_tables_open_solution_tables.png" /><br>
+
+To enter data you just have to click on the table name in question. Make sure the category `All` or `tables` is selected as in the screenshot below:
 <br><img src="./images/work_tables_open_table.png" /><br>
 
 The lower part shows now a grid where you can directly edit the values.
@@ -246,7 +249,7 @@ Specifics resulting from the column definition are automatically reflected by th
 * You can only select as user names that are entered in the table CST_USERS
 * You can only select a value from the predefined state values
 
-To understand the columns checkout the column definitions. Click on "Columns" as shown below.
+To understand the columns checkout the column definitions. Click on `Columns` as shown below.
 
 <br><img src="./images/work_tables_cols_ovr.png" /><br>
 
