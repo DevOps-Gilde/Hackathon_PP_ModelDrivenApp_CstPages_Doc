@@ -53,8 +53,10 @@ Set the fields as shown in the table:
 | Row count      | 1                         |
 
 The expression for `Filter rows` we use for filtering the rows by the importing username that was specified in the form. The required expression is `hackpp_sceapp_cst_username eq '<value from form>'`. 
-`hackpp_sceapp_cst_username` is the so called `EntitySetName` of the targeted table. 
-To poulate `<value from form>` we have to generate a new parameter. The screenshot below shows how that is done. Position the cursor in the parentheses and click in the field. Select in the tab `Dynamic Content` the expression `Ask in PowerApps`. The screenshot shows the reaction of the designer after `Ask in PowerApps` was picked.
+`hackpp_sceapp_cst_username` is one of the various internal column names of the `CST_USERNAME` in the targeted table. 
+To populate `<value from form>` we have to generate a new parameter. The screenshot below shows how that is done. Click into the field with the above expression. If you don't see an extra window click the small link under the field named `Add dynamic content`. Select in the tab `Dynamic Content` the expression `Ask in PowerApps`. The screenshot shows the reaction of the designer after `Ask in PowerApps` was picked.
+
+**NOTE: The generated expression must be inside the single quotes.**
 <br><img src="./images/flow_new_list_rows_add_para.png" /><br>
 
 When you hover over the generated expression you see the name of the expected parameter which is `Listrows_Filterrows` (Corresponds to `<name of action>_<name of field>`).
@@ -63,6 +65,8 @@ In the next step we will add a new row that represents our import header. We wil
 <br><img src="./images/flow_new_add_row.png" /><br>
 
 As a first value we will set the value for CST_IMP_USERNAMES. Power Platform expects an expression `<EntitySetName>(<GUID of record>)>`. The entity set name in our case is `hackpp_sceapp_imp_users` and `<GUID of record>` is the result of the previous action. Enter `hackpp_sceapp_imp_users()` and position the mouse cursor into the parentheses. Power Platform will assist you in completing the dynamic expression needed here. Pick `IMP_USER` from the displayed options in the tab `Dynamic content` as shown in the screenshot.
+
+**NOTE: The generated expression must be inside the parenthesis.**
 <br><img src="./images/flow_new_set_imp_user.png" /><br>
 
 When you selected the value you will notice a change, Dataverse embeds the new `Add new row` task in a loop since the previous command might return multiple rows. The screenshot below shows this new situation:
