@@ -188,20 +188,22 @@ Custom pages are used to bundle the functionality for the importer and approver 
 
 ## Data Model
 
-The picture below shows the data model (Table names are abbreviated):
+The picture below shows the conceptual data model. The table names are abbreviated. As stated previously only the red marked tables are covered by the application:
 
 <br><img src="./images/intro_dataverse_app_model.png" /><br>
 
 The meaning of the tables are as follows. The names are the ones that are also used in dataverse:
-* Table IMP_CO2_CONS_ACC - Aggregated CO2 consumption
-* Table IMP_CO2_CONS_RAW_HDR - Import header
-* Table IMP_CO2_CONS_RAW - Consumption data of the import
-* Table IMP_USERS - Users and associated department
+* IMP_CO2_CONS_ACC - Aggregated CO2 consumption
+* IMP_CO2_CONS_RAW_HDR - Import header
+* IMP_CO2_CONS_RAW - Consumption data of the import
+* IMP_USERS - Users and associated department
 * Table IMP_DEARTMENTS - Departments
-* Choice IMP_STATES_CHOICE - Possible import states
-* Choice IMP_CO2_DRIVER_TYPES_CHOICE - Possible drivers for CO2 emission
+* IMP_STATES_CHOICE - Possible import states
+* IMP_CO2_DRIVER_TYPES_CHOICE - Possible drivers for CO2 emission
 
-The table below gives a short overview of the columns for the custom tables. Choices contain key value pairs. In our hackathon the only used default column feature is attachments. All other required ones we defined manually. In a real world scenario you would only define missing columns on top of the existing ones. All relevant columns except attachments have the prefx `CST` to quickly identify them:
+Conceptually all tables below behave like tables. But from PowerPlatform perspective we have technically two kinds of tables: **(1) custom tables** and **(2) choice**. Choice is like an enum and from a tabular perspective they have just two columns to accomodate key value pairs. They are the preferred option when you have a rather fixed set of values.
+
+The table below gives a short overview of the columns for the custom tables. In our hackathon the only used default column feature is attachments. All other required ones we defined manually. In a real world scenario you would only define missing columns on top of the existing ones. All relevant columns except attachments have the prefx `CST` to quickly identify them:
 
 |Table name          |Column name           |Purpose                                     |
 |--------------------|----------------------|--------------------------------------------|
