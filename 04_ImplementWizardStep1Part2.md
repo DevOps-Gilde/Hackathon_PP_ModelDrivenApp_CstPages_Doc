@@ -54,7 +54,7 @@ Set the fields as shown in the table:
 
 The expression for `Filter rows` we use for filtering the rows by the importing username that was specified in the form. The required expression is `hackpp_sceapp_cst_username eq '<value from form>'`. 
 `hackpp_sceapp_cst_username` is one of the various internal column names of the `CST_USERNAME` in the targeted table. 
-To populate `<value from form>` we have to generate a new parameter. The screenshot below shows how that is done. Click into the field with the above expression. If you don't see an extra window click the small link under the field named `Add dynamic content`. Select in the tab `Dynamic Content` the expression `Ask in PowerApps`. The screenshot shows the reaction of the designer after `Ask in PowerApps` was picked.
+To populate `<value from form>` we have to generate a new parameter. The screenshot below shows how that is done. Click into the field with the above expression. If you don't see an extra window click the small link under the field named `Add dynamic content`. Select in the tab `Dynamic Content` the entry `Ask in PowerApps`. The screenshot shows the reaction of the designer after `Ask in PowerApps` was picked.
 
 **NOTE: The generated expression must be inside the single quotes.**
 <br><img src="./images/flow_new_list_rows_add_para.png" /><br>
@@ -69,7 +69,7 @@ As a first value we will set the value for CST_IMP_USERNAMES. Power Platform exp
 **NOTE: The generated expression must be inside the parenthesis.**
 <br><img src="./images/flow_new_set_imp_user.png" /><br>
 
-When you selected the value you will notice a change, Dataverse embeds the new `Add new row` task in a loop since the previous command might return multiple rows. The screenshot below shows this new situation:
+When you selected the value you will notice a change: Dataverse embeds the new `Add new row` task in a loop since the previous command might return multiple rows. The screenshot below shows this new situation:
 <br><img src="./images/flow_new_apply_each.png" /><br>
 
 Let's try to understand `Apply to each` better. The major input is the output from the previous step displayed as ` value x`. To understand it you have to be aware of the JSON structure that is returned by `List rows`. Below you find a sample:

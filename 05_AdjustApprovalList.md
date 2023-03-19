@@ -35,11 +35,11 @@ Relevant for applying the tabular layout is not a built-in property in the right
 
 * Adding additional controls
 
-  Just add them as you did it before. Only make sure that the container control is selected. You can achieve this by clicking near the borders of the first item in the list.
+  We will reuse the existing two labels. So we just need additional labes to cover the remaining columns. Just add them as you did it before. Only make sure that the container control is selected. You can achieve this by clicking near the borders of the first item in the list.
 
 * Adjust existing controls
 
-  The standard layout is achieved by just placing the labels per column horizontally. Add new labels beyond the already existing ones to cover all columns in the same way as you added the button and te form. To achieve a tabular layout just drag the labels side by side. The screenshot below illustrates this by the imports.
+  The standard layout is achieved by just placing the labels per column horizontally. To achieve a tabular layout just drag the labels side by side. The screenshot below illustrates this.
   <br><img src="./images/appr_list_blueprint_ctrls.png" /><br>
 
   The most important setting per label is the `Text` property. Normally you have static text but this time we have to reference the column to be displayed. The required expression is `ThisItem.<name of table column>`. `ThisRecord` refers to the current record displayed later. The screenshot below shows an example:
