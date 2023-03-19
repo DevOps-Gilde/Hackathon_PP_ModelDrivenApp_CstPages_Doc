@@ -64,7 +64,7 @@ When you hover over the generated expression you see the name of the expected pa
 In the next step we will add a new row that represents our import header. We will use the `Add a new row` action within dataverse. Click `New Step` and enter `dataverse` in the search field. Pick the action `Add a new row`. The screenshot below shows the action. Select `IMP_CO2_CONS_RAW_HDR` as table name. As a result the table specific columns will be shown as illustrated in the screenshot below. Mandatory fields are marked with an asteriks. The generated UI is not correct reagrding `CST_IMP_CODE`. Yes as logical primary key it is mandatory. However due to the auto generated definition no value is required. We will provide a special dummy to satisfy the constraints:
 <br><img src="./images/flow_new_add_row.png" /><br>
 
-As a first value we will set the value for CST_IMP_USERNAMES. Power Platform expects an expression `<EntitySetName>(<GUID of record>)>`. The entity set name in our case is `hackpp_sceapp_imp_users` and `<GUID of record>` is the result of the previous action. Enter `hackpp_sceapp_imp_users()` and position the mouse cursor into the parentheses. Power Platform will assist you in completing the dynamic expression needed here. Pick `IMP_USER` from the displayed options in the tab `Dynamic content` as shown in the screenshot.
+As a first value we will set the value for CST_IMP_USERNAMES. Power Platform expects an expression `<EntitySetName>(<GUID of record>)>`. The entity set name in our case is `hackpp_sceapp_imp_users` and `<GUID of record>` is the result of the previous action. Enter `hackpp_sceapp_imp_users()` and position the mouse cursor into the parentheses. Power Platform will assist you in completing the dynamic content needed here. Pick `IMP_USER` from the displayed options in the tab `Dynamic content` as shown in the screenshot.
 
 **NOTE: The generated expression must be inside the parenthesis.**
 <br><img src="./images/flow_new_set_imp_user.png" /><br>
@@ -99,7 +99,7 @@ Follow the instructions in the table for the remaining fields. Enter the paramet
 | CST_IMP_DESC   | Use the way for adding a parameter as before. If you don't see the expression `Ask in PwerApps` under `PowerApp` you have to click on `See more`. |
 | CST_IMP_STATE  | Select Pending from the dropdown             |
 
-When you have filled out everything your action should like the following:
+When you have filled out everything your action should look like the following:
 <br><img src="./images/flow_new_row_final.png" /><br>
 
 ### Return the import code
@@ -119,7 +119,10 @@ Click the button `Add an action` inside the loop that is highlighted below. Add 
 Select the name you specified in `Initialize variable` from the dropdown in the field `Name`. Select the `CST_IMP_CODE` as value as shown below:
 <br><img src="./images/flow_new_set_var_val.png" /><br>
 
-Now we are ready to return the value. Click on the button `+ New step` to add a new action AT TH END OUTSIDE THE LOOP. Enter `PowerApp` as category and add a new action `Respond to a PowerApp or flow`. In the beginning the task is empty and we have to create a return parameter by clicking on `Add an output`. Click on the button and select `Text`. You will then get the fields for a new named output as shown below:
+Now we are ready to return the value. Click on the button `+ New step` to add a new action AT TH END OUTSIDE THE LOOP. Enter `PowerApp` as category and add a new action `Respond to a PowerApp or flow`. In the beginning the task is empty as shown below:
+<br><img src="./images/flow_new_output_step.png" /><br>
+
+Create a return parameter by clicking on `Add an output`. Chose `Text` as type. Afterwards you will see now a new entry that we have to configure as shown below:
 <br><img src="./images/flow_new_output_def_ret.png" /><br>
 
 Enter `returnedval` as name for the parameter. Click into the value field and let Power Platform assist you as shown in the screenshot below. The column with the primary key is named `CST_IMP_CODE`:
