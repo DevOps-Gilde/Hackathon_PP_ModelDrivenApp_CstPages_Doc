@@ -27,11 +27,10 @@ The learning goals are as stated before:
 
 ## Layouting Form and Button
 
-Navigate to the page for approvals named `pgApprOverview` within the app as shown in the screenshot below and click the edit icon:
+Navigate to the page for approvals named `PgManageImps` within the app as shown in the screenshot below and click the edit icon:
 <br><img src="./images/wiz_layout_page_import.png" /><br>
 
 As you know it from other environments our application shall support responsive layout so we will avoid pixel based statements. A key are containers that allow to layout their child components based on relative a measurement such as a percentage. Container layout their children either horizontally or vertically and can be nested. We already implemented the first container for you that uses the expressions `Parent.Width` and `Parent.Height` to occupy all space of the screen. The screenshot below shows the starting point. As you can see there is a gap in the sense that the main content is missing:
-
 <br><img src="./images/wiz_layout_start_point.png" /><br>
 
 Let's now implement the content for which we need an additional container (to block the bulk of the screen) and the child controls (EditForm and Button). We will start with the vertical container for the content. Adding controls always follows the same pattern which is as follows:
@@ -65,20 +64,16 @@ Select the newly added container so that it is going to become the new parent fo
 
 ## Configure added Form and Button
 
-First we have to wire our form with the underlying `IMP_CO2_CONS_RAW_HDR` table. Go to the data source property and select the table.
-
+First we have to wire our form with the underlying `IMP_CO2_CONS_RAW_HDR` table. Go to the `Data source` property and select the table.
 <br><img src="./images/wiz_layout_ctrls_frm_ds.png" /><br>
 
 Next we have to pick all relevant columns. Click on `Edit fields`. You see then the already selected columns.
-
 <br><img src="./images/wiz_layout_ctrls_frm_fields.png" /><br>
 
 Remove the column `Created On` by hovering over the entry. In the appearing context menu (...) on the right hand side you find an option to delete it. Select now all missing columns that start with `CST_IMP` by clicking on `+ Add field` as shown below:
-
 <br><img src="./images/wiz_layout_ctrls_frm_sel_cols.png" /><br>
 
 As a reaction you will now see additional input cards. Each card covers one column. Each card consists of multiple controls. We will need them later. Therefore naming and a better understanding of the control structure is important. The screenshot belows shows the description card:
-
 <br><img src="./images/wiz_layout_ctrls_frm_desc_card.png" /><br>
 
 The important take aways:
@@ -93,12 +88,11 @@ Rename the controls listed below as stated since we need them later:
 |Year               |TextInput                         |                            WizardStepImpHdrMainViewImportYearTextBox|
 |Description        |TextBox                           |WizardStepImpHdrMainViewImportDescTextBox|
 
-Creating or editing is defined by the property mode. The new and the edit scenario require different values. That is the first case where we need a formula to determine the correct value. Two ways exist:
+Creating or editing is defined by the property `Default mode`. The new and the edit scenario require different values. That is the first case where we need a formula to determine the correct value. Two ways exist:
 * Entering it in the properties on the right-hand side
 * Formular bar
 
   The screen below shows it:
-
   <br><img src="./images/wiz_layout_ctrls_frm_mode_fx.png" /><br>
 
   To enter any formular for a given property do the following:
@@ -107,20 +101,19 @@ Creating or editing is defined by the property mode. The new and the edit scenar
 
   The expression in our case is a simple if expression: `If(locImpMode = "Edit", FormMode.Edit, FormMode.New)`. `locImpMode` is the local variable that contains the mode. The setting of the value for `locImpMode` we already implemented for you when you click the buttons on the overview page. 
 
-For the mode `New` we have completed all major fields. Edit requires additional information about the record to edit. The control provides the `Item` property for that purpose (In the mode New the value is ignored). Set the expression as follows: `LookUp(IMP_CO2_CONS_RAW_HDR, CST_IMP_CODE = locImpCode)`. Explanations:
+For the mode `New` we have completed all major fields. Edit requires additional information about the record to edit. The control provides the `Item` property on the tab `Advanced` for that purpose (In the mode New the value is ignored). Set the expression as follows: `LookUp(IMP_CO2_CONS_RAW_HDR, CST_IMP_CODE = locImpCode)`. Explanations:
 * `IMP_CO2_CONS_RAW_HDR` denotes the table we are looking at
 * `LookUp` retrieves the record that fulfills the condition
 * `CST_IMP_CODE = locImpCode`represents the condition that filters the currently edited record
 
 Many fields within the cards are configured with defaults such as the card for the import code. With the standard configuration the field is still displayed as editable but you cannot jump into it. To avoid confusion we want to disable it for creating a new record. It also a good example to illustrate that you have to sometimes unlock properties before being able to edit them. To unlock them click on the lock icon:
-
 <br><img src="./images/wiz_layout_ctrls_frm_enabled_lock.png" /><br>
 
-Unlock the property `DisplayMode` for CST_IMP_CODE, CST_IMP_STATE and CST_IMP_USER. The required expression is `If(locImpMode = "New", DisplayMode.Disabled, Parent.DisplayMode)`. 
+Unlock the property `DisplayMode` on the tab `Properties` for CST_IMP_CODE, CST_IMP_STATE and CST_IMP_TS. The required expression is `If(locImpMode = "New", DisplayMode.Disabled, Parent.DisplayMode)`. 
 
-As a last step we set the relative height so that the form occupies minimum space. Set `Fill portions` to `0.2`.
+As a last step we set the relative height so that the form occupies minimum space. Set `Fill portions` on the tab `Properties` to `0.2`.
 
-We are finished and can switch over to the button. Change the `Text` property to `Submit`. The property `OnSelect` contains the action when the button is pressed. For now we will just display an information that proofs we can access the values in the form. Enter the following expression in the `OnSelect` property: `Notify("Changes submitted for import " & WizardStepImpHdrMainViewImportDescTextBox.Value & " submitted.", NotificationType.Information)`. As you probably have alraedy guessed `&` is the operator for concatenating strings.
+We are finished and can switch over to the button. Change the `Text` property on the tab `Properties` to `Submit`. The property `OnSelect` contains the action when the button is pressed. For now we will just display an information that proofs we can access the values in the form. Enter the following expression in the `OnSelect` property on the tab `Advanced`: `Notify("Changes submitted for import " & WizardStepImpHdrMainViewImportDescTextBox.Value & " submitted.", NotificationType.Information)`. As you probably have alraedy guessed `&` is the operator for concatenating strings.
 
 ## Navigation
 
@@ -164,7 +157,7 @@ For testing you have the following options:
 For our case ad-hoc testing is sufficient. Start from the import overview page to ensure a correct screen context. Press the play button after selecting the overview screen to start the tests. Thanks to your changes the following scenarios should now work:
 |Test                                             |Expected Result                          |
 |-------------------------------------------------|------------------------------------------|
-|Import Overview Page: Click on new import button |Fields on the form are empty. Clicking on the submit button should show an additional info message with the entered description.|
-|Import Overview Page: Select a single record and click on edit import button|Fields on the form are prefilled with the record you selected. Clicking on the submit button should show an additional info message with the entered description.|
+|Import Overview Screen: Click on new import button |Fields on the form are empty. Clicking on the submit button should show an additional info message with the entered description.|
+|Import Overview Screen: Filter down to a single record and click on the edit import button|Fields on the form are prefilled with the record you selected. Clicking on the submit button should show an additional info message with the entered description.|
 |Wizard first step: Click on next button          |Next screen is displayed                  |
 |Wizard first step: Click on home button          |Overview page is shown from where wizard was triggered (Correct display of list only when you run the app)|

@@ -19,10 +19,12 @@ The reason for the embedded flow is a limitation of the `SubmitForm` command whe
 
 ## Define Flow
 
-To create an embedded flow click on the power automate icon `>>` and then click `+ Add flow` as shown below:
+### Start the flow designer
+
+To create an embedded flow click on the power automate icon `>>` and then click `Create new flow` as shown below:
 <br><img src="./images/flow_new_trigger_create.png" /><br>
 
-Clicking on `Create from blank` takes you to the flow designer:
+Clicking on `+ Add flow` takes you to the flow designer:
 <br><img src="./images/flow_new_create.png" /><br>
 
 In the designer you normally just see the initial step. The second step in the screesnhot just serves as illustration for the scenarios that can hit you.
@@ -36,12 +38,12 @@ The following general rules apply:
 * To delete a step click on the three dots right to the header. There you find an entry for removal.
 * Saving the flow requires a name. Click on the text `Untitled` and enter your desired name. Afterwards press the save button.
 
-In the next step we have to get the internal ID of the record holding the importing user. We will use the `List Rows` action within dataverse for that. Click `New Step` and enter `dataverse` in the search field as shown below:
+### Implement flow logic
 
+In the next step we have to get the internal ID of the record holding the importing user. We will use the `List Rows` action within dataverse for that. Click `New Step` and enter `dataverse` in the search field as shown below:
 <br><img src="./images/flow_new_search_action.png" /><br>
 
 Pick the action `List rows`. The screenshot below shows the added action:
-
 <br><img src="./images/flow_new_list_rows.png" /><br>
 
 Set the fields as shown in the table:
@@ -57,10 +59,10 @@ To poulate `<value from form>` we have to generate a new parameter. The screensh
 
 When you hover over the generated expression you see the name of the expected parameter which is `Listrows_Filterrows` (Corresponds to `<name of action>_<name of field>`).
 
-In the next step we will add a new row that represents our import header. We will use the `Add a new row` action within dataverse. Click `New Step` and enter `dataverse` in the search field. Pick the action `List rows`. The screenshot below shows the action. Select `IMP_CO2_CONS_RAW_HDR` as table name. As a result the table specific columns will be shown as illustrated in the screenshot below. Mandatory fields are marked with an asteriks. The generated UI is not correct reagrding `CST_IMP_CODE`. Yes as logical primary key it is mandatory. However due to the auto generated definition no value is required. We will provide a special dummy to satisfy the constraints:
+In the next step we will add a new row that represents our import header. We will use the `Add a new row` action within dataverse. Click `New Step` and enter `dataverse` in the search field. Pick the action `Add a new row`. The screenshot below shows the action. Select `IMP_CO2_CONS_RAW_HDR` as table name. As a result the table specific columns will be shown as illustrated in the screenshot below. Mandatory fields are marked with an asteriks. The generated UI is not correct reagrding `CST_IMP_CODE`. Yes as logical primary key it is mandatory. However due to the auto generated definition no value is required. We will provide a special dummy to satisfy the constraints:
 <br><img src="./images/flow_new_add_row.png" /><br>
 
-As a first value we will set the value for CST_IMP_USERNAMES. Power Platform expects an expression `<EntitySetName>(<GUID of record>)>`. The entity set name in our case is `hackpp_sceapp_imp_users` and `<GUID of record>` is the result of the previous action. Enter `hackpp_sceapp_imp_users()` and position the mouse cursor into the parentheses. Power Platform will assist you in completing the dynamic expression needed here. Pick `IMP_USR` from the displayed options in the tab `Dynamic content` as shown in the screenshot.
+As a first value we will set the value for CST_IMP_USERNAMES. Power Platform expects an expression `<EntitySetName>(<GUID of record>)>`. The entity set name in our case is `hackpp_sceapp_imp_users` and `<GUID of record>` is the result of the previous action. Enter `hackpp_sceapp_imp_users()` and position the mouse cursor into the parentheses. Power Platform will assist you in completing the dynamic expression needed here. Pick `IMP_USER` from the displayed options in the tab `Dynamic content` as shown in the screenshot.
 <br><img src="./images/flow_new_set_imp_user.png" /><br>
 
 When you selected the value you will notice a change, Dataverse embeds the new `Add new row` task in a loop since the previous command might return multiple rows. The screenshot below shows this new situation:
@@ -80,46 +82,50 @@ Let's try to understand `Apply to each` better. The major input is the output fr
 	}]
 }
 ```
-The used path `body/value` is another word for navigating to the `value` property. As you can see in the JSON the property `value` is an array. The loop now cycles over each entry. We need the id which is shown as `IMP_USER x`. With the expression `items('Apply_to_each')?['hackpp_sceapp_imp_userid']` we pick the technical id we are interested in.
+The used path `body/value` is another word for navigating to the `value` property. As you can see in the JSON the property `value` is an array. The loop now cycles over each entry. Expand the `Add a new row` by clicking in the header. We need the id which is represented by `IMP_USER x`. Hoover with the mouse over the expression. The expression `items('Apply_to_each')?['hackpp_sceapp_imp_userid']` picks the technical id from the current array item.
 
-Expand the `Add new row` action again to set now the remaining fields. For setting `CST_IMP_TS` we use the built-in function `utcNow`. As you can see in the screenshot we are in the tab `Expression`. Enter it as formula in the bar as shown below:
+For setting `CST_IMP_TS` we use the built-in function `utcNow`. As you can see in the screenshot we are in the tab `Expression`. Enter it as formula in the bar as shown below:
 <br><img src="./images/flow_new_add_row_ts_utcnow.png" /><br>
 
-Follow the instructions in the table for the remaining fields:
+Follow the instructions in the table for the remaining fields. Enter the parameters for year and description exactly in that order. Otherwise the parameter order in the snippet for calling the flow won't be correct:
 |Field           |Value                                         |
 |----------------|----------------------------------------------|
 | CST_IMP_CODE   | Set the field to the special expression `null` as you did it for `utcNow`. Otherwise you get an error.     |
-| CST_IMP_YEAR   | Use the way for adding a parameter as before |
-| CST_IMP_DESC   | Use the way for adding a parameter as before |
+| CST_IMP_YEAR   | Use the way for adding a parameter as before. If you don't see the expression `Ask in PwerApps` under `PowerApp` you have to click on `See more`. |
+| CST_IMP_DESC   | Use the way for adding a parameter as before. If you don't see the expression `Ask in PwerApps` under `PowerApp` you have to click on `See more`. |
 | CST_IMP_STATE  | Select Pending from the dropdown             |
 
 When you have filled out everything your action should like the following:
-
 <br><img src="./images/flow_new_row_final.png" /><br>
 
-As a last step we now have to return the primary key of the newly created record. Enter `PowerApp` as category and add a new action `Respond to a PowerApp or flow`. In the beginning the task is empty and we have to create a return parameter by clicking on `Add an output`. Click on the button and select `Text`. You will then get the fields for a new named output as shown below:
+### Return the import code
 
+As a last step we now have to return the primary key of the newly created record. Just adding a return step by clicking on `Add an action` INSIDE THE LOOP unfortunately does not work. Trying that results in an error. Therefore we have to store the primary key in a variable. This requires two steps:
+* Defining & Initializing a variable
+* Assigning the value
+
+Insert a step before `List rows` by clicking on the plus icon. Enter as category `Variable` and pick the action `Initialize variable`. The screenshot below shows the resulting situation:
+<br><img src="./images/flow_new_define_var.png" /><br>
+
+Enter a name of your choice in the field `Name` and chose as Type `String`.
+
+Click the button `Add an action` inside the loop that is highlighted below. Add a new action to `Set variable`. The screenshot below shows the result:
+<br><img src="./images/flow_new_set_var.png" /><br>
+
+Select the name you specified in `Initialize variable` from the dropdown in the field `Name`. Select the `CST_IMP_CODE` as value as shown below:
+<br><img src="./images/flow_new_set_var_val.png" /><br>
+
+Now we are ready to return the value. Click on the button `+ New step` to add a new action AT TH END OUTSIDE THE LOOP. Enter `PowerApp` as category and add a new action `Respond to a PowerApp or flow`. In the beginning the task is empty and we have to create a return parameter by clicking on `Add an output`. Click on the button and select `Text`. You will then get the fields for a new named output as shown below:
 <br><img src="./images/flow_new_output_def_ret.png" /><br>
 
 Enter `returnedval` as name for the parameter. Click into the value field and let Power Platform assist you as shown in the screenshot below. The column with the primary key is named `CST_IMP_CODE`:
-
 <br><img src="./images/flow_new_output_val.png" /><br>
 
-Save your flow under the new name you want. Before you leave the designer note the name of the flow you have defined. You will need it in the next step.
+Save your flow under the new name you want. It will be automatically added to your app when you started the flow designer with `+ Add flow`.
 
 ## Wire Flow with Submit Button
 
-The following steps are necessary to add your flow:
-* Add the new flow to your application
-* Call your flow when Submit Button clicked
-
-**Regarding add flow)**
-
-Click on the power automate icon and click the button `Add flow`. Enter the name under which you saved the flow.
-
-**Cally our flow)**
-
-We will replace now the original content of the `OnSelect`property from the previous step. We plan for different ways to persist the changes. In the edit case we can use the standard `SubmitForm` to persist the changes. We just add a confirmation message for the user. For new we have run our flow and store returned value for later processing in a local variable. The user is also informed with an additional message. Enter the following formula in the property `OnSelect` that is doing all that:
+We replace now the `OnSelect`property from the previous step. We plan for different ways to persist the changes. In the edit case we can use the standard `SubmitForm` to persist the changes. We just add a confirmation message for the user. For new we have run our flow and store returned value for later processing in a local variable. The user is also informed with an additional message. Enter the following formula in the property `OnSelect` that is doing all that (You have insert your flow name):
 ```
 If(locImpMode = "New", 
    UpdateContext(
@@ -127,7 +133,7 @@ If(locImpMode = "New",
 	 locParaYear: WizardStepImpHdrMainViewImportYearTextBox.Text,
 	 locParaDesc: WizardStepImpHdrMainViewImportDescTextBox.Value});
    UpdateContext(
-	 {locNewImpCode: TestFlowInp.Run(locParaUserName, locParaYear, locParaDesc).returnedval });
+	 {locNewImpCode: <Name of your flow>.Run(locParaUserName, locParaYear, locParaDesc).returnedval });
    Notify("Import " & locNewImpCode & " has been created."), 
    SubmitForm(WizardStepImpHdrMainView);
    Notify("Import " & WizardStepImpHdrMainView.LastSubmit.CST_IMP_CODE & " has been updated."))
