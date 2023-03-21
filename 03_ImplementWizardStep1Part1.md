@@ -59,8 +59,8 @@ Select the newly added container so that it is going to become the new parent fo
 
 |Control   |Name Parent   |Name  |
 |---|---|---|
-|EditForm   |newy added `Container1`    |WizardStepImpHdrMainView   |
-|Button   |newy added `Container1`   |up to you  |
+|EditForm   |newly added `Container1`    |WizardStepImpHdrMainView   |
+|Button   |newly added `Container1`   |up to you  |
 
 ## Configure added Form and Button
 
@@ -77,7 +77,7 @@ As a reaction you will now see additional input cards. Each card covers one colu
 <br><img src="./images/wiz_layout_ctrls_frm_desc_card.png" /><br>
 
 The important take aways:
-* A card contains of multiple controls
+* A card contains multiple controls
 * Control holding the user input => here `DataCardValue3`
 * Other controls that contain other visual parts such as column label, asteriks etc.
 
