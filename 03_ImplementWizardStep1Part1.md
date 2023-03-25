@@ -6,26 +6,27 @@ You should now have completed the following things:
 
 Next you add the required controls for the first step of the wizard and wire them with the rest of the application.
 
-# 2. Implementation Task
+# 2. Goal
 
-## Introduction
-
-Each step of the wizard is implemented as a separate screen within the same custom page. In the default setup the ability to create multiple screens is disabled. The screenshot below shows the setting in case you want to create your own application:
+Each step of the wizard is implemented as a separate screen within the same custom page. In the default setup the ability to create multiple screens is disabled. We enabled this setting already for you. The screenshot below shows where the setting can be found:
 
 <br><img src="./images/wiz_layout_mul_scr_setUntitled.png" /><br>
 
-Focus of part 1 will be the main content of the first step of the wizard including the navigation as shown below:
+The screenshot below shows the starting point. As you can see the main content of the first header step is missing. Moreover no action is implemented when you click the home or next button.
+
+<br><img src="./images/wiz_layout_scope_tasks_start.png" /><br>
+
+The screenshot below shows the result if you have completed all implementation tasks.
 
 <br><img src="./images/wiz_layout_scope_tasks.png" /><br>
 
-After having completed everything the application will display an information message when you click the submit button.
+This includes
+* Form and Submit button
+* display an information message when you click the submit button
+* navigating to correct screen when you click next or home button
 
-The learning goals are as stated before:
-* Layouting controls
-* Working with the form control (New/ Edit Mode)
-* Expressions for navigation
-
-## Layouting Form and Button
+# 3. Implementation Tasks
+## Add controls for main content
 
 Navigate to the page for approvals named `PgManageImps` within the app as shown in the screenshot below and click the edit icon:
 <br><img src="./images/wiz_layout_page_import.png" /><br>
@@ -33,7 +34,7 @@ Navigate to the page for approvals named `PgManageImps` within the app as shown 
 As you know it from other environments our application shall support responsive layout so we will avoid pixel based statements. A key are containers that allow to layout their child components based on relative a measurement such as a percentage. Container layout their children either horizontally or vertically and can be nested. We already implemented the first container for you that uses the expressions `Parent.Width` and `Parent.Height` to occupy all space of the screen. The screenshot below shows the starting point. As you can see there is a gap in the sense that the main content is missing:
 <br><img src="./images/wiz_layout_start_point.png" /><br>
 
-Let's now implement the content for which we need an additional container (to block the bulk of the screen) and the child controls (EditForm and Button). We will start with the vertical container for the content. Adding controls always follows the same pattern which is as follows:
+To implement the content we need first an additional container. We it to group the form and the submit button. They are comparable to a `div`element in HTML. We will start with the vertical container for the content. Adding controls always follows the same pattern which is as follows:
 * Select the parent control `WizardStepImpHdrLayout` on the canvas or in the tree on the left-hand side
 * Add the control `Vertical container` from the list under `+Insert`
 
@@ -55,14 +56,11 @@ Let's now implement the content for which we need an additional container (to bl
 
   We won't need the container anymore later so the name is up to you.
 
-Select the newly added container so that it is going to become the new parent for insert. Insert the remaining controls in the same way and order. The form will be referenced later in code snippets. Therefore the name must be as stated below:
+Select the newly added container so that it is going to become the new parent for insert. Insert the remaining controls in the same way and order. 
 
-|Control   |Name Parent   |Name  |
-|---|---|---|
-|EditForm   |newly added `Container1`    |WizardStepImpHdrMainView   |
-|Button   |newly added `Container1`   |up to you  |
+The form will be referenced later in code snippets. Rename the newly added form to `WizardStepImpHdrMainView` to ensure the code snippets work. The newly added button won't be referenced so the name is up to you.
 
-## Configure added Form and Button
+## Configure added Form
 
 First we have to wire our form with the underlying `IMP_CO2_CONS_RAW_HDR` table. Go to the `Data source` property and select the table.
 <br><img src="./images/wiz_layout_ctrls_frm_ds.png" /><br>
@@ -81,8 +79,8 @@ The important take aways:
 * Control holding the user input => here `DataCardValue3`
 * Other controls that contain other visual parts such as column label, asteriks etc.
 
-Rename the controls listed below as stated since we need them later:
-|Card               |Technical Control Type| Name|
+Rename the controls **HOLDING THE USER INPUT** listed below as stated since we need them later:
+|Card               |Technical Control Type| Rename To|
 |-------------------|-----------------------------------|-----|
 |Importing user name|ComboBox                          | WizardStepImpHdrMainViewImportUserNameDropDown|
 |Year               |TextInput                         |                            WizardStepImpHdrMainViewImportYearTextBox|
@@ -99,21 +97,51 @@ Creating or editing is defined by the property `Default mode`. The new and the e
   * select the name of the property on the left-hand side (here DefaultMode)
   * set the expression on the right hand side after the Fx icon
 
-  The expression in our case is a simple if expression: `If(locImpMode = "Edit", FormMode.Edit, FormMode.New)`. `locImpMode` is the local variable that contains the mode. The setting of the value for `locImpMode` we already implemented for you when you click the buttons on the overview page. 
+  Overwrite the existing value with the following simple if expression: 
+  
+  `If(locImpMode = "Edit", FormMode.Edit, FormMode.New)`
+  
+  Explanations regarding the expression:
+  * `locImpMode` is the local variable that contains the mode.
+  * The setting of the value for `locImpMode` we already implemented for you when you click the buttons on the overview page. 
 
-For the mode `New` we have completed all major fields. Edit requires additional information about the record to edit. The control provides the `Item` property on the tab `Advanced` for that purpose (In the mode New the value is ignored). Set the expression as follows: `LookUp(IMP_CO2_CONS_RAW_HDR, CST_IMP_CODE = locImpCode)`. Explanations:
+For the mode `New` we have completed all major fields. Edit requires additional information about the record to edit. The control provides the `Item` property on the tab `Advanced` for that purpose (In the mode New the value is ignored). Set the expression as follows:
+```
+LookUp(
+  IMP_CO2_CONS_RAW_HDR, 
+  CST_IMP_CODE = locImpCode)
+```
+
+Explanations regarding the expression:
 * `IMP_CO2_CONS_RAW_HDR` denotes the table we are looking at
 * `LookUp` retrieves the record that fulfills the condition
-* `CST_IMP_CODE = locImpCode`represents the condition that filters the currently edited record
+* `CST_IMP_CODE = locImpCode` represents the condition that filters the currently edited record
 
 Many fields within the cards are configured with defaults such as the card for the import code. With the standard configuration the field is still displayed as editable but you cannot jump into it. To avoid confusion we want to disable it for creating a new record. It also a good example to illustrate that you have to sometimes unlock properties before being able to edit them. To unlock them click on the lock icon:
 <br><img src="./images/wiz_layout_ctrls_frm_enabled_lock.png" /><br>
 
-Unlock the property `DisplayMode` on the tab `Properties` for CST_IMP_CODE, CST_IMP_STATE and CST_IMP_TS. The required expression is `If(locImpMode = "New", DisplayMode.Disabled, Parent.DisplayMode)`. 
+Unlock the property `DisplayMode` on the tab `Properties` for the cards CST_IMP_CODE, CST_IMP_STATE and CST_IMP_TS. Overwrite the existing value with the following expression:
+`If(locImpMode = "New", DisplayMode.Disabled, Parent.DisplayMode)`
+
+Explanations regarding the expression:
+* `DisplayMode.Disabled` disables the card
+* `Parent.DisplayMode` enforces the default behavior
 
 As a last step we set the relative height so that the form occupies minimum space. Set `Fill portions` on the tab `Properties` to `0.2`.
 
-We are finished and can switch over to the button. Change the `Text` property on the tab `Properties` to `Submit`. The property `OnSelect` contains the action when the button is pressed. For now we will just display an information that proofs we can access the values in the form. Enter the following expression in the `OnSelect` property on the tab `Advanced`: `Notify("Changes submitted for import " & WizardStepImpHdrMainViewImportDescTextBox.Value & " submitted.", NotificationType.Information)`. As you probably have alraedy guessed `&` is the operator for concatenating strings.
+## Configure added Submit Button
+
+We are finished and can switch over to the button. Change the `Text` property on the tab `Properties` to `Submit`. The property `OnSelect` contains the action when the button is pressed. For now we will just display an information that proofs we can access the values in the form. Enter the following expression in the `OnSelect` property on the tab `Advanced`:
+
+```
+Notify(
+  "Changes submitted for import " & WizardStepImpHdrMainViewImportDescTextBox.Value & " submitted.", 
+  NotificationType.Information)
+```
+
+Explanations regarding the expression:
+* `Notify` displays a message of the given type
+* `&` is the operator for concatenating strings
 
 ## Navigation
 
@@ -124,13 +152,27 @@ As you have already seen we work with screens to separate things. They are linke
 `Next` means we just refer to the screen representing the second step in our wizard. In addition to that we have to pass required context information. This context information includes:
 * The primary key of the newly created/ edited record
 * The import state of the newly created/ edited record
-The `Navigate` command allows to jump to the designated screen and to pass parameters. Set the `OnSelect` property of the button to `Navigate(WizardStepUploadData, ScreenTransition.None, { locImpState: locImpState, locImpCode: locImpCode})`. `{}` is an arbitrary json structure that we use to pass the information. `WizardStepUploadData` is the name of new screen and we just pass the current values of the local variables.
+
+The `Navigate` command allows to jump to the designated screen and to pass parameters. Set the `OnSelect` property of the button to the following expression:
+
+```
+Navigate(
+  WizardStepUploadData, 
+  ScreenTransition.None, 
+  { 
+    locImpState: locImpState, 
+    locImpCode: locImpCode})
+```
+
+Explanations regarding the expression:
+* `{}` is an arbitrary json structure that we use to pass the information
+* `WizardStepUploadData` is the name of new screen and we just pass the current values of the local variables.
 
 The `Home` button shall reference the entry page for the importer. Passing any parameters is not required. Therefore just set the `OnSelect` of the button to `Navigate(OvrImports, ScreenTransition.None, {})`. Local variables will be correctly adjusted because in the overview page because we implemented the `OnVisible` property of the overview screen.
   
-# 3. Testing changes
+# 4. Testing changes
 
-For testing you have the following options:
+For testing you have the following options. For our case quicktests are sufficient. The second option is only given as information:
 * Quicktests
 
   Ad hoc test of changes is quite easy trough the `Play` button (Triangle icon) that is provided by the web portal as shown by the first screenshot. The current screen selected in the tree view is assumed as screen under test. 
@@ -153,8 +195,8 @@ For testing you have the following options:
 * Running application
 
   In rare edge cases this is the last feedback due to observed problems in the Quicktests environment. 
-   
-For our case ad-hoc testing is sufficient. Start from the import overview page to ensure a correct screen context. Press the play button after selecting the overview screen to start the tests. Thanks to your changes the following scenarios should now work:
+
+Press the play button after selecting the import overview screen to start the quicktests. Thanks to your changes the following scenarios should now work:
 |Test                                             |Expected Result                          |
 |-------------------------------------------------|------------------------------------------|
 |Import Overview Screen: Click on new import button |Fields on the form are empty. Clicking on the submit button should show an additional info message with the entered description.|
