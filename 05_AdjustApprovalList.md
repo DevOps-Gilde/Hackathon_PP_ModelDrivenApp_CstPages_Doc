@@ -8,9 +8,7 @@ You should now have completed the following things:
 
 Next you will apply the extended layout of the import overview to tje approval page.
 
-# 2. Implementation Task
-
-## Introduction
+# 2. Goal
 
 Custom pages come with a gallery control that allows you to display lists. The standard layout is as shown below. You have flexibility to change the layout per entry but standard functionality such as filtering per column needs to be added manually.
 <br><img src="./images/appr_list_def_layout.png" /><br>
@@ -19,6 +17,8 @@ The final goal is the approach we already implemented for showing the existing i
 <br><img src="./images/appr_list_def_goal.png" /><br>
 
 As you can see we have now a tabular list layout and an extra header that allows us to sort the list according to a certain column. The column after we sort is indicated by different background color in the header.
+
+# 3. Implementation Task
 
 ## Apply tabular layout
 
@@ -129,7 +129,7 @@ UpdateContext(
 )
 ```
 
-# 3. Testing changes
+# 4. Testing changes
 
 Thanks to your changes the following scenarios should now work:
 |Test                                             |Expected Result                          |
