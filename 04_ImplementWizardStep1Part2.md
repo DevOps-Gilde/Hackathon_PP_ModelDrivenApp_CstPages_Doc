@@ -125,7 +125,7 @@ Now we are ready to return the value. Click on the button `+ New step` to add a 
 Create a return parameter by clicking on `Add an output`. Chose `Text` as type. Afterwards you will see now a new entry that we have to configure as shown below:
 <br><img src="./images/flow_new_output_def_ret.png" /><br>
 
-Enter `returnedval` as name for the parameter. Click into the value field and let Power Platform assist you as shown in the screenshot below. The column with the primary key is named `CST_IMP_CODE`:
+Enter `returnedval` as name for the parameter. Click into the value field and let Power Platform assist you as shown in the screenshot below. You have to pick the variable name from the dynamic content tab you defined (In the screenshot below the variable was named `TempVar`). With that we have returned the primary key of the newly created import header row:
 <br><img src="./images/flow_new_output_val.png" /><br>
 
 Save your flow under the new name you want. It will be automatically added to your app when you started the flow designer with `+ Add flow`.
