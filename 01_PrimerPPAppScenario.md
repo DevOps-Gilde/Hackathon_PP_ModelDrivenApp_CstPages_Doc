@@ -46,7 +46,7 @@ The central element for storing data are tables. A table is just another entity 
 ## Model-driven-Apps
 
 Model driven apps are a special application type within power apps. Others are as stated previously out of scope. Model driven apps consist of a number of pages. Each page can use one of the three technologies which greatly differ from the developer experience:
-1. Based on dataverse tables
+1. Based on dataverse tables - [youtube video](https://youtu.be/LIC8DFW8fOE)
 2. Custom Pages (Our focus)
 3. Dashboards
 These three options are also reflected by the UI when you add a page:
