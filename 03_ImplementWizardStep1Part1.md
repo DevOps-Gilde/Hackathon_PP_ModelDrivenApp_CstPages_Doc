@@ -44,6 +44,7 @@ To implement the content we need first an additional container. We it to group t
 
   Click on the context menu (...) of the container control in the tree view. There you find the option `Move up` to move it as shown below:
   <br><img src="./images/wiz_layout_reorder.png" /><br>
+  You can also use `Ctrl+]` and `Ctrl+[` on keyboard layouts that don't need ALT for the brackets. [Other shortcuts can be found here](https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/keyboard-shortcuts)
 
 * Adjust properties
 
@@ -59,6 +60,25 @@ To implement the content we need first an additional container. We it to group t
 Select the newly added container so that it is going to become the new parent for insert. Insert the remaining controls in the same way and order. 
 
 The form will be referenced later in code snippets. Rename the newly added form to `WizardStepImpHdrMainView` to ensure the code snippets work. The newly added button won't be referenced so the name is up to you.
+
+## Understanding Dataverse
+
+Before we work with the Form you should make yourself familiar with Dataverse.
+Open the Data Menu on the left side and click on the `...` next to the `IMP_CO2_CONS_RAW_HDR` table to go to the minimalistic `Edit data` view. 
+<br><img src="./images/wiz_layout_open_dataverse.png" /><br>
+
+Here you can expand your view by clicking on `+24 more` and adding the column `CST_IMP_USERNAME`.
+You can view each column settings by clicking on the titles and on `Edit column`, but as you can see the managed Table prevents you from editing the entries under CST_IMP_CODE and Created On columns, but you could edit the field under the column `CST_IMP_USERNAME`. In this case it is not working though, because it is no text field, but a lookup field. You can only select entries from a different table. Currently there is no entry inside to select and we are going to change that.
+
+Open a new browser tab at [https://make.powerapps.com/](https://make.powerapps.com/) and go to `Tables`, filter `All` and click on `IMP_USER`.
+<br><img src="./images/wiz_layout_open_usertable_dataverse.png" /><br>
+
+This opens the bigger Table view where you can also inspect the Schema of the columns for their important schema and logical name and much more. At the bottom you see the column `CST_USERNAME` which is not the primary key of the entry, but the user-friendly "primary name column". To fill this entry simply write any text under it. Other fields will automatically set default values like the current date in the other column.
+<br><img src="./images/wiz_layout_edit_usertable_dataverse.png" /><br>
+
+After doing so you can go back to the prior `IMP_CO2_CONS_RAW_HDR` table and under the lookup column `CST_IMP_USERNAME` the option for your new username should be selectable.
+
+You do not need to save this change and can close the view by discarding all changes.
 
 ## Configure added Form
 
@@ -96,6 +116,8 @@ Creating or editing is defined by the property `Default mode`. The new and the e
   To enter any formular for a given property do the following:
   * select the name of the property on the left-hand side (here DefaultMode)
   * set the expression on the right hand side after the Fx icon
+
+  You can drag the bottom formular bar border downwards or click the arrow on the right side of it to expand it.
 
   Overwrite the existing value with the following simple if expression: 
   

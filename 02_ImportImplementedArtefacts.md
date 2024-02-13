@@ -1,6 +1,6 @@
 # 1. Introduction to Import Implemented Artefacts
 
-Due to time we cannot create the data model step by step nor can we implement the complete application. We will use **solutions** instead as transport mechanism to deploy a fully implemented database model and the partially implemented application as starting point. This approach can be used for any artefact that has been created within PowerPlatform.  Essentially solutions boil down to a Zip file that contains the artefacts in an internal Microsoft format that you should always treat as black box.
+Due to time we cannot create the data model step by step nor can we implement the complete application. We will use **solutions** instead as transport mechanism to deploy a fully implemented database model and the partially implemented application as starting point. This approach can be used for any artefact that has been created within PowerPlatform. Essentially solutions boil down to a Zip file that contains the artefacts in an internal Microsoft format that you should always treat as black box. To import a solution you need all of its dependencies. Those are either all inside one solution file or split into multiple solutions files with a specific order. Its important to include newly added tables, flows and other dependencys into your solution before you export them later, but this is not needed for now.
 
 A solution can either be `managed`or `unmanaged` Both options differ regarding the possibility to edit the artefacts definition and their lifecycle. Only the `unmanaged` solution gives you the possibility to edit the imported artefacts. Artefacts inside the solution are not automatically removed, when you remove the solution. A `managed` solution doesn't allow editing and all containing artefacts are removed with the solution. Therefore `managed` is intended for a production deployment scenario whereas `unmanaged` for a development scenarios.
 
@@ -13,6 +13,8 @@ When performing an import you have to distinguish two scenarios:
 * Importing fully implemented application => only if you want to see the fully implemented code
 
 # 2. Import Implemented Artefacts
+
+Since our solution is depending on our Data Model you must first import the Tables before you can import the model driven app.
 
 # Data Model
 

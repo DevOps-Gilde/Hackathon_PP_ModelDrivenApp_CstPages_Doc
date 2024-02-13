@@ -47,13 +47,15 @@ The central element for storing data are tables. A table is just another entity 
 
 Model driven apps are a special application type within power apps. Others are as stated previously out of scope. Model driven apps consist of a number of pages. Each page can use one of the three technologies which greatly differ from the developer experience:
 1. Based on dataverse tables - [youtube video](https://youtu.be/LIC8DFW8fOE)
-2. Custom Pages (Our focus)
+2. Custom Pages / canvas (Our focus)
 3. Dashboards
-These three options are also reflected by the UI when you add a page:
+4. Web resource
+5. URL
+These options are also reflected by the UI when you add a page:
 
 <br><img src="./images/intro_apps_page_types.png" /><br>
 
-Custom pages can give you a citizen developer like experience. in that option you define the UI separatly on top of the dataverse tables in contrast to the dataverse table option. In the dataverse table option you define the UI for your tables within dataverse by forms. Therefore custom pages are much closer architecture principles such as separation of concerns.
+This Hackathonis based on a Model-driven App, but we focus mainly on Custom pages. They can give you a citizen developer like experience. in that option you define the UI separatly on top of the dataverse tables in contrast to the dataverse table option. In the dataverse table option you define the UI for your tables within dataverse by forms. Therefore custom pages are much closer architecture principles such as separation of concerns.
 
 The next major design decision within custom pages is using multiple screens within the same custom page or multiple custom pages. According to our experience from that hackathon custom pages come with serious limitations regarding communication with other pages:
 * The `Navigate()` command only allows to pass a record to the called page
@@ -96,7 +98,7 @@ Saving is also a two step process if changes shall take effect outside your curr
 
 ## Power Automate
 
-Power automate is the workhorse to implement your business logic. It propagates a workflow like programming style that boils down to a graph. The trigger is the starting point, actions are represented by boxes and the arrows between the boxes determine what comes next. Access to data sources or third party systems is provided by connectors that are used by the actions under the hood. The picture below shows a simple example of a few sequential steps:
+Power automate is the workhorse to implement your business logic. It propagates a workflow like programming style that boils down to a graph. The trigger is the starting point, actions are represented by boxes and the arrows between the boxes determine what comes next. These triggers can be manual, scheduled or automated.Access to data sources or third party systems is provided by connectors that are used by the actions under the hood. The picture below shows a simple example of a few sequential steps:
 
 <br><img src="./images/intro_flows_example.png" /><br>
 
@@ -106,10 +108,14 @@ Comments regarding the picture:
 * A box corresponds to a step within the flow performing a certain action
 
 There are various types of flows but the major distinction for us is the following:
-1. Stand alone flow that is defined in Power Automate
+1. Stand alone flow (with a new UI Design) that is defined in Power Automate
 2. Flow that is embedded in a Power App
 
    We will use the second option since option one would requires additional licenses. Embedded flows can only be called from Power Apps.
+
+## Templates
+
+Even though its recommendet to create a new project from scratch, especially for going into production, Microsoft does offer simple, pre-created examples named Templates to quickstart into Power Apps or Power Automate. They are easy to get into and edit, but most usecases are more advanced. You generally expand excisting solutions with new functionallity just like in this Hackathon.
 
 ## Solutions
 
