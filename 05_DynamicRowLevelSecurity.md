@@ -97,7 +97,9 @@ For PrincipalAccess the formular expects you to input valid JSON code, which you
 
 1. Fill the value of systemuserid with the expression `triggerOutputs()?['body']?['RunAsSystemUserId']`. The questionmarks return null instead of error when its element could not be found. With this expression we input the RunAsSystemUserId from the body from the Output of our starting trigger.
 2. Replace the @ with a variable of @. The @ is an excape character and you can row 2 @@ to fix it temporarily, but the best and permanent solution is to insert a variable containing `@`:
+  
   a. Insert a new Step above the `Perform an unbound action` by clicking on the `+` on the arrow and selecting `Add an action`. Choose `Initialize variable` as action. Name it `At` with the type of `String` and the value `@`.
+  
   b. Replace the @ in PrincipalAccess with the Variable.
 
 After all steps are done the flow should look like this and you can save it without an error.
