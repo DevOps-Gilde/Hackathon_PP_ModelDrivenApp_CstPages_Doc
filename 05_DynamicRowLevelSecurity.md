@@ -100,7 +100,7 @@ For PrincipalAccess the formular expects you to input valid JSON code, which you
   
     - Insert a new Step above the `Perform an unbound action` by clicking on the `+` on the arrow and selecting `Add an action`. Choose `Initialize variable` as action. Name it `At` with the type of `String` and the value `@`.
   
-    - Replace the @ in PrincipalAccess with the Variable.
+    - Replace the @ in PrincipalAccess with the variable.
 
 After all steps are done the flow should look like this and you can save it without an error.
 <br><img src="./images/flow_unbound_grandaccess.png" /><br>
@@ -117,7 +117,7 @@ To remove our user from the owner column you must specify a different one. Since
 8. For Row ID input the dynamic content of `IMP_CO2_CONS_RAW_HDR`
 9. For Owner (Owners) insert `/systemusers()` with the expression `items('Apply_to_each')?['systemuserid']?[1]` inside the parenthesis.
 
-* Notice that the Owner input needs the pluralised logical name of the table user with a leading `/` and that you select the second element of systemuserid inside the output of List Rows.
+* Notice that the Owner input needs the pluralised logical name of the table `user` with a leading `/` and that you select the second element of systemuserid from the output of List Rows.
 <br><img src="./images/flow_update_row_owner.png" /><br>
 
 
