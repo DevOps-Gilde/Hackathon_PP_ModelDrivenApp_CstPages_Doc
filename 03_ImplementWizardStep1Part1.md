@@ -31,6 +31,14 @@ This includes
 Navigate to the page for approvals named `PgManageImps` within the app as shown in the screenshot below and click the edit icon:
 <br><img src="./images/wiz_layout_page_import.png" /><br>
 
+You will notice that this page is again split into multiple screens on the left side, which can fill the whole or only parts of the page:
+- OvrImports
+- WizardStepImpHeader
+- WizardStepUploadData
+- WizardStepAppr
+
+Click through them to see the whole page changing. We can use later use `Navigate()` Buttons to travel between them with a selected amount of local variables instead of using global ones. For now we will focus on WizardStepImpHeader.
+
 As you know it from other environments our application shall support responsive layout so we will avoid pixel based statements. A key are containers that allow to layout their child components based on relative a measurement such as a percentage. Container layout their children either horizontally or vertically and can be nested. We already implemented the first container for you that uses the expressions `Parent.Width` and `Parent.Height` to occupy all space of the screen. The screenshot below shows the starting point. As you can see there is a gap in the sense that the main content is missing:
 <br><img src="./images/wiz_layout_start_point.png" /><br>
 
@@ -149,6 +157,11 @@ Explanations regarding the expression:
 * `DisplayMode.Disabled` disables the card
 * `Parent.DisplayMode` enforces the default behavior
 
+Furthermore we want to fill the description with additional calculated data which could even can be a new variable.
+Select the Card `WizardStepImpHdrMainViewImportDesc` and replace the `default` propety with `myDescription`.
+On the OnSelect of Submit we add: 
+`UpdateContext({myDescription: WizardStepImpHdrMainViewImportDescTextBox.Value & " This element needs a checkup on: " & Text( DateAdd( Now(), 7 ), "dd-mm-yyyy at hh:mm" )});`
+
 As a last step we set the relative height so that the form occupies minimum space. Set `Fill portions` on the tab `Properties` to `0.2`.
 
 ## Configure added Submit Button
@@ -175,7 +188,7 @@ As you have already seen we work with screens to separate things. They are linke
 * The primary key of the newly created/ edited record
 * The import state of the newly created/ edited record
 
-The `Navigate` command allows to jump to the designated screen and to pass parameters. Set the `OnSelect` property of the button to the following expression:
+The `Navigate` command allows to jump to the designated screen and to pass local parameters. This is important as we don't want to use global variables! Set the `OnSelect` property of the button to the following expression:
 
 ```
 Navigate(

@@ -106,7 +106,7 @@ After all steps are done the flow should look like this and you can save it with
 <br><img src="./images/flow_unbound_grandaccess.png" /><br>
 
 
-To remove our user from the owner column you must specify a different one. Since you can't create a new one we select a random one that exist for technical reasons:
+To remove our user from the owner column you must specify a different one:
 1. Add a new step
 2. Add the action `List rows` from Dataverse
 3. Select the Table name: `Users`
@@ -115,10 +115,11 @@ To remove our user from the owner column you must specify a different one. Since
 6. Add the action `Update a row` from Dataverse
 7. Select Table name `IMP_CO2_CONS_RAW_HDR`
 8. For Row ID input the dynamic content of `IMP_CO2_CONS_RAW_HDR`
-9. For Owner (Owners) insert `/systemusers()` with the expression `items('Apply_to_each')?['systemuserid']?[1]` inside the parenthesis.
+9. For Owner (Owners) insert `/systemusers()` with the expression `outputs('List_rows')?['body/value']?[1]?['systemuserid']` inside the parenthesis.
 
-* Notice that the Owner input needs the pluralised logical name of the table `user` with a leading `/` and that you select the second element of systemuserid from the output of List Rows.
 <br><img src="./images/flow_update_row_owner.png" /><br>
+
+* Notice that the Owner input needs the pluralised logical name of the table `user` with a leading `/` and that you select systemuserid of the second element from the output of `List Rows`. There are internal users in that table, but many will lead to an error `SecLib::CrmCheckPrivilege failed. Returned hr = -2147220839 on UserId: f3c78acb-abbf-ee11-9079-002248e61a82 and Privilege: prvReadHACKPP_SCEAPP_IMP_CO2_CONS_RAW_HDR` since they have no general read rights of the table to be the owner of a row.
 
 
 # 4. Testing changes
@@ -126,6 +127,6 @@ To remove our user from the owner column you must specify a different one. Since
 Start from the import overview page to ensure a correct screen context. Press the play button after selecting the overview screen to start the tests. Thanks to your changes the following scenarios should now work:
 |Test                                             |Expected Result          ,                |
 |-------------------------------------------------|------------------------------------------|
-|Wizard first step: Click on Submit button (new)  |You should see a new record in the dataverse table after clicking submit with a different owner.|
-|Wizard first step: Click on Submit button (edit) |You should see the updated record in the dataverse table  with a different owner.|
+|Wizard first step: Click on Submit button (new)  |Either the Flow Test should run through and you should see a new record in the dataverse table after clicking submit with a different owner. Or only the last `Update a row` errors with `SecLib::CrmCheckPrivilege failed`|
+|Wizard first step: Click on Submit button (edit) |Either the Flow Test should run through and you should see a new record in the dataverse table after clicking submit with a different owner. Or only the last `Update a row` errors with `SecLib::CrmCheckPrivilege failed`|
 
