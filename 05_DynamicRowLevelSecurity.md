@@ -1,4 +1,4 @@
-# 1. Introduction to Flows
+# 1. Introduction to row level security
 
 You should now have Completed the Following things:
 
@@ -18,7 +18,7 @@ There are several ways to handle the security of your Dataverse tables. The basi
 
 Where Child Business Units are optional and can be under another (Child) Business Unit.
 
-Each of them can be given one of these access rights:
+Each of them can be given some of these access rights to its underlying users:
 
 - CreateAccess
 - ReadAccess
@@ -45,7 +45,7 @@ The reason for this approach is that it allows the most granual control over an 
 
 ### Start the flow designer
 
-To create an automated flow click on `Flows` in the [Power Apps Maker](https://make.powerapps.com/) and then create a new named flow with the trigger `When a row is added, modified or deleted, Microsoft Dataverse`:
+To create an automated flow click on `Flows` in the [Power Apps Maker](https://make.powerapps.com/) and then create a new named automated flow with the trigger `When a row is added, modified or deleted` from Microsoft Dataverse:
 <br><img src="./images/flow_new_automated_create.png" /><br>
 
 The following general rules apply:
@@ -70,18 +70,20 @@ Set the fields as shown in the table:
 | Run as         | Modifying user            |
 
 
-This should give us the output of a body containing
-`"hackpp_sceapp_imp_co2_cons_raw_hdrid": "c210849e-31cb-ee11-9079-002248e466b9"`,
-`"_ownerid_value": "75591718-bcb3-ee11-a569-002248e466b9"`,
-`"_modifiedby_value": "75591718-bcb3-ee11-a569-002248e466b9"`, and
-`"RunAsSystemUserId": "75591718-bcb3-ee11-a569-002248e466b9"`
+After running a test this should give us the output of a body containing:
+- `"hackpp_sceapp_imp_co2_cons_raw_hdrid": "c210849e-31cb-ee11-9079-002248e466b9"`
+- `"_ownerid_value": "75591718-bcb3-ee11-a569-002248e466b9"`
+- `"_modifiedby_value": "75591718-bcb3-ee11-a569-002248e466b9"`
+- `"RunAsSystemUserId": "75591718-bcb3-ee11-a569-002248e466b9"`
 
-In our example the user is the same person who created and thereby modified the entity and thereby who triggered the function as the RunAsSystemUser. Because we have no other user we are going to share ourself the access rights. Add a new Step and select `Perform an unbound action` from Dataverse. This action is a multitool for several functions and is not bound (associated with a table).
+In our example the user is the same person who created and modified the entity and thereby who triggered the function as the RunAsSystemUser. Because we have no other user we are going to share ourself the access rights. 
 
-For `Action Name` you will pick `GrantAccess` (or in other cases RevokeAccess). It will update the format of the action to fit your requested action with 2 new fields: Target and PrincipalAccess.
+Add a new Step and select `Perform an unbound action` from Dataverse. This action is a multitool for several functions and is not bound (associated with a table).
+
+For `Action Name` you pick `GrantAccess` (or in other cases RevokeAccess). It will update the format of the action to fit your requested action with 2 new fields: Target and PrincipalAccess.
 For Target you must find your logical name of your Table. In this case it is hackpp_sceapp_imp_co2_cons_raw_hdr.
-Additionally you must pluralise it here by replacing the ending -y with -ies or else just adding -s and add its GUID inside Parentheses: `hackpp_sceapp_imp_co2_cons_raw_hdrs(GUID)`. You must replace the GUID placeholder with the dynamic content of `IMP_CO2_CONS_RAW_HDR`.
-For PrincipalAccess the formular expects you to input valid JSON code, which you can not fully comply yet.
+Additionally you must pluralise the term by replacing the ending -y with -ies or else just adding -s and add its GUID inside Parentheses: `hackpp_sceapp_imp_co2_cons_raw_hdrs(GUID)`. You must replace the GUID placeholder with the dynamic content of `IMP_CO2_CONS_RAW_HDR`.
+For PrincipalAccess the formular expects you to input valid JSON code, which you can not fully comply yet unless you follow the following steps:
 ```
 {
   "Principal": {
@@ -91,10 +93,12 @@ For PrincipalAccess the formular expects you to input valid JSON code, which you
   "AccessMask": "ReadAccess,WriteAccess"
 }
 ```
+- Hint: To add a team instead of a user you would replace CRM.systemuser with CRM.team and systemuserid with teamid.
+
 1. Fill the value of systemuserid with the expression `triggerOutputs()?['body']?['RunAsSystemUserId']`. The questionmarks return null instead of error when its element could not be found. With this expression we input the RunAsSystemUserId from the body from the Output of our starting trigger.
-2. Replace the @ with a variable of @. The @ is an excape character and you can row 2 @@ to fix it temporarily, but the best and permanent solution is to insert a variable containing `@`.
-  - Insert a new Step above the `Perform an unbound action` by clicking on the `+` on the arrow and selecting `Add an action`. Choose `Initialize variable` as action. Name it `At` with the type of `String` and the value `@`.
-  - Replace the @ in PrincipalAccess with the Variable.
+2. Replace the @ with a variable of @. The @ is an excape character and you can row 2 @@ to fix it temporarily, but the best and permanent solution is to insert a variable containing `@`:
+  a. Insert a new Step above the `Perform an unbound action` by clicking on the `+` on the arrow and selecting `Add an action`. Choose `Initialize variable` as action. Name it `At` with the type of `String` and the value `@`.
+  b. Replace the @ in PrincipalAccess with the Variable.
 
 After all steps are done the flow should look like this and you can save it without an error.
 <br><img src="./images/flow_unbound_grandaccess.png" /><br>

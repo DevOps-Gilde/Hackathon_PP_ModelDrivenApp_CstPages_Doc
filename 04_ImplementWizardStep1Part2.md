@@ -72,7 +72,7 @@ As a first value we will set the value for CST_IMP_USERNAMES. Power Platform exp
 When you selected the value you will notice a change: Dataverse embeds the new `Add new row` task in a loop since the previous command might return multiple rows. The screenshot below shows this new situation:
 <br><img src="./images/flow_new_apply_each.png" /><br>
 
-Let's try to understand `Apply to each` better. The major input is the output from the previous step displayed as ` value x`. To understand it you have to be aware of the JSON structure that is returned by `List rows`. Below you find a sample:
+You could initialize a variable with `first(outputs('List_rows')?['body'])` or `outputs('List_rows')?['body']?[0]` to ignore the looping, but let's try to understand `Apply to each` better. The major input is the output from the previous step displayed as ` value x`. To understand it you have to be aware of the JSON structure that is returned by `List rows`. Below you find a sample:
 ```
 {
 	"@odata.context": "https://orgc9bd3046.crm6.dynamics.com/api/data/v9.1/$metadata#cr953_workflowmaxes(cr953_jobid,cr953_...)",
