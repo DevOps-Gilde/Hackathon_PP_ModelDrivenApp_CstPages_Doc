@@ -43,7 +43,7 @@ The reason for this approach is that it allows the most granual control over an 
 
 ## Create Logout Option
 
-Before we start we could add a signout option for canvas apps into our OvrImports screen. Navigate to it and select inside `OvrImpVertLayout` the nested `OvrImpHdrLayout` element. We are going to insert a new button into it and set its Text parameter to `Signout` and the onSelect action to `Exit(true)`. The optional boolean defines if the user shall be signed out or not. This does not work in the Editor or Simulatior though. You would need to Publish your version and Play it without Edit. But since this also only works with Canvas Apps and not with Model-driven app like our Hackathon, you can't test it.
+Before we start we could add a signout option for canvas apps into our `OvrImports` screen. Navigate to it and select inside `OvrImpVertLayout` the nested `OvrImpHdrLayout` element. We are going to insert a new button into it and set its Text parameter to `Signout` and the onSelect action to `Exit(true)`. The optional boolean defines if the user shall be signed out or not. This does not work in the Editor or Simulatior though. You would need to `publish` your version and `play` it without Edit mode. Since `Exit(true)` also only works with Canvas Apps and not with Model-driven apps like our Hackathon, you can't test it, but we are going to continue with our flow anyway to give you an idea:
 
 ## Define Flow
 
