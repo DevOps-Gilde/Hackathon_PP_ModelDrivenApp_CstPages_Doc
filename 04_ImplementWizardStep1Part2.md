@@ -130,6 +130,17 @@ Enter `returnedval` as name for the parameter. Click into the value field and le
 
 Save your flow under the new name you want. It will be automatically added to your app when you started the flow designer with `+ Add flow`.
 
+## Versioning
+
+In the last excercise we learned how to rollback to a later version of a page. You are probably wondering if there is such a versioning system for flows as well. Even though this feature was planned to be already implemented it is not available yet. You can check [here](https://learn.microsoft.com/en-us/power-platform/release-plan/2023wave2/power-automate/use-versioning-solution-cloud-flows) if that has already been changed.
+For now we are going to use the rather ugly way of copying and renaming:
+1. Use the `Back` arrow button until you are back to the objects of your solution:
+<br><img src="./images/view_solution.png" /><br>
+
+Your saved flow should be in there at the bottom. Open it and you will see a new view with all the details of the Flow and its run history. At the very top next to the Edit button is the `Save as` button. We will use it to create a copy of our flow and name it with a version number behind it.
+
+Since it got a different name our app still relys on the first version name and therefor you should treat the flow without version number always as the newest, which you can replace with an older copy by removing the original and renaming the versioned flow back to the original.
+
 ## Wire Flow with Submit Button
 
 We replace now the `OnSelect`property from the previous step. We plan for different ways to persist the changes. In the edit case we can use the standard `SubmitForm` to persist the changes. We just add a confirmation message for the user. For new we have run our flow and store returned value for later processing in a local variable. The user is also informed with an additional message. Enter the following formula in the property `OnSelect` that is doing all that (You have insert your flow name):
