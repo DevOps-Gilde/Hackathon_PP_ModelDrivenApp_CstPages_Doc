@@ -58,7 +58,7 @@ The following tasks will expect you:
    
    In that step you add the missing persistence.
 
-5. **Optional advanced extra task:** Understand Gallery and implement approval flow [here](/05_ImplementApprovalFlow.md)
+5. **Optional advanced extra task:** Understand Gallery and implement approval flow [here](/05_AdjustApprovalList.md)
 
 6. **Optional advanced extra task:** Understand Ownership and implement dynamic Dataverse security [here](/06_DynamicRowLevelSecurity.md)
 
