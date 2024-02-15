@@ -51,9 +51,7 @@ The following tasks will expect you:
    
    In that step you add the persistence in the data model. Reason for the involving an embedded flow are limitations of the used controls.
 
-5. **Optional advanced extra task:** Understand Gallery and implement approval flow [here](/05_ImplementApprovalFlow.md)
-
-6. **Optional advanced extra task:** Understand Ownership and implement dynamic Dataverse security [here](/06_DynamicRowLevelSecurity.md)
+5. **Optional advanced extra task:** Implement approval flow [here](/05_ImplementApprovalFlow.md)
 
 :white_check_mark: We also created a fully implemented application including data model located in the branch [Solution](https://github.com/DevOps-Gilde/Hackathon_PP_ModelDrivenApp_CstPages_Doc/tree/Solution) of your forked repository that covers all tasks. You only have to import it to your environment.
 If at any Point you need assistance nevertheless do not hesitate to ask. We are here to Help you.

@@ -79,7 +79,7 @@ We are going to test rolling back to an older version in case you brake somethin
 Therefor you are going do click onto the new form `WizardStepImpHdrMainView` and add a `Rectangle`, which will add a very noticeable blue box onto your screen. Now you are going to save this version without publishing it with the disk symbol again.
 
 Lets imagine this rectangle was totally unwanted and you can't revert it or it broke some of your work.
-On the top, far left, above the `Tree View`and under the colored title `Power Apps  |  PgManageImps (Editing)` is an arrow with  the text `Back`. Use it 2 times to go back to the objects of your solution:
+On the top, far left, above the `Tree View`and under the colored title `Power Apps  |  PgManageImps (Editing)` is an arrow with the text `Back`. Use it 2 times to go back to the objects of your solution:
 <br><img src="./images/view_solution.png" /><br>
 
 Here you can see the 3 pages pgApprOvetview, PgMain and PgManagelmps which saved your changes. Our rectangle should be found in the page `PgManagelmps`. Click on the `...` button next to its name and open the `Details` view. Next to the details you should find the tab for Versions where the version on the top is the latest iteration with the rectangle and the version with the `Published` lable `Live` should be an earlier version without the rectangle.
