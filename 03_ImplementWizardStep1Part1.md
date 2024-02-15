@@ -157,10 +157,7 @@ Explanations regarding the expression:
 * `DisplayMode.Disabled` disables the card
 * `Parent.DisplayMode` enforces the default behavior
 
-Furthermore we want to fill the description with additional calculated data which could even can be a new variable.
-Select the Card `WizardStepImpHdrMainViewImportDesc` and replace the `default` propety with `myDescription`.
-On the OnSelect of Submit we add: 
-`UpdateContext({myDescription: WizardStepImpHdrMainViewImportDescTextBox.Value & " This element needs a checkup on: " & Text( DateAdd( Now(), 7 ), "dd-mm-yyyy at hh:mm" )});`
+Furthermore we want to fill the description with additional derived data, which could even be stored as a new variable. Select the Card `WizardStepImpHdrMainViewImportDesc` and replace the `Default` propety with `myDescription`. This will lead to a temporary error, since the variable is not getting initialized yet.
 
 As a last step we set the relative height so that the form occupies minimum space. Set `Fill portions` on the tab `Properties` to `0.2`.
 
@@ -169,14 +166,18 @@ As a last step we set the relative height so that the form occupies minimum spac
 We are finished and can switch over to the button. Change the `Text` property on the tab `Properties` to `Submit`. The property `OnSelect` contains the action when the button is pressed. For now we will just display an information that proofs we can access the values in the form. Enter the following expression in the `OnSelect` property on the tab `Advanced`:
 
 ```
+UpdateContext({
+  myDescription: WizardStepImpHdrMainViewImportDescTextBox.Value & " This element needs a checkup on: " & Text( DateAdd( Now(), 7 ), "dd-mm-yyyy at hh:mm" )});
+
 Notify(
-  "Changes submitted for import " & WizardStepImpHdrMainViewImportDescTextBox.Value & " submitted.", 
+  "Changes submitted for import " & WizardStepImpHdrMainViewImportDescTextBox.Value & " submitted. " & myDescription, 
   NotificationType.Information)
 ```
 
 Explanations regarding the expression:
-* `Notify` displays a message of the given type
+* `UpdateContext` will fill the myDescription variable with derived or even calculated data. Since the form card selects the new myDescription, it could directly insert it into our database
 * `&` is the operator for concatenating strings
+* `Notify` displays a message of the given type
 
 ## Navigation
 

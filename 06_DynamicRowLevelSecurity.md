@@ -41,6 +41,10 @@ The reason for this approach is that it allows the most granual control over an 
 
 # 4. Implementation Task
 
+## Create Logout Option
+
+TODO
+
 ## Define Flow
 
 ### Start the flow designer

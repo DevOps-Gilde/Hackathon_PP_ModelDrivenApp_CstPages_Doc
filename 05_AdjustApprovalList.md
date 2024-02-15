@@ -28,7 +28,7 @@ Navigate to the page for approvals named `pgApprOverview` within the app as show
 To apply the layout you first have to understand better how the designer displays the control. The screenshot below illustrates important points:
 <br><img src="./images/appr_list_ctrls_tree.png" /><br>
 
-Relevant for applying the tabular layout is not a built-in property in the right-hand side. The key is the template mechanism of the first row. The layout of the first row is applied to all others. The controls below the gallery show the controls of the first row. The rectangle serves as container for all controls on it. That means:
+Relevant for applying the tabular layout is not a built-in property in the right-hand side. The key is the template mechanism of the first row. While editing the gallery you will notice that all changes of the layout of the first row is getting applied to all others. The controls below the gallery only show the controls of the first row, which are getting cloned for each element inside the list of items in the gallery dynamically. The rectangle serves as container for all controls on it. That means:
 * Removing existing controls
 
   To drop controls just delete them from the container. In our case we don't need the image.
