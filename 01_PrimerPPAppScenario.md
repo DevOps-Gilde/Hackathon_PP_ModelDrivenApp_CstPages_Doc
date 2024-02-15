@@ -43,6 +43,7 @@ The central element for storing data are tables. A table is just another entity 
 * **Relationships:** They correspond to foreign key constraints in relational databases. Power platform uses partially a special terminology. An example are lookup columns that boil down to a relationship under the hood.
 * **Choices:** You can think of them as an enum or a table with key value pairs. Relational databases don't provide something like that out of the box. You can limit a column to these values by associating the column with the choice as part of the column definition. Choices can't have an empty/null value.
 * **Null values** Field values are stored as null when sending blank() or "". These blank values can be checked with IsBlank() in Power Apps and null in Power Automate Flows. Checking if a collection value is empty is done with IsEmpty() in Power Apps and empty in Power Automate Flows.
+* **Owners** Each entry/row of a table is being owned by a user or team upon creation and is in relation to his business unit.
 
 ## Model-driven-Apps
 

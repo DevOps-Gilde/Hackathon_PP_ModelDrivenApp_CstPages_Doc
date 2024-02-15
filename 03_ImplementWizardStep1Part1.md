@@ -69,6 +69,24 @@ Select the newly added container so that it is going to become the new parent fo
 
 The form will be referenced later in code snippets. Rename the newly added form to `WizardStepImpHdrMainView` to ensure the code snippets work. The newly added button won't be referenced so the name is up to you.
 
+## Saving and Versioning
+You have done the first changes! Congratulations! You shall better save them now. Click the disk icon or hit `[ctrl+S]` on your keyboard now.
+<br><img src="./images/intro_app_save_publish.png" /><br>
+
+Well done! This state is saved as a new version in your version history. Not to be confused with the version of the app/solution. You can also publish this version with the button next to the disk to the right, or using `[ctrl+shift+P]`.
+
+We are going to test rolling back to an older version in case you brake something and can't undo the changes.
+Therefor you are going do click onto the new form `WizardStepImpHdrMainView` and add a `Rectangle`, which will add a very noticeable blue box onto your screen. Now you are going to save this version without publishing it with the disk symbol again.
+
+Lets imagine this rectangle was totally unwanted and you can't revert it or it broke some of your work.
+On the top, far left, above the `Tree View`and under the colored title `Power Apps  |  PgManageImps (Editing)` is an arrow with  the text `Back`. Use it 2 times to go back to the objects of your solution:
+<br><img src="./images/view_solution.png" /><br>
+
+Here you can see the 3 pages pgApprOvetview, PgMain and PgManagelmps which saved your changes. Our rectangle should be found in the page `PgManagelmps`. Click on the `...` button next to its name and open the `Details` view. Next to the details you should find the tab for Versions where the version on the top is the latest iteration with the rectangle and the version with the `Published` lable `Live` should be an earlier version without the rectangle.
+<br><img src="./images/restore_page_version.png" /><br>
+
+Again you can just hit the `...` button to `Restore` a version. Do so for the version you published `Live` before. It will create a copy of that version as a newer version. Afterwards you can reload the project and the rectangle should be gone. Please check if your other changes are still in this version and redo them if not.
+
 ## Understanding Dataverse
 
 Before we work with the Form you should make yourself familiar with Dataverse.

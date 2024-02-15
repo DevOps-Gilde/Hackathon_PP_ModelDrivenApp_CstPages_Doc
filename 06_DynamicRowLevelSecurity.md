@@ -7,6 +7,8 @@ You should now have Completed the Following things:
 
 Next you will learn the different row level security options to give rights on each entity.
 
+*Info: The following tasks can not be fully tested in this Hackathon, but you will get a feel for it.
+
 # 2. All Options:
 
 There are several ways to handle the security of your Dataverse tables. The basis of all of them are access rights via roles. Pre-defined is a hierarchical data access structure, which counts the higher hierarchical rights over the lower ones. This means you can't limit an individual user's rights, if their team or even business unit already gave them. The structure looks as follows:
@@ -43,7 +45,9 @@ The reason for this approach is that it allows the most granual control over an 
 
 ## Create Logout Option
 
-Before we start we could add a signout option for canvas apps into our `OvrImports` screen. Navigate to it and select inside `OvrImpVertLayout` the nested `OvrImpHdrLayout` element. We are going to insert a new button into it and set its Text parameter to `Signout` and the onSelect action to `Exit(true)`. The optional boolean defines if the user shall be signed out or not. This does not work in the Editor or Simulatior though. You would need to `publish` your version and `play` it without Edit mode. Since `Exit(true)` also only works with Canvas Apps and not with Model-driven apps like our Hackathon, you can't test it, but we are going to continue with our flow anyway to give you an idea:
+Before we start we could add a signout option for canvas apps into our `OvrImports` screen. Navigate to it and select inside `OvrImpVertLayout` the nested `OvrImpHdrLayout` element. We are going to insert a new button into it and set its Text parameter to `Signout` and the onSelect action to `Exit(true)`. 
+
+The optional boolean defines if the user shall be signed out or not. This does not work in the Editor or Simulatior though. You would need to `publish` your version and `play` it without Edit mode. Since `Exit(true)` also only works with Canvas Apps and not with Model-driven apps like our Hackathon, you can't test it, but we are going to continue with our flow anyway to give you an idea:
 
 ## Define Flow
 
@@ -129,8 +133,7 @@ To remove our user from the owner column you must specify a different one:
 # 4. Testing changes
 
 Start from the import overview page `WizardStepImpHeader` to ensure a correct screen context. Press the play button after selecting the overview screen to start the tests. Thanks to your changes the following scenarios should now work:
-|Test                                             |Expected Result          ,                |
+|Test                                             |Expected Result                           |
 |-------------------------------------------------|------------------------------------------|
-|Wizard first step: Click on Submit button (new)  |Either the Flow Test should run through and you should see a new record in the dataverse table after clicking submit with a different owner. Or only the last `Update a row` errors with `SecLib::CrmCheckPrivilege failed`|
-|Wizard first step: Click on Submit button (edit) |Either the Flow Test should run through and you should see a new record in the dataverse table after clicking submit with a different owner. Or only the last `Update a row` errors with `SecLib::CrmCheckPrivilege failed`|
+|Wizard first step: Click on Submit button        |Either the Flow Test should run through and you should see a new record in the dataverse table after clicking submit with a different owner. Or only the last `Update a row` errors with `SecLib::CrmCheckPrivilege failed`|
 
