@@ -43,7 +43,7 @@ The reason for this approach is that it allows the most granual control over an 
 
 ## Create Logout Option
 
-TODO
+Before we start we could add a signout option for canvas apps into our OvrImports screen. Navigate to it and select inside `OvrImpVertLayout` the nested `OvrImpHdrLayout` element. We are going to insert a new button into it and set its Text parameter to `Signout` and the onSelect action to `Exit(true)`. The optional boolean defines if the user shall be signed out or not. This does not work in the Editor or Simulatior though. You would need to Publish your version and Play it without Edit. But since this also only works with Canvas Apps and not with Model-driven app like our Hackathon, you can't test it.
 
 ## Define Flow
 
@@ -128,7 +128,7 @@ To remove our user from the owner column you must specify a different one:
 
 # 4. Testing changes
 
-Start from the import overview page to ensure a correct screen context. Press the play button after selecting the overview screen to start the tests. Thanks to your changes the following scenarios should now work:
+Start from the import overview page `WizardStepImpHeader` to ensure a correct screen context. Press the play button after selecting the overview screen to start the tests. Thanks to your changes the following scenarios should now work:
 |Test                                             |Expected Result          ,                |
 |-------------------------------------------------|------------------------------------------|
 |Wizard first step: Click on Submit button (new)  |Either the Flow Test should run through and you should see a new record in the dataverse table after clicking submit with a different owner. Or only the last `Update a row` errors with `SecLib::CrmCheckPrivilege failed`|

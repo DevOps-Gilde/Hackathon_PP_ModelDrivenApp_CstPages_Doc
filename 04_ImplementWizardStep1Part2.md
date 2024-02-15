@@ -166,7 +166,7 @@ The important new takeaways from that code are:
 
 # 4. Testing changes
 
-Start from the import overview page to ensure a correct screen context. Press the play button after selecting the overview screen to start the tests. Thanks to your changes the following scenarios should now work:
+Start from the import overview page `WizardStepImpHeader` to ensure a correct screen context. Press the play button after selecting the overview screen to start the tests. Thanks to your changes the following scenarios should now work:
 |Test                                             |Expected Result          ,                |
 |-------------------------------------------------|------------------------------------------|
 |Wizard first step: Click on Submit button (new)  |You should see a new record in the dataverse table after clicking submit. The displayed message should be accordingly.|
