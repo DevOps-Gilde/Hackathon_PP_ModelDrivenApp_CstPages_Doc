@@ -127,7 +127,7 @@ To remove our user from the owner column you must specify a different one:
 
 <br><img src="./images/flow_update_row_owner.png" /><br>
 
-* Notice that the Owner input needs the pluralised logical name of the table `user` with a leading `/` and that you select systemuserid of the second element from the output of `List Rows`. There are internal users in that table, but many will lead to an error `SecLib::CrmCheckPrivilege failed. Returned hr = -2147220839 on UserId: f3c78acb-abbf-ee11-9079-002248e61a82 and Privilege: prvReadHACKPP_SCEAPP_IMP_CO2_CONS_RAW_HDR` since they have no general read rights of the table to be the owner of a row.
+* Notice that the Owner input needs the pluralised logical name of the table `user` with or without a leading `/` and that you select systemuserid of the second element from the output of `List Rows`. There are internal users in that table, but many will lead to an error `SecLib::CrmCheckPrivilege failed. Returned hr = -2147220839 on UserId: f3c78acb-abbf-ee11-9079-002248e61a82 and Privilege: prvReadHACKPP_SCEAPP_IMP_CO2_CONS_RAW_HDR` since they have no general read rights of the table to be the owner of a row.
 
 
 # 4. Testing changes
