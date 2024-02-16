@@ -20,8 +20,8 @@ Comments regarding the picture:
 * The red boxes in the picture mark environment and user
 
   You will get this information from us before the hackathon starts. It includes:
-  * URL for environment: https://make.powerapps.com/environments/<your environment id>/home
-  * User: Make sure you are always logged in with that user. The user IS NOT your capgemini EMail account.
+  * URL for environment: https://make.powerapps.com/environments/[your environment id]/home
+  * User: Make sure you are always logged in with that user. The user IS NOT your capgemini E-Mail account.
   * User credentials: Use the password that is provided by us. 
 
 * On the left hand side you have the main navigation that allows you to reach Dataverse, Power Apps and solutions.
@@ -57,7 +57,7 @@ These options are also reflected by the UI when you add a page:
 
 <br><img src="./images/intro_apps_page_types.png" /><br>
 
-This Hackathonis based on a Model-driven App, but we focus mainly on Custom pages. They can give you a citizen developer like experience. in that option you define the UI separatly on top of the dataverse tables in contrast to the dataverse table option. In the dataverse table option you define the UI for your tables within dataverse by forms. Therefore custom pages are much closer architecture principles such as separation of concerns.
+This Hackathon is based on a Model-driven App, but we focus mainly on Custom pages. They can give you a citizen developer like experience. in that option you define the UI separatly on top of the dataverse tables in contrast to the dataverse table option. In the dataverse table option you define the UI for your tables within dataverse by forms. Therefore custom pages are much closer architecture principles such as separation of concerns.
 
 The next major design decision within custom pages is using multiple screens within the same custom page or multiple custom pages. According to our experience from that hackathon custom pages come with serious limitations regarding communication with other pages:
 * The `Navigate()` command only allows to pass a record to the called page
@@ -209,9 +209,11 @@ The meaning of the tables are as follows. The names are the ones that are also u
 * IMP_STATES_CHOICE - Possible import states
 * IMP_CO2_DRIVER_TYPES_CHOICE - Possible drivers for CO2 emission
 
+You will mostly get in contact with IMP_CO2_CONS_RAW_HDR in this hackathon.
+
 Conceptually all tables below behave like tables. But from PowerPlatform perspective we have technically two kinds of tables: **(1) custom tables** and **(2) choice**. Choice is like an enum and from a tabular perspective they have just two columns to accomodate key value pairs. They are the preferred option when you have a rather fixed set of values.
 
-The table below gives a short overview of the columns for the custom tables. In our hackathon the only used default column feature is attachments. All other required ones we defined manually. In a real world scenario you would only define missing columns on top of the existing ones. All relevant columns except attachments have the prefx `CST` to quickly identify them:
+The table below gives a short overview of the columns for the custom tables. In our hackathon the only used default column feature is attachments. All other required ones we defined manually. In a real world scenario you would only define missing columns on top of the existing ones. All relevant columns except attachments have the prefx `CST` in their user-friendly name to quickly identify them. All custom tables and colums also have a schema and logical name for interacting with them. In our case its the prefix `HACKPP_SCEAPP_`.
 
 |Table name          |Column name           |Purpose                                     |
 |--------------------|----------------------|--------------------------------------------|
