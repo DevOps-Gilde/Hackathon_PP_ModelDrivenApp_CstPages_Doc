@@ -37,12 +37,12 @@ You will notice that this page is again split into multiple screens on the left 
 - WizardStepUploadData
 - WizardStepAppr
 
-Click through them to see the whole page changing. We can use later use `Navigate()` Buttons to travel between them with a selected amount of local variables instead of using global ones. For now we will focus on WizardStepImpHeader.
+Click through them to see the whole page changing. We can later use `Navigate()` Buttons to travel between them with a selected amount of local variables instead of using global ones. For now we will focus on WizardStepImpHeader.
 
 As you know it from other environments our application shall support responsive layout so we will avoid pixel based statements. A key are containers that allow to layout their child components based on relative a measurement such as a percentage. Container layout their children either horizontally or vertically and can be nested. We already implemented the first container for you that uses the expressions `Parent.Width` and `Parent.Height` to occupy all space of the screen. The screenshot below shows the starting point. As you can see there is a gap in the sense that the main content is missing:
 <br><img src="./images/wiz_layout_start_point.png" /><br>
 
-To implement the content we need first an additional container. We it to group the form and the submit button. They are comparable to a `div`element in HTML. We will start with the vertical container for the content. Adding controls always follows the same pattern which is as follows:
+To implement the content we need first an additional container. We need it to group the form and the submit button. They are comparable to a `div`element in HTML. We will start with the vertical container for the content. Adding controls always follows the same pattern which is as follows:
 * Select the parent control `WizardStepImpHdrLayout` on the canvas or in the tree on the left-hand side
 * Add the control `Vertical container` from the list under `+Insert`
 
@@ -52,7 +52,7 @@ To implement the content we need first an additional container. We it to group t
 
   Click on the context menu (...) of the container control in the tree view. There you find the option `Move up` to move it as shown below:
   <br><img src="./images/wiz_layout_reorder.png" /><br>
-  You can also use `Ctrl+]` and `Ctrl+[` on keyboard layouts that don't need ALT for the brackets. [Other shortcuts can be found here](https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/keyboard-shortcuts)
+  You can also use `Ctrl+]` and `Ctrl+[` on keyboard layouts that don't need ALT for the brackets, because ALT is used as a quick way to simulate interactions inside the Editor without starting the simulator. [Other shortcuts can be found here](https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/keyboard-shortcuts).
 
 * Adjust properties
 
@@ -98,12 +98,12 @@ Open the Data Menu on the left side and click on the `...` next to the `IMP_CO2_
 <br><img src="./images/wiz_layout_open_dataverse.png" /><br>
 
 Here you can expand your view by clicking on `+24 more` and adding the column `CST_IMP_USERNAME`.
-You can view each column settings by clicking on the titles and on `Edit column`, but as you can see the managed Table prevents you from editing the entries under CST_IMP_CODE and Created On columns, but you could edit the field under the column `CST_IMP_USERNAME`. In this case it is not working though, because it is no text field, but a lookup field. You can only select entries from a different table. Currently there is no entry inside to select and we are going to change that.
+You can view each column settings by clicking on the titles and on `Edit column`, but as you can see the managed Table prevents you from editing the entries under CST_IMP_CODE and Created On columns, but you could edit the field under the column `CST_IMP_USERNAME`. In this case it is not working though, because it is no text field, but a lookup field. It can only select entries from a different table it is looking at. Currently there is no entry inside to select and we are going to change that.
 
 Open a new browser tab at [https://make.powerapps.com/](https://make.powerapps.com/) and go to `Tables`, filter `All` and click on `IMP_USER`.
 <br><img src="./images/wiz_layout_open_usertable_dataverse.png" /><br>
 
-This opens the bigger Table view where you can also inspect the Schema of the columns for their important schema and logical name and much more. At the bottom you see the column `CST_USERNAME` which is not the primary key of the entry, but the user-friendly "primary name column". To fill this entry simply write any text under it. Other fields will automatically set default values like the current date in the other column.
+This opens the bigger Table view where you can also inspect the Schema of the columns for their important schema and logical name under `Columns` -> `...` -> `Advanced` -> `Tools` and much more. At the bottom you see the column `CST_USERNAME` which is not the primary key of the entry, but the user-friendly "primary name column". To fill this entry simply write any text under it. Other fields will automatically set default values like the current date in the other column.
 <br><img src="./images/wiz_layout_edit_usertable_dataverse.png" /><br>
 
 After doing so you can go back to the prior `IMP_CO2_CONS_RAW_HDR` table and under the lookup column `CST_IMP_USERNAME` the option for your new username should be selectable.
@@ -135,6 +135,24 @@ Rename the controls **HOLDING THE USER INPUT** listed below as stated since we n
 |Importing user name|ComboBox                          | WizardStepImpHdrMainViewImportUserNameDropDown|
 |Year               |TextInput                         |                            WizardStepImpHdrMainViewImportYearTextBox|
 |Description        |TextBox                           |WizardStepImpHdrMainViewImportDescTextBox|
+
+Because deleting text of a Text field is intuitive, but deleting text of a Date field is not, we are going to add a reset button to `WizardStepImpHdrMainViewImportTS`. Select its Datepicker `WizardStepImpHdrMainViewImportTSDatePicker` and set its `OnSelect` action to `UpdateContext({resetdateTS:false})`.
+
+* `UpdateContext` updates the context of the local page with new or changed local variables such as resetdateTS.
+
+This is also a good example to illustrate that you have to sometimes unlock properties before being able to edit them. To unlock them click on the lock icon at the top of the `Advanced` tab:
+<br><img src="./images/wiz_layout_ctrls_frm_enabled_lock.png" /><br>
+
+After unlocking the `WizardStepImpHdrMainViewImportTSDatePicker`, you can edit its default `Value` to `If(resetdateTS,Blank(),Parent.Default)`.
+
+* This will set the element value to null if resetdateTS is true.
+* Otherwise Parent.Default redirects to the Default value of its parent element `WizardStepImpHdrMainViewImportTS`, which is directly connected to `ThisItem.CST_IMP_TS` to overwrite its table data.
+
+Now we just need to insert a new button to the Card. Set its Text to `X` and its OnSelect action to `UpdateContext({resetdateTS:true}); Reset(WizardStepImpHdrMainViewImportTSDatePicker);`. You can move the button so that its not overlapping other elements.
+
+* This will set the variable resetdateTS to true and reset the selected date of the Datepicker popup menu. 
+
+The reset function works now! Well done!
 
 Creating or editing is defined by the property `Default mode`. The new and the edit scenario require different values. That is the first case where we need a formula to determine the correct value. Two ways exist:
 * Entering it in the properties on the right-hand side
@@ -169,8 +187,7 @@ Explanations regarding the expression:
 * `LookUp` retrieves the record that fulfills the condition
 * `CST_IMP_CODE = locImpCode` represents the condition that filters the currently edited record
 
-Many fields within the cards are configured with defaults such as the card for the import code. With the standard configuration the field is still displayed as editable but you cannot jump into it. To avoid confusion we want to disable it for creating a new record. It also a good example to illustrate that you have to sometimes unlock properties before being able to edit them. To unlock them click on the lock icon:
-<br><img src="./images/wiz_layout_ctrls_frm_enabled_lock.png" /><br>
+Many fields within the cards are configured with defaults such as the card for the import code. With the standard configuration the field is still displayed as editable but you cannot jump into it. To avoid confusion we want to disable it for creating a new record.
 
 Unlock the property `DisplayMode` on the tab `Properties` for the cards CST_IMP_CODE, CST_IMP_STATE and CST_IMP_TS. Overwrite the existing value with the following expression:
 `If(locImpMode = "New", DisplayMode.Disabled, Parent.DisplayMode)`
@@ -179,7 +196,7 @@ Explanations regarding the expression:
 * `DisplayMode.Disabled` disables the card
 * `Parent.DisplayMode` enforces the default behavior
 
-Furthermore we want to fill the description with additional derived data, which could even be stored as a new variable. Select the Card `WizardStepImpHdrMainViewImportDesc` and replace the `Default` propety with `myDescription`. This will lead to a temporary error, since the variable is not getting initialized yet.
+Furthermore we want to fill the description with additional derived data, which could even be stored as a new variable. Select the Card `WizardStepImpHdrMainViewImportDesc` and replace the `Default` propety with `myDescription`. This will lead to a temporary error since the variable is not getting initialized yet.
 
 As a last step we set the relative height so that the form occupies minimum space. Set `Fill portions` on the tab `Properties` to `0.2`.
 

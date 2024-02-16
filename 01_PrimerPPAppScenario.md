@@ -53,6 +53,7 @@ Model driven apps are a special application type within power apps. Others are a
 3. Dashboards
 4. Web resource
 5. URL
+
 These options are also reflected by the UI when you add a page:
 
 <br><img src="./images/intro_apps_page_types.png" /><br>
@@ -213,7 +214,7 @@ You will mostly get in contact with IMP_CO2_CONS_RAW_HDR in this hackathon.
 
 Conceptually all tables below behave like tables. But from PowerPlatform perspective we have technically two kinds of tables: **(1) custom tables** and **(2) choice**. Choice is like an enum and from a tabular perspective they have just two columns to accomodate key value pairs. They are the preferred option when you have a rather fixed set of values.
 
-The table below gives a short overview of the columns for the custom tables. In our hackathon the only used default column feature is attachments. All other required ones we defined manually. In a real world scenario you would only define missing columns on top of the existing ones. All relevant columns except attachments have the prefx `CST` in their user-friendly name to quickly identify them. All custom tables and colums also have a schema and logical name for interacting with them. In our case its the prefix `HACKPP_SCEAPP_`.
+The table below gives a short overview of the columns for the custom tables. In our hackathon the only used default column feature is attachments. All other required ones we defined manually. In a real world scenario you would only define missing columns on top of the existing ones. All relevant columns except attachments have the prefx `CST_` in their user-friendly name to quickly identify them. All custom tables and colums also have a schema and logical name for interacting with them. In our case its the prefix `HACKPP_SCEAPP_`.
 
 |Table name          |Column name           |Purpose                                     |
 |--------------------|----------------------|--------------------------------------------|
