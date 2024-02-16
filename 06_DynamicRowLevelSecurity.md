@@ -7,7 +7,7 @@ You should now have Completed the Following things:
 
 Next you will learn the different row level security options to give rights on each entity.
 
-*Info: The following tasks can not be fully tested in this Hackathon, but you will get a feel for it.
+* Info: The following tasks can't be fully tested in this Hackathon, but you will get a feel for it.
 
 # 2. All Options:
 

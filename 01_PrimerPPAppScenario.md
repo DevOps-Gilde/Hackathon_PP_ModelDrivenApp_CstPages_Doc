@@ -20,7 +20,7 @@ Comments regarding the picture:
 * The red boxes in the picture mark environment and user
 
   You will get this information from us before the hackathon starts. It includes:
-  * URL for environment: https://make.powerapps.com/environments/[your environment id]/home
+  * URL for environment: https://make.powerapps.com/environments/[your-environment-id]/home
   * User: Make sure you are always logged in with that user. The user IS NOT your capgemini E-Mail account.
   * User credentials: Use the password that is provided by us. 
 
