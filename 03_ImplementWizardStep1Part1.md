@@ -70,6 +70,7 @@ Select the newly added container so that it is going to become the new parent fo
 The form will be referenced later in code snippets. Rename the newly added form to `WizardStepImpHdrMainView` to ensure the code snippets work. The newly added button won't be referenced so the name is up to you.
 
 ## Saving and Versioning
+
 You have done the first changes! Congratulations! You shall better save them now. Click the disk icon or hit `[ctrl+S]` on your keyboard now.
 <br><img src="./images/intro_app_save_publish.png" /><br>
 
@@ -112,6 +113,10 @@ You do not need to save this change and can close the view by discarding all cha
 
 ## Configure added Form
 
+Go back to the page `PgManageImps` in edit mode and select our newly added form `WizardStepImpHdrMainView`.
+
+### Wire form with data source/ columns
+
 First we have to wire our form with the underlying `IMP_CO2_CONS_RAW_HDR` table. Go to the `Data source` property and select the table.
 <br><img src="./images/wiz_layout_ctrls_frm_ds.png" /><br>
 
@@ -136,6 +141,8 @@ Rename the controls **HOLDING THE USER INPUT** listed below as stated since we n
 |Year               |TextInput                         |                            WizardStepImpHdrMainViewImportYearTextBox|
 |Description        |TextBox                           |WizardStepImpHdrMainViewImportDescTextBox|
 
+### Customize default cards with reset button 
+
 Because deleting text of a Text field is intuitive, but deleting text of a Date field is not, we are going to add a reset button to `WizardStepImpHdrMainViewImportTS`. Select its Datepicker `WizardStepImpHdrMainViewImportTSDatePicker` and set its `OnSelect` action to `UpdateContext({resetdateTS:false})`.
 
 * `UpdateContext` updates the context of the local page with new or changed local variables such as resetdateTS.
@@ -153,6 +160,8 @@ Now we just need to insert a new button to the Card. Set its Text to `X` and its
 * This will set the variable resetdateTS to true and reset the selected date of the Datepicker popup menu. 
 
 The reset function works now! Well done!
+
+### Configuring DefaultMode of the form
 
 Creating or editing is defined by the property `Default mode`. The new and the edit scenario require different values. That is the first case where we need a formula to determine the correct value. Two ways exist:
 * Entering it in the properties on the right-hand side
@@ -187,6 +196,8 @@ Explanations regarding the expression:
 * `LookUp` retrieves the record that fulfills the condition
 * `CST_IMP_CODE = locImpCode` represents the condition that filters the currently edited record
 
+### Configuring other properties of the form
+
 Many fields within the cards are configured with defaults such as the card for the import code. With the standard configuration the field is still displayed as editable but you cannot jump into it. To avoid confusion we want to disable it for creating a new record.
 
 Unlock the property `DisplayMode` on the tab `Properties` for the cards CST_IMP_CODE, CST_IMP_STATE and CST_IMP_TS. Overwrite the existing value with the following expression:
@@ -196,7 +207,7 @@ Explanations regarding the expression:
 * `DisplayMode.Disabled` disables the card
 * `Parent.DisplayMode` enforces the default behavior
 
-Furthermore we want to fill the description with additional derived data, which could even be stored as a new variable. Select the Card `WizardStepImpHdrMainViewImportDesc` and replace the `Default` propety with `myDescription`. This will lead to a temporary error since the variable is not getting initialized yet.
+Furthermore we want to fill the description with additional derived data, which could even be stored as a new variable. Select the Card `WizardStepImpHdrMainViewImportDesc` and replace the `Default` property with `myDescription`. This will lead to a temporary error since the variable is not getting initialized yet.
 
 As a last step we set the relative height so that the form occupies minimum space. Set `Fill portions` on the tab `Properties` to `0.2`.
 

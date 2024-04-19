@@ -38,6 +38,23 @@ The following general rules apply:
 * To delete a step click on the three dots right to the header. There you find an entry for removal.
 * Saving the flow requires a name. Click on the text `Untitled` and enter your desired name. Afterwards press the save button.
 
+### Declare input parameters
+
+In the `PowerApps (V2)` initial action input parameters must be declared explicitly. We need the following parameters that are then later populated by the form:
+|Parameter               |Type|Name of parameter|
+|-------------------|-----------------------------------|--|
+|Importing user name|Text                          |Username|
+|Description|Text                          |Description|
+|Year|Number                          |Year|
+
+To enter the parameter klick at the header of the step so that the action is expanded. You should see a link to add a parameter named `+ Add an input`. Run the following steps for each parameter:
+* Klick at `Add` link
+* Specify the type by clicking at the icon according to the table. You should now get a new entry with a box for the name and the value.
+* Enter the name according to the table IN THE LEFT BOX and leave the right textfield for the value empty.
+
+At the end your initial step should like in the picture below:
+<br><img src="./images/flow_new_ppaction_paras.png" /><br>
+
 ### Implement flow logic
 
 In the next step we have to get the internal ID of the record holding the importing user. We will use the `List Rows` action within dataverse for that. Click `New Step` and enter `dataverse` in the search field as shown below:
@@ -54,12 +71,10 @@ Set the fields as shown in the table:
 
 The expression for `Filter rows` we use for filtering the rows by the importing username that was specified in the form. The required expression is `hackpp_sceapp_cst_username eq '<value from form>'`. 
 `hackpp_sceapp_cst_username` is one of the various internal column names of the `CST_USERNAME` in the targeted table. 
-To populate `<value from form>` we have to generate a new parameter. The screenshot below shows how that is done. Click into the field with the above expression. If you don't see an extra window click the small link under the field named `Add dynamic content`. Select in the tab `Dynamic Content` the entry `Ask in PowerApps`. The screenshot shows the reaction of the designer after `Ask in PowerApps` was picked.
+To populate `<value from form>` we have to generate a new parameter. The screenshot below shows how that is done. Click into the field with the above expression. If you don't see an extra window click the small link under the field named `Add dynamic content`. Select in the tab `Dynamic Content` and enter the name of the parameter `Username`. The screenshot shows the reaction of the designer after `Username` was picked.
 
 **NOTE: The generated expression must be inside the single quotes.**
 <br><img src="./images/flow_new_list_rows_add_para.png" /><br>
-
-When you hover over the generated expression you see the name of the expected parameter which is `Listrows_Filterrows` (Corresponds to `<name of action>_<name of field>`).
 
 In the next step we will add a new row that represents our import header. We will use the `Add a new row` action within dataverse. Click `New Step` and enter `dataverse` in the search field. Pick the action `Add a new row`. The screenshot below shows the action. Select `IMP_CO2_CONS_RAW_HDR` as table name. As a result the table specific columns will be shown as illustrated in the screenshot below. Mandatory fields are marked with an asteriks. The generated UI is not correct reagrding `CST_IMP_CODE`. Yes as logical primary key it is mandatory. However due to the auto generated definition no value is required. We will provide a special dummy to satisfy the constraints:
 <br><img src="./images/flow_new_add_row.png" /><br>
@@ -95,8 +110,8 @@ Follow the instructions in the table for the remaining fields. Enter the paramet
 |Field           |Value                                         |
 |----------------|----------------------------------------------|
 | CST_IMP_CODE   | Set the field to the special expression `null` as you did it for `utcNow`. Otherwise you get an error.     |
-| CST_IMP_YEAR   | Use the way for adding a parameter as before. If you don't see the expression `Ask in PwerApps` under `PowerApp` you have to click on `See more`. |
-| CST_IMP_DESC   | Use the way for adding a parameter as before. If you don't see the expression `Ask in PwerApps` under `PowerApp` you have to click on `See more`. |
+| CST_IMP_YEAR   | Use the way for adding a parameter as before. If you don't see the expression `Year` under `PowerApps (V2)` within the tab `Dynamic content` you have to click on `See more`. |
+| CST_IMP_DESC   | Use the way for adding a parameter as before. If you don't find `Description` under `PowerApps (V2)` within the tab `Dynamic content` you have to click on `See more`. |
 | CST_IMP_STATE  | Select Pending from the dropdown             |
 
 When you have filled out everything your action should look like the following:
@@ -130,17 +145,6 @@ Enter `returnedval` as name for the parameter. Click into the value field and le
 
 Save your flow under the new name you want. It will be automatically added to your app when you started the flow designer with `+ Add flow`.
 
-## Versioning
-
-In the last excercise we learned how to rollback to a later version of a page. You are probably wondering if there is such a versioning system for flows as well. Even though this feature was planned to be already implemented it is not available yet. You can check [here](https://learn.microsoft.com/en-us/power-platform/release-plan/2023wave2/power-automate/use-versioning-solution-cloud-flows) if that has already been changed.
-For now we are going to use the rather ugly way of copying and renaming:
-1. Use the `Back` arrow button until you are back to the objects of your solution:
-<br><img src="./images/view_solution.png" /><br>
-
-Your saved flow should be in there at the bottom. Open it and you will see a new view with all the details of the Flow and its run history. At the very top next to the Edit button is the `Save as` button. We will use it to create a copy of our flow and name it with a version number behind it.
-
-Since it got a different name our app still relys on the first version name and therefor you should treat the flow without version number always as the newest, which you can replace with an older copy by removing the original and renaming the versioned flow back to the original.
-
 ## Wire Flow with Submit Button
 
 We replace now the `OnSelect`property from the previous step. We plan for different ways to persist the changes. In the edit case we can use the standard `SubmitForm` to persist the changes. We just add a confirmation message for the user. For new we have run our flow and store returned value for later processing in a local variable. The user is also informed with an additional message. Enter the following formula in the property `OnSelect` that is doing all that (You have insert your flow name):
@@ -151,7 +155,7 @@ If(locImpMode = "New",
 	 locParaYear: WizardStepImpHdrMainViewImportYearTextBox.Text,
 	 locParaDesc: WizardStepImpHdrMainViewImportDescTextBox.Value});
    UpdateContext(
-	 {locNewImpCode: <Name of your flow>.Run(locParaUserName, locParaYear, locParaDesc).returnedval });
+	 {locNewImpCode: <Name of your flow>.Run(locParaUserName, locParaDesc, locParaYear).returnedval });
    Notify("Import " & locNewImpCode & " has been created."), 
    SubmitForm(WizardStepImpHdrMainView);
    Notify("Import " & WizardStepImpHdrMainView.LastSubmit.CST_IMP_CODE & " has been updated."))
@@ -173,7 +177,7 @@ The important new takeaways from that code are:
 
   Running a flow with parameters requires the run command as follows: `<flowname>.Run(<parameters separated by comma>)`. Referencing the return value is done by `.<name of return parameter>`.
 
-* LastSubmit: Refers to the stored data. Unfortunately it only works for edit only.
+* LastSubmit: Refers to the stored data. Unfortunately it works for edit only.
 
 # 4. Testing changes
 
@@ -183,3 +187,13 @@ Start from the import overview page `WizardStepImpHeader` to ensure a correct sc
 |Wizard first step: Click on Submit button (new)  |You should see a new record in the dataverse table after clicking submit. The displayed message should be accordingly.|
 |Wizard first step: Click on Submit button (edit) |You should see the updated record in the dataverse table. The displayed message should be accordingly.|
 
+# 5. Versioning
+
+In the last excercise we learned how to rollback to a later version of a page. You are probably wondering if there is such a versioning system for flows as well. Even though this feature was planned to be already implemented it is not available yet. You can check [here](https://learn.microsoft.com/en-us/power-platform/release-plan/2023wave2/power-automate/use-versioning-solution-cloud-flows) if that has already been changed.
+For now we are going to use the rather ugly way of copying and renaming:
+1. Use the `Back` arrow button until you are back to the objects of your solution:
+<br><img src="./images/view_solution.png" /><br>
+
+Your saved flow should be in there at the bottom. Open it and you will see a new view with all the details of the Flow and its run history. At the very top next to the Edit button is the `Save as` button. We will use it to create a copy of our flow and name it with a version number behind it.
+
+Since it got a different name our app still relys on the first version name and therefor you should treat the flow without version number always as the newest, which you can replace with an older copy by removing the original and renaming the versioned flow back to the original.
