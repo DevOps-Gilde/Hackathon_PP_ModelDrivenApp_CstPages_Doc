@@ -18,7 +18,7 @@ Implementing everything would be beyond the scope of that hackathon. But we want
 * Assigning permissions at row level (=row is also called entity in dataverse)
 
   We will create an example flow for that. The idea is to share access rights on a single entity to individual users. The reason for this approach is that it allows the most granual control over an entity to an additional single user, to only give access to the appropriate levels of information that is required to do their jobs.
-  :white_check_mark: This tasks can't be fully tested in this Hackathon, but you will get a feeling for it.
+  :warning: This tasks can't be fully tested in this Hackathon, but you will get a feeling for it.
 
 # 3. Implementation Tasks
 ## Introduction Dataverse role-based security
