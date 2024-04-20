@@ -184,6 +184,6 @@ The important new takeaways from that code are:
 Start from the import overview page `WizardStepImpHeader` to ensure a correct screen context. Press the play button after selecting the overview screen to start the tests. Thanks to your changes the following scenarios should now work:
 |Test                                             |Expected Result          ,                |
 |-------------------------------------------------|------------------------------------------|
-|Wizard first step: Click on Submit button (new)  |You should see a new record in the dataverse table after clicking submit. The displayed message should be accordingly.|
-|Wizard first step: Click on Submit button (edit) |You should see the updated record in the dataverse table. The displayed message should be accordingly.|
+|Creation of new record  |Click on new import button in the import overview screen. You should see a new record in the dataverse table after clicking submit. The displayed message should be accordingly.|
+|Editing existing record |Filter down to a single record and click on the edit import button in the import overview screen. Fields on the form are prefilled with the record you selected. You should see the updated record in the dataverse table. The displayed message should be accordingly.|
 
