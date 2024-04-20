@@ -16,13 +16,14 @@ The screenshot below shows the starting point. As you can see the main content o
 
 <br><img src="./images/wiz_layout_scope_tasks_start.png" /><br>
 
-The screenshot below shows the result if you have completed all implementation tasks.
+The screenshot below shows the result if you have completed all implementation tasks when you add a new record.
 
 <br><img src="./images/wiz_layout_scope_tasks.png" /><br>
 
 This includes
-* Form and Submit button
-* display an information message when you click the submit button
+* Form and Submit button and enabling of fields accordingly
+* Being able to clear the date when you press the button
+* Display an information message when you click the submit button
 * navigating to correct screen when you click next or home button
 
 # 3. Implementation Tasks
@@ -65,41 +66,27 @@ To implement the content we need first an additional container. We need it to gr
 
   We won't need the container anymore later so the name is up to you.
 
-Select the newly added container so that it is going to become the new parent for insert. Insert the remaining controls in the same way and order. 
+Select the newly added container so that it is going to become the new parent for insert. Insert the following remaining controls in the same way and order:
+* An `Edit Form` via using the `+Insert` option add the top
+  When you add the form the editor will offer you options to jump right into the configuration as shown in the screenshot below. 
+  <br><img src="./images/wiz_layout_form_added.png" /><br>
+  We postpone that or later and continue with adding another control. Select newly added container again so that the next control is inserted with the correct parent.
+* A `Button` via using the `+Insert` option add the top
 
-The form will be referenced later in code snippets. Rename the newly added form to `WizardStepImpHdrMainView` to ensure the code snippets work. The newly added button won't be referenced so the name is up to you.
+The form will be referenced later in code snippets. Rename the newly added form to `WizardStepImpHdrMainView` to ensure the code snippets work. The option rename is available via context menu within the tree view that we use for reorder. You can also edit the name in the property pane at the right by clicking at the pencil icon as shown in the screenshot below. The newly added button won't be referenced so the name is up to you.
+<br><img src="./images/wiz_rename_ctrl.png" /><br>
 
-## Saving and Versioning
+## Configure added Form
+### Understanding Dataverse
 
-You have done the first changes! Congratulations! You shall better save them now. Click the disk icon or hit `[ctrl+S]` on your keyboard now.
-<br><img src="./images/intro_app_save_publish.png" /><br>
-
-Well done! This state is saved as a new version in your version history. Not to be confused with the version of the app/solution. You can also publish this version with the button next to the disk to the right, or using `[ctrl+shift+P]`.
-
-We are going to test rolling back to an older version in case you brake something and can't undo the changes.
-Therefor you are going do click onto the new form `WizardStepImpHdrMainView` and add a `Rectangle`, which will add a very noticeable blue box onto your screen. Now you are going to save this version without publishing it with the disk symbol again.
-
-Lets imagine this rectangle was totally unwanted and you can't revert it or it broke some of your work.
-On the top, far left, above the `Tree View`and under the colored title `Power Apps  |  PgManageImps (Editing)` is an arrow with the text `Back`.
-Use it once to go back to the `all pages` level.
-<br><img src="./images/intro_app_stepwise_edit.png" /><br>
-
-Use it again to go back to the objects of your solution:
-<br><img src="./images/view_solution.png" /><br>
-
-Here you can see the 3 pages pgApprOvetview, PgMain and PgManagelmps which saved your changes. Our rectangle should be found in the page `PgManagelmps`. Click on the `...` button next to its name and open the `Details` view. Next to the details you should find the tab for Versions where the version on the top is the latest iteration with the rectangle and the version with the `Published` lable `Live` should be an earlier version without the rectangle.
-<br><img src="./images/restore_page_version.png" /><br>
-
-Again you can just hit the `...` button to `Restore` a version. Do so for the version you published `Live` before. It will create a copy of that version as a newer version. Afterwards you can reload the project and the rectangle should be gone. Please check if your other changes are still in this version and redo them if not.
-
-## Understanding Dataverse
-
-Before we work with the Form you should make yourself familiar with Dataverse.
+Our form will be bound to a table in dataverse to add new records and add existing ones. Before we work with the Form you should make yourself familiar with Dataverse.
 Open the Data Menu on the left side and click on the `...` next to the `IMP_CO2_CONS_RAW_HDR` table to go to the minimalistic `Edit data` view. 
 <br><img src="./images/wiz_layout_open_dataverse.png" /><br>
 
 Here you can expand your view by clicking on `+24 more` and adding the column `CST_IMP_USERNAME`.
-You can view each column settings by clicking on the titles and on `Edit column`, but as you can see the managed Table prevents you from editing the entries under CST_IMP_CODE and Created On columns, but you could edit the field under the column `CST_IMP_USERNAME`. In this case it is not working though, because it is no text field, but a lookup field. It can only select entries from a different table it is looking at. Currently there is no entry inside to select and we are going to change that.
+You can view each column settings by clicking on the titles and selecting `Edit column` in the upcoming context menu. The screenshot below shows displayed column information from the `CST_IMP_CODE` column.
+<br><img src="./images/wiz_enter_usernames.png" /><br>
+As you can see the column uses autogenerated values (Data Type = `Autonumber`) and therefore you cannot directly enter a value in the UI for it. Editing the value in the newly selected column `CST_IMP_USERNAME` is possible but not via directly typing. In this case it is not working though, because it is no text field, but a lookup field. It can only select entries from a different table it is looking at. Currently there is no entry inside to select and we are going to change that.
 
 Open a new browser tab at [https://make.powerapps.com/](https://make.powerapps.com/) and go to `Tables`, filter `All` and click on `IMP_USER`.
 <br><img src="./images/wiz_layout_open_usertable_dataverse.png" /><br>
@@ -107,15 +94,14 @@ Open a new browser tab at [https://make.powerapps.com/](https://make.powerapps.c
 This opens the bigger Table view where you can also inspect the Schema of the columns for their important schema and logical name under `Columns` -> `...` -> `Advanced` -> `Tools` and much more. At the bottom you see the column `CST_USERNAME` which is not the primary key of the entry, but the user-friendly "primary name column". To fill this entry simply write any text under it. Other fields will automatically set default values like the current date in the other column.
 <br><img src="./images/wiz_layout_edit_usertable_dataverse.png" /><br>
 
-After doing so you can go back to the prior `IMP_CO2_CONS_RAW_HDR` table and under the lookup column `CST_IMP_USERNAME` the option for your new username should be selectable.
+After doing so you can go back to the prior `IMP_CO2_CONS_RAW_HDR` table and under the lookup column `CST_IMP_USERNAME` the option for your new username should be selectable. Create at least one row `IMP_CO2_CONS_RAW_HDR` with values for the `CST_IMP_XXX` in th screenshot below so that you can test the form also in edit mode.
+<br><img src="./images/wiz_layout_add_imptable_dataverse.png" /><br>
 
 You do not need to save this change and can close the view by discarding all changes.
 
-## Configure added Form
+### Wire form with data source/ columns
 
 Go back to the page `PgManageImps` in edit mode and select our newly added form `WizardStepImpHdrMainView`.
-
-### Wire form with data source/ columns
 
 First we have to wire our form with the underlying `IMP_CO2_CONS_RAW_HDR` table. Go to the `Data source` property and select the table.
 <br><img src="./images/wiz_layout_ctrls_frm_ds.png" /><br>
@@ -140,26 +126,9 @@ Rename the controls **HOLDING THE USER INPUT** listed below as stated since we n
 |Importing user name|ComboBox                          | WizardStepImpHdrMainViewImportUserNameDropDown|
 |Year               |TextInput                         |                            WizardStepImpHdrMainViewImportYearTextBox|
 |Description        |TextBox                           |WizardStepImpHdrMainViewImportDescTextBox|
+|Date Timestamp     |Datepicker                           |WizardStepImpHdrMainViewImportTSDatePicker|
 
-### Customize default cards with reset button 
-
-Because deleting text of a Text field is intuitive, but deleting text of a Date field is not, we are going to add a reset button to `WizardStepImpHdrMainViewImportTS`. Select its Datepicker `WizardStepImpHdrMainViewImportTSDatePicker` and set its `OnSelect` action to `UpdateContext({resetdateTS:false})`.
-
-* `UpdateContext` updates the context of the local page with new or changed local variables such as resetdateTS.
-
-This is also a good example to illustrate that you have to sometimes unlock properties before being able to edit them. To unlock them click on the lock icon at the top of the `Advanced` tab:
-<br><img src="./images/wiz_layout_ctrls_frm_enabled_lock.png" /><br>
-
-After unlocking the `WizardStepImpHdrMainViewImportTSDatePicker`, you can edit its default `Value` to `If(resetdateTS,Blank(),Parent.Default)`.
-
-* This will set the element value to null if resetdateTS is true.
-* Otherwise Parent.Default redirects to the Default value of its parent element `WizardStepImpHdrMainViewImportTS`, which is directly connected to `ThisItem.CST_IMP_TS` to overwrite its table data.
-
-Now we just need to insert a new button to the Card. Set its Text to `X` and its OnSelect action to `UpdateContext({resetdateTS:true}); Reset(WizardStepImpHdrMainViewImportTSDatePicker);`. You can move the button so that its not overlapping other elements.
-
-* This will set the variable resetdateTS to true and reset the selected date of the Datepicker popup menu. 
-
-The reset function works now! Well done!
+Set `Fill portions` of the form on the tab `Properties` to `0.2`. It ensures that the form occupies minimum space.
 
 ### Configuring DefaultMode of the form
 
@@ -181,8 +150,8 @@ Creating or editing is defined by the property `Default mode`. The new and the e
   `If(locImpMode = "Edit", FormMode.Edit, FormMode.New)`
   
   Explanations regarding the expression:
-  * `locImpMode` is the local variable that contains the mode.
-  * The setting of the value for `locImpMode` we already implemented for you when you click the buttons on the overview page. 
+  * `locImpMode` is the local variable that contains the mode. Its value is set when you jump to this screen from the import over `OvrImports`.
+  * The setting of the value for `locImpMode` we already implemented for you when you click the buttons new/ edit on the import overview screen. 
 
 For the mode `New` we have completed all major fields. Edit requires additional information about the record to edit. The control provides the `Item` property on the tab `Advanced` for that purpose (In the mode New the value is ignored). Set the expression as follows:
 ```
@@ -190,26 +159,51 @@ LookUp(
   IMP_CO2_CONS_RAW_HDR, 
   CST_IMP_CODE = locImpCode)
 ```
-
 Explanations regarding the expression:
 * `IMP_CO2_CONS_RAW_HDR` denotes the table we are looking at
-* `LookUp` retrieves the record that fulfills the condition
+* `LookUp` retrieves the record that fulfills the condition. It is a first example of the excel like [Power Fx formula](https://learn.microsoft.com/en-us/power-platform/power-fx/overview) you are working with.
 * `CST_IMP_CODE = locImpCode` represents the condition that filters the currently edited record
 
-### Configuring other properties of the form
+### Customize timestamp card with reset button 
 
-Many fields within the cards are configured with defaults such as the card for the import code. With the standard configuration the field is still displayed as editable but you cannot jump into it. To avoid confusion we want to disable it for creating a new record.
+Deleting text of a Date field is not intuitive and therefore we are going to add a reset button to the card holding the timestamp.
+To achieve that we first have to unlock the card to be able to edit them. Make sure you selected the card either via tree view or by clicking at it. To unlock them click on the lock icon at the top of the `Advanced` tab:
+<br><img src="./images/wiz_layout_ctrls_frm_enabled_lock.png" /><br>
 
-Unlock the property `DisplayMode` on the tab `Properties` for the cards CST_IMP_CODE, CST_IMP_STATE and CST_IMP_TS. Overwrite the existing value with the following expression:
-`If(locImpMode = "New", DisplayMode.Disabled, Parent.DisplayMode)`
+Select the unlocked card and insert a new button. Make the existing controls smaller so that you have enough space for the new button with a text of your own choice such as "Clear". For the desired functionality we have to implement now some custom formulas. This is the basic idea:
+* We use a local variable `resetdateTS` as clearing indicator
+
+  This variable needs to be initialized in a controled way. We will do it when the formular becomes visible. We will use the `OnVisible` property of the screen. This property allows us to bundle this initialization with potential others. Moreover it will be known immediately when we use th variable later on. Using other places might result in a temporary error in the editor that is first resolved when you run the code via the `Play` button.  
+
+* We define a formula to override the default behavior based on the indicator
+  
+  In the default setup the field is wired to the corresponding fields within the data source. Controls holding a value delegate getting the value to its parent control (=card) by `Parent.Default`.
+
+To initialize the new local variable `resetdateTS` go to the screen `WizardStepImpHeader` and select the property `OnVisible`. Add the line `UpdateContext({resetdateTS:false})`. `UpdateContext` sets the context of the associated screen with new or changed local variables such as `resetdateTS`.
+In the date picker `WizardStepImpHdrMainViewImportTSDatePicker` we override the default behavior by setting the `Value` to `If(resetdateTS,Blank(),Parent.Default)`. Thanks to the `If` you see now the empty value (=`Blank()`) when this formula is applied and the local variable. 
+Otherwise Parent.Default redirects to the Default value of its parent element `WizardStepImpHdrMainViewImportTS`, which is directly connected to `ThisItem.CST_IMP_TS` to overwrite its table data.
+
+The last missing piece is the newly added button. Set its `OnSelect` property to the following expression: `UpdateContext({resetdateTS:true}); Reset(WizardStepImpHdrMainViewImportTSDatePicker);`. The expression consists of two statements:
+* `UpdateContext({resetdateTS:true});` creates the prerequisite that a blank value is displayed by setting the local variable
+* `Reset(WizardStepImpHdrMainViewImportTSDatePicker);` is triggering a reevaluation of the formula behind the `Value` of the named control here `WizardStepImpHdrMainViewImportTSDatePicker`
+
+Note that the instructios only clear the date part of the timestamp. If you want include hours and minutes you have apply the same pattern.
+
+### Customize display mode 
+
+Due to our application setup it makes no sense that certain fields are editable. These are:
+* CST_IMP_CODE = since the value is autogenerated
+* CST_IMP_STATE/ CST_IMP_TS (New only) = since the values will be set later in our PowerAutomate flow
+
+With the standard configuration the field import code is still displayed as editable but you cannot jump into it. To avoid confusion we want to disable it for creating a new record. Also the other two we want to disable but only for the edit case.
+
+Unlock the property `DisplayMode` on the tab `Properties` also for the cards CST_IMP_CODE, CST_IMP_STATE. Overwrite the existing value with the following expression:
+* CST_IMP_CODE: `DisplayMode.Disabled`
+* CST_IMP_STATE/ CST_IMP_TS: `If(locImpMode = "New", DisplayMode.Disabled, Parent.DisplayMode)`
 
 Explanations regarding the expression:
 * `DisplayMode.Disabled` disables the card
 * `Parent.DisplayMode` enforces the default behavior
-
-Furthermore we want to fill the description with additional derived data, which could even be stored as a new variable. Select the Card `WizardStepImpHdrMainViewImportDesc` and replace the `Default` property with `myDescription`. This will lead to a temporary error since the variable is not getting initialized yet.
-
-As a last step we set the relative height so that the form occupies minimum space. Set `Fill portions` on the tab `Properties` to `0.2`.
 
 ## Configure added Submit Button
 
@@ -225,9 +219,9 @@ Notify(
 ```
 
 Explanations regarding the expression:
-* `UpdateContext` will fill the myDescription variable with derived or even calculated data. Since the form card selects the new myDescription, it could directly insert it into our database
-* `&` is the operator for concatenating strings
+* `UpdateContext` will fill the `myDescription` variable with derived or even calculated data. Since the form card selects the new `myDescription`, it could directly insert it into our database
 * `Notify` displays a message of the given type
+* `&` is the operator for concatenating strings
 
 ## Navigation
 
@@ -272,20 +266,26 @@ For testing you have the following options. For our case quicktests are sufficie
 
   A problem of that approach is the setting of the context. In our case you can achieve it by starting with the importing overview screen. In a more complex case with many test cases this might mean a lot of clicking.
 
-* Test Studio
+* Automated Testing
 
-  It allows you to define test cases that consist of steps. Each step can have an action such as `Navigate()`. Running these tests greatly reduces clicking. The two screenshots below shall give you only an idea:
+  Currently the tools from Microsoft only support canvas apps. Therefore we cannot use them. Support for model driven apps is announced.
+  It allows you to define test cases that consist of steps. The two screenshots of the [`Test Studio`](https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/working-with-test-studio) below shall give you only an idea:
   <br><img src="./images/tst_start_studio.png" /><br>
   <br><img src="./images/tst_studio_define_tc.png" /><br>
+
+  [`Test engine`](https://github.com/microsoft/PowerApps-TestEngine) is the recommended new kid in the block which is still in an experimental state. Test Engine builds upon the key use cases of Test Studio, but takes it in a new, powerful direction through open source collaboration and use of the Playwright browser testing platform.
 
 * Running application
 
   In rare edge cases this is the last feedback due to observed problems in the Quicktests environment. 
 
-Press the play button after selecting the import overview screen to start the quicktests. Thanks to your changes the following scenarios should now work:
+We will use the quicktests. All test cases must start from the import overview screen. Therefore, make sure the import overview screen is selected in the tree view before you click at the `Play` button.
+
+Thanks to your changes the following scenarios should now work:
 |Test                                             |Expected Result                          |
 |-------------------------------------------------|------------------------------------------|
-|Import Overview Screen: Click on new import button |Fields on the form are empty. Clicking on the submit button should show an additional info message with the entered description.|
-|Import Overview Screen: Filter down to a single record and click on the edit import button|Fields on the form are prefilled with the record you selected. Clicking on the submit button should show an additional info message with the entered description.|
-|Wizard first step: Click on next button          |Next screen is displayed                  |
-|Wizard first step: Click on home button          |Overview page is shown from where wizard was triggered (Correct display of list only when you run the app)|
+|Creation of new record |Click on new import button in the import overview screen. Fields on the form are empty. Clicking on the submit button should show an additional info message.|
+|Editing existing record |Filter down to a single record and click on the edit import button in the import overview screen. Fields on the form are prefilled with the record you selected. Clicking on the submit button should show an additional info message.|
+|Clear Date of the timestamp|Filter down to a single record and click on the edit import button in the import overview screen. Clicking the reset button should clear the date and should be able to select a new one.|
+|Next button at the wizard clicked          |Next screen is displayed                  |
+|Home button at the wizard clicked         |Overview page is shown from where wizard was triggered (Correct display of list only when you run the app)|

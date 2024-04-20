@@ -58,9 +58,11 @@ The following tasks will expect you:
    
    In that step you add the missing persistence.
 
-5. **Optional advanced extra task:** Understand Gallery and implement approval flow [here](/05_AdjustApprovalList.md)
+5. **Optional extra task:** Understand versioning and restore [here](/05_SavingVersioning.md)
 
-6. **Optional advanced extra task:** Understand Ownership and implement dynamic Dataverse security [here](/06_DynamicRowLevelSecurity.md)
+6. **Optional advanced extra task:** Understand Gallery and implement approval flow [here](/06_AdjustApprovalList.md)
+
+7. **Optional advanced extra task:** Understand Ownership and implement dynamic Dataverse security [here](/07_DynamicRowLevelSecurity.md)
 
 :white_check_mark: We also created a partially implemented application including data model located in the branch [Solution](https://github.com/DevOps-Gilde/Hackathon_PP_ModelDrivenApp_CstPages_Doc/tree/Solution). You only have to import it to your environment. Note that the import slightly differs in that case. Check out [here](/02_ImportImplementedArtefacts.md) how to do it.
 
