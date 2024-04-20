@@ -1,15 +1,27 @@
-# 1. Introduction to row level security
+# 1. Introduction to dataverse role based authorization
 
-You should now have Completed the Following things:
+You should now have completed the Following things:
 
 1. Importing implemented Artefacts
 2. Implement Wizard Step 1 (Part2)
 
-Next you will learn the different row level security options to give rights on each entity.
+Having completed the second part of the wizard is prerequisites for the following reasons:
+* Background of PowerAutomate is beenficial since we will implement another flow to specify who has access to the newly created row
+* Trigger of the flow is newly added record by the you implemented in step 2
 
-* Info: The following tasks can't be fully tested in this Hackathon, but you will get a feel for it.
+Our application scenario would be a perfect fit for applying role based security. The users importing CO2 consumption could be for instance different from the users that approve them. In a reality an importing user would probably only allowed to see his own imports and not those of other departments.
 
-# 2. All Options:
+# 2. Goal
+
+Implementing everything would be beyond the scope of that hackathon. But we want to give you at least some hands-on ideas what power platform offers for various scenarios including:
+* Log out users
+* Assigning permissions at row level (=row is also called entity in dataverse)
+
+  We will create an example flow for that. The idea is to share access rights on a single entity to individual users. The reason for this approach is that it allows the most granual control over an entity to an additional single user, to only give access to the appropriate levels of information that is required to do their jobs.
+  :white_check_mark: This tasks can't be fully tested in this Hackathon, but you will get a feeling for it.
+
+# 3. Implementation Tasks
+## Introduction Dataverse role-based security
 
 There are several ways to handle the security of your Dataverse tables. The basis of all of them are access rights via roles. Pre-defined is a hierarchical data access structure, which counts the higher hierarchical rights over the lower ones. This means you can't limit an individual user's rights, if their team or even business unit already gave them. The structure looks as follows:
 
@@ -35,22 +47,13 @@ Besides whole Organisation owned or User/Team owned table permissions we can als
 
 Another way to give rights to multiple users or even multiple teams is by sharing access. This method is less documented and tougher to troubleshoot because it's not a consistently implemented access control, but needed if there are no dedicated teams defined.
 
-# 3. Goal
-
-We will create an example flow to share access rights on a single entity to individual users.
-
-The reason for this approach is that it allows the most granual control over an entity to an additional single user, to only give access to the appropriate levels of information that is required to do their jobs.
-
-# 4. Implementation Task
-
 ## Create Logout Option
 
-Before we start we could add a signout option for canvas apps into our `OvrImports` screen. Navigate to it and select inside `OvrImpVertLayout` the nested `OvrImpHdrLayout` element. We are going to insert a new button into it and set its Text parameter to `Signout` and the onSelect action to `Exit(true)`. 
+Before we start we could add a signout option for canvas apps into our `OvrImports` screen. Navigate to it and select inside `OvrImpVertLayout` the nested `OvrImpHdrLayout` element. We are going to insert a new button into it and set its Text parameter to `Signout` and the `OnSelect` action to `Exit(true)`. 
 
 The optional boolean defines if the user shall be signed out or not. This does not work in the Editor or Simulatior though. You would need to `publish` your version and `play` it without Edit mode. Since `Exit(true)` also only works with Canvas Apps and not with Model-driven apps like our Hackathon, you can't test it, but we are going to continue with our flow anyway to give you an idea:
 
 ## Define Flow
-
 ### Start the flow designer
 
 To create an automated flow click on `Flows` in the [Power Apps Maker](https://make.powerapps.com/) and then create a new named automated flow with the trigger `When a row is added, modified or deleted` from Microsoft Dataverse:
@@ -76,7 +79,6 @@ Set the fields as shown in the table:
 | Scope          | Organization              |
 | Select columns | cr181_cst_imp_state       |
 | Run as         | Modifying user            |
-
 
 After running a test this should give us the output of a body containing:
 - `"hackpp_sceapp_imp_co2_cons_raw_hdrid": "c210849e-31cb-ee11-9079-002248e466b9"`
@@ -128,7 +130,6 @@ To remove our user from the owner column you must specify a different one:
 <br><img src="./images/flow_update_row_owner.png" /><br>
 
 * Notice that the Owner input needs the pluralised logical name of the table `user` with or without a leading `/` and that you select systemuserid of the second element from the output of `List Rows`. There are internal users in that table, but many will lead to an error `SecLib::CrmCheckPrivilege failed. Returned hr = -2147220839 on UserId: f3c78acb-abbf-ee11-9079-002248e61a82 and Privilege: prvReadHACKPP_SCEAPP_IMP_CO2_CONS_RAW_HDR` since they have no general read rights of the table to be the owner of a row.
-
 
 # 4. Testing changes
 

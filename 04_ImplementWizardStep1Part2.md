@@ -50,7 +50,7 @@ In the `PowerApps (V2)` initial action input parameters must be declared explici
 To enter the parameter klick at the header of the step so that the action is expanded. You should see a link to add a parameter named `+ Add an input`. Run the following steps for each parameter:
 * Klick at `Add` link
 * Specify the type by clicking at the icon according to the table. You should now get a new entry with a box for the name and the value.
-* Enter the name according to the table IN THE LEFT BOX and leave the right textfield for the value empty.
+* Enter the name according to the table IN THE LEFT BOX and leave the right textfield for the description empty.
 
 At the end your initial step should like in the picture below:
 <br><img src="./images/flow_new_ppaction_paras.png" /><br>

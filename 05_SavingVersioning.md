@@ -57,10 +57,10 @@ Again you can just hit the `...` button to `Restore` a version. Do so for the ve
 # 3. Restore elder version PowerAutomate
 
 You are probably wondering if there is such a versioning system for flows as well. Even though this feature was planned to be already implemented it is not available yet. You can check [here](https://learn.microsoft.com/en-us/power-platform/release-plan/2023wave2/power-automate/use-versioning-solution-cloud-flows) if that has already been changed.
-For now we are going to use the rather ugly way of copying and renaming:
-1. Use the `Back` arrow button until you are back to the objects of your solution:
-<br><img src="./images/view_solution.png" /><br>
+For now we are going to use the rather ugly way of copying and renaming. Navigate back to your solution as before but expand this time the flows inside the solution. In the screenshot the one listed flow is the one that creates the new row in dataverse.
+<br><img src="./images/vers_sol_flows.png" /><br>
 
-Your saved flow should be in there at the bottom. Open it and you will see a new view with all the details of the Flow and its run history. At the very top next to the Edit button is the `Save as` button. We will use it to create a copy of our flow and name it with a version number behind it.
+Click at `Details` in the context menu (=`...`) for the flow in question. You will see a new view with all the details of the Flow and its run history. At the very top next to the Edit button is the `Save as` button. We will use it to create a copy of our flow and name it with a version number behind it. The screenshot below shows the details page with the `Save As` option.
+<br><img src="./images/vers_flow_details.png" /><br>
 
 Since it got a different name our app still relys on the first version name and therefore you should treat the flow without version number always as the newest, which you can replace with an older copy by removing the original and renaming the versioned flow back to the original.
