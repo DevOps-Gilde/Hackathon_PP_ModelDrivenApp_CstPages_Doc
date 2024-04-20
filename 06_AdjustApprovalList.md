@@ -1,4 +1,4 @@
-# 1. Introduction to Flows
+# 1. Introduction to lists (gallery control)
 
 You should now have completed the following things:
 
@@ -6,7 +6,7 @@ You should now have completed the following things:
 2. Implement wizard step 1 (Part1)
 3. Implement wizard step 2 (Part2)
 
-Next you will apply the extended layout of the import overview to tje approval page.
+Next you will apply the extended layout of the import overview to the approval page.
 
 # 2. Goal
 
